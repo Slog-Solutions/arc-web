@@ -1,4 +1,4 @@
-// src/layouts/UnitPageLayout.tsx
+// src/layouts/UnitPageLayout.tsx — REFINED (Museum Room Transitions)
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import HeroSection from '../components/sections/HeroSection';
@@ -22,6 +22,21 @@ const pageVariants = {
   in: { opacity: 1 },
   out: { opacity: 0 },
 };
+
+// Premium Room Divider to transition between museum halls
+function RoomDivider({ title }: { title: string }) {
+  return (
+    <div className="room-divider">
+      <div className="room-divider-line" />
+      <div className="room-divider-flourish">
+        <span>✦</span>
+        <span className="font-cinzel text-xs tracking-[0.35em] uppercase">{title}</span>
+        <span>✦</span>
+      </div>
+      <div className="room-divider-line" />
+    </div>
+  );
+}
 
 export default function UnitPageLayout({ data, heroImage, badge, historyImage }: Props) {
   const { meta, history, commandingOfficers, gaonBuras, achievements, gallery, videos } = data;
@@ -47,6 +62,7 @@ export default function UnitPageLayout({ data, heroImage, badge, historyImage }:
 
       <SectionNav />
 
+      {/* Hero entrance hall */}
       <HeroSection
         title={title}
         subtitle={location}
@@ -57,6 +73,8 @@ export default function UnitPageLayout({ data, heroImage, badge, historyImage }:
         badge={badge}
       />
 
+      <RoomDivider title="Exhibition Room I · Heritage & Chronology" />
+
       <HistorySection
         overview={history.overview}
         paragraphs={history.paragraphs}
@@ -66,25 +84,25 @@ export default function UnitPageLayout({ data, heroImage, badge, historyImage }:
         heroImage={historyImage}
       />
 
-      <div className="divider-gold" />
+      <RoomDivider title="Exhibition Room II · Portrait Gallery" />
 
       <CommandingOfficersSection
         officers={commandingOfficers}
         gaonBuras={gaonBuras}
       />
 
-      <div className="divider-gold" />
+      <RoomDivider title="Exhibition Room III · Hall of Honour" />
 
       <AchievementsSection
         achievements={achievements}
         highlights={history.highlights}
       />
 
-      <div className="divider-gold" />
+      <RoomDivider title="Exhibition Room IV · Photography Archives" />
 
       <GallerySection gallery={gallery} />
 
-      <div className="divider-gold" />
+      <RoomDivider title="Exhibition Room V · Regimental Cinema" />
 
       <VideosSection videos={videos} />
     </motion.div>

@@ -95,7 +95,7 @@ export const rashtriyaRiflesData = {
       tenure: "2010 – 2012",
       bio: "Commanded the Rashtriya Rifles during a critical period of transition from high-intensity operations to intelligence-based precision strikes.",
       contribution: "Streamlined intelligence-sharing protocols between RR, RAW, and state police for more precise operations.",
-      image: "/images/rr_co_1.jpg",
+      image: "/assami/Commanding Officers (CO History)/co-pk-singh.jpg",
     },
     {
       name: "Maj. Gen. A.S. Pathania",
@@ -103,7 +103,7 @@ export const rashtriyaRiflesData = {
       tenure: "2015 – 2017",
       bio: "A veteran of multiple counter-insurgency campaigns, Maj. Gen. Pathania led the Victor Force through several high-profile operations.",
       contribution: "Enhanced community engagement programmes and hearts-and-minds operations in the Kashmir Valley.",
-      image: "/images/rr_co_2.jpg",
+      image: "/assami/Commanding Officers (CO History)/co-mk-nair.jpg",
     },
     {
       name: "Maj. Gen. R.K. Yadav",
@@ -111,7 +111,7 @@ export const rashtriyaRiflesData = {
       tenure: "2019 – 2021",
       bio: "Commanded during the historic Article 370 abrogation period. Ensured seamless security transition across J&K.",
       contribution: "Ensured peaceful security environment during India's most significant legislative change in J&K.",
-      image: "/images/rr_co_3.jpg",
+      image: "/assami/Commanding Officers (CO History)/co-ak-sharma.jpg",
     },
   ],
   gaonBuras: [

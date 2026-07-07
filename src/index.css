@@ -365,12 +365,174 @@ body {
   margin: 0 auto;
 }
 
-/* Responsive utilities */
-@media (max-width: 768px) {
-  .timeline-line {
-    left: 20px;
+/* Premium Museum Ambient Rooms & Textures */
+.museum-room-wall {
+  background: radial-gradient(circle at 50% 30%, rgba(20, 26, 13, 0.95) 0%, #080a06 100%);
+  position: relative;
+}
+
+.museum-room-wall::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 30%, transparent 20%, rgba(0, 0, 0, 0.8) 100%);
+}
+
+/* Wood frame for pictures & exhibit cards */
+.museum-wood-frame {
+  position: relative;
+  background: linear-gradient(135deg, #141a0d 0%, #0d120a 100%);
+  border: 10px solid #2b1d0c; /* Wooden look */
+  box-shadow: 
+    inset 0 0 15px rgba(0, 0, 0, 0.9),
+    0 10px 30px rgba(0, 0, 0, 0.8),
+    0 0 0 1px #443118;
+}
+
+/* Brass corners for frames */
+.brass-corners::before,
+.brass-corners::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #d4a017;
+  z-index: 10;
+  pointer-events: none;
+}
+.brass-corners::before {
+  top: -6px;
+  left: -6px;
+  border-right: none;
+  border-bottom: none;
+}
+.brass-corners::after {
+  bottom: -6px;
+  right: -6px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Vintage Engraved Brass Plate */
+.brass-plate {
+  position: relative;
+  background: linear-gradient(180deg, #ffd97d 0%, #d4a017 60%, #a67c13 100%);
+  border: 1px solid #735308;
+  color: #1a1200;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 2px;
+}
+
+/* Screws in brass plate */
+.brass-plate::before,
+.brass-plate::after {
+  content: '•';
+  position: absolute;
+  font-size: 8px;
+  color: #3b2803;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.brass-plate::before { left: 4px; }
+.brass-plate::after { right: 4px; }
+
+/* Spotlight ambient glow */
+.spotlight-glow {
+  position: relative;
+}
+.spotlight-glow::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 40%;
+  background: radial-gradient(ellipse at top, rgba(212, 160, 23, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Old vintage paper card */
+.vintage-paper-card {
+  background: linear-gradient(135deg, #f3ede2 0%, #e4d7be 100%);
+  color: #2e261a;
+  border: 1px solid #c2b090;
+  box-shadow: 
+    0 10px 25px rgba(0,0,0,0.35),
+    inset 0 0 40px rgba(46,38,26,0.08);
+}
+
+.vintage-paper-card p {
+  color: #3d3323 !important;
+}
+
+/* Room separation dividers */
+.room-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 0;
+  background: #080a06;
+}
+
+.room-divider-line {
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, transparent, #2b1d0c, #d4a017, #2b1d0c, transparent);
+}
+
+.room-divider-flourish {
+  font-family: 'Cinzel', serif;
+  color: #d4a017;
+  font-size: 1.25rem;
+  letter-spacing: 0.3em;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Exhibition Timelines */
+.brass-rail {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: linear-gradient(180deg, #d4a017, #a67c13 50%, #d4a017);
+  box-shadow: 
+    0 0 10px rgba(212,160,23,0.3),
+    inset -1px 0 2px rgba(0,0,0,0.5);
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+/* Responsive containers for wider museum look */
+.museum-container {
+  max-width: 1560px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .museum-container {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
 }
+
 
 /* ── 3D Flip Card ──────────────────────────────────── */
 .flip-card {

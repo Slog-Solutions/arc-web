@@ -85,46 +85,50 @@ export default function ARCPage() {
       />
 
       {/* Affiliated Units Showcase */}
-      <section className="relative py-24" style={{ background: '#0a0c08' }}>
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12">
+      <section className="relative py-32 museum-room-wall spotlight-glow">
+        <div className="museum-container">
           <SectionHeader
-            tag="The ARC Family"
+            tag="Exhibition Rooms"
             title="Affiliated Units"
-            subtitle="Four distinguished forces operating under the stewardship of the Assam Regimental Centre."
+            subtitle="Explore the individual history, heritage, achievements and media files of our four affiliated commands."
           />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mt-16">
             {unitCards.map((unit, i) => (
               <motion.div
                 key={unit.id}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 35 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.6 }}
+                transition={{ delay: i * 0.12, duration: 0.7 }}
               >
                 <Link to={unit.path} className="group block h-full">
-                  <div className="heritage-card rounded-xl overflow-hidden h-full flex flex-col">
-                    {/* Image */}
-                    <div className="relative img-zoom-container flex-shrink-0" style={{ height: '240px' }}>
-                      <img src={unit.image} alt={unit.title} className="w-full h-full object-cover" loading="lazy" />
-                      <div className="absolute inset-0 hero-overlay-dark" />
-                      <div className="absolute top-4 left-4 text-3xl">{unit.icon}</div>
+                  <div className="museum-wood-frame brass-corners rounded-2xl overflow-hidden h-full flex flex-col hover:border-yellow-500/40 hover:shadow-[0_0_40px_rgba(212,160,23,0.25)] transition-all duration-500 transform hover:-translate-y-2">
+                    {/* Image (occupies 70%) */}
+                    <div className="relative img-zoom-container flex-shrink-0" style={{ height: '300px' }}>
+                      <img src={unit.image} alt={unit.title} className="w-full h-full object-cover filter brightness-[0.88] contrast-[1.05]" loading="lazy" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0d120a] via-transparent to-transparent" />
+                      <div className="absolute top-4 left-4 text-4xl filter drop-shadow-md">{unit.icon}</div>
+                      
+                      {/* Small museum badge */}
                       <div className="absolute bottom-4 left-4">
-                        <div className="font-inter text-xs text-yellow-500/80 tracking-widest">Est. {unit.est}</div>
+                        <span className="font-inter text-[9px] tracking-widest uppercase bg-yellow-500/10 text-yellow-500 border border-yellow-500/30 px-2 py-0.5 rounded">
+                          Exhibit No. 0{i + 1}
+                        </span>
                       </div>
-                      {/* Hover overlay */}
-                      <div className="absolute inset-0 bg-yellow-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
-                    {/* Content */}
-                    <div className="p-5 flex flex-col flex-1">
-                      <h3 className="font-cinzel text-stone-100 text-lg mb-1 group-hover:text-yellow-400 transition-colors duration-300">
+                    
+                    {/* Content (at bottom) */}
+                    <div className="p-6 flex flex-col flex-1 bg-gradient-to-b from-[#141a0d] to-[#0a0c08] border-t border-[#443118]/50">
+                      <div className="font-inter text-[10px] text-yellow-600/70 tracking-widest uppercase mb-1">Est. {unit.est}</div>
+                      <h3 className="font-cinzel text-stone-100 text-lg md:text-xl mb-2 group-hover:text-yellow-400 transition-colors duration-300">
                         {unit.title}
                       </h3>
-                      <div className="font-inter text-xs text-stone-500 mb-2">{unit.role}</div>
-                      <div className="font-garamond text-yellow-600/70 text-sm italic mb-3">{unit.motto}</div>
-                      <p className="font-inter text-stone-400 text-xs leading-relaxed mb-4 flex-1">{unit.description}</p>
-                      <div className="flex items-center gap-2 text-yellow-500/70 text-xs font-inter tracking-wider group-hover:text-yellow-400 transition-colors duration-300 mt-auto">
-                        <span>Explore</span>
-                        <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <div className="font-inter text-[11px] text-stone-500 mb-3">{unit.role}</div>
+                      <p className="font-garamond text-stone-400 text-sm leading-relaxed mb-6 flex-1">{unit.description}</p>
+                      
+                      <div className="flex items-center gap-2 text-yellow-500/70 text-xs font-inter tracking-widest uppercase group-hover:text-yellow-400 transition-colors duration-300 mt-auto">
+                        <span>Enter Exhibit</span>
+                        <svg className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                         </svg>
                       </div>
@@ -138,6 +142,16 @@ export default function ARCPage() {
       </section>
 
       {/* ARC History Section */}
+      <div className="room-divider">
+        <div className="room-divider-line" />
+        <div className="room-divider-flourish">
+          <span>✦</span>
+          <span className="font-cinzel text-xs tracking-[0.35em] uppercase">Exhibition Room I · Heritage & Chronology</span>
+          <span>✦</span>
+        </div>
+        <div className="room-divider-line" />
+      </div>
+
       <HistorySection
         overview={arcData.history.overview}
         paragraphs={arcData.history.paragraphs}
@@ -147,7 +161,15 @@ export default function ARCPage() {
         heroImage="/assami/Assam Regimental Centre/arc-raising-day.jpg"
       />
 
-      <div className="divider-gold" />
+      <div className="room-divider">
+        <div className="room-divider-line" />
+        <div className="room-divider-flourish">
+          <span>✦</span>
+          <span className="font-cinzel text-xs tracking-[0.35em] uppercase">Exhibition Room II · Portrait Gallery</span>
+          <span>✦</span>
+        </div>
+        <div className="room-divider-line" />
+      </div>
 
       {/* CO Section */}
       <CommandingOfficersSection
@@ -155,7 +177,15 @@ export default function ARCPage() {
         gaonBuras={arcData.gaonBuras}
       />
 
-      <div className="divider-gold" />
+      <div className="room-divider">
+        <div className="room-divider-line" />
+        <div className="room-divider-flourish">
+          <span>✦</span>
+          <span className="font-cinzel text-xs tracking-[0.35em] uppercase">Exhibition Room III · Hall of Honour</span>
+          <span>✦</span>
+        </div>
+        <div className="room-divider-line" />
+      </div>
 
       {/* Achievements */}
       <AchievementsSection
@@ -163,12 +193,28 @@ export default function ARCPage() {
         highlights={arcData.history.highlights}
       />
 
-      <div className="divider-gold" />
+      <div className="room-divider">
+        <div className="room-divider-line" />
+        <div className="room-divider-flourish">
+          <span>✦</span>
+          <span className="font-cinzel text-xs tracking-[0.35em] uppercase">Exhibition Room IV · Photography Archives</span>
+          <span>✦</span>
+        </div>
+        <div className="room-divider-line" />
+      </div>
 
       {/* Gallery */}
       <GallerySection gallery={arcData.gallery} />
 
-      <div className="divider-gold" />
+      <div className="room-divider">
+        <div className="room-divider-line" />
+        <div className="room-divider-flourish">
+          <span>✦</span>
+          <span className="font-cinzel text-xs tracking-[0.35em] uppercase">Exhibition Room V · Regimental Cinema</span>
+          <span>✦</span>
+        </div>
+        <div className="room-divider-line" />
+      </div>
 
       {/* Videos */}
       <VideosSection videos={arcData.videos} />

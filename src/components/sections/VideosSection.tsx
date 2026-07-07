@@ -1,4 +1,4 @@
-// src/components/sections/VideosSection.tsx
+// src/components/sections/VideosSection.tsx — REFINED (Museum Cinema Room)
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SectionHeader from './SectionHeader';
@@ -9,15 +9,16 @@ interface Props {
 }
 
 function PlayIcon({ size = 'lg' }: { size?: 'sm' | 'lg' }) {
-  const dim = size === 'lg' ? 'w-16 h-16' : 'w-11 h-11';
+  const dim = size === 'lg' ? 'w-16 h-16' : 'w-12 h-12';
   const iconDim = size === 'lg' ? 'w-6 h-6' : 'w-4 h-4';
   return (
     <div
       className={`${dim} rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-110`}
       style={{
-        background: 'rgba(212,160,23,0.15)',
-        border: '2px solid rgba(212,160,23,0.6)',
-        backdropFilter: 'blur(8px)',
+        background: 'rgba(212,160,23,0.18)',
+        border: '2px solid #d4a017',
+        backdropFilter: 'blur(10px)',
+        boxShadow: '0 0 20px rgba(212,160,23,0.3)',
       }}
     >
       <svg className={`${iconDim} text-yellow-400 ml-0.5`} fill="currentColor" viewBox="0 0 24 24">
@@ -29,83 +30,92 @@ function PlayIcon({ size = 'lg' }: { size?: 'sm' | 'lg' }) {
 
 export default function VideosSection({ videos }: Props) {
   const [activeVideo, setActiveVideo] = useState<VideoItem | null>(null);
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
   const featured = videos.find(v => v.featured);
   const regular = videos.filter(v => !v.featured);
 
   return (
-    <section id="videos" className="relative py-24 section-pattern">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12">
+    <section id="videos" className="relative py-32 museum-room-wall spotlight-glow overflow-hidden">
+      
+      {/* Film Strip Top Border Ornament */}
+      <div className="absolute top-0 left-0 right-0 h-4 bg-[#0a0c08] flex items-center justify-around pointer-events-none opacity-20">
+        {Array.from({ length: 30 }).map((_, idx) => (
+          <div key={idx} className="w-3 h-2.5 bg-[#d4a017]/40 rounded-sm" />
+        ))}
+      </div>
+
+      <div className="museum-container">
         <SectionHeader
-          tag="Documentary Archive"
-          title="Videos"
-          subtitle="Cinematic documentaries and historic footage preserving the living memory of the regiment."
+          tag="Documentary Screening"
+          title="Regimental Cinema"
+          subtitle="Sit back and watch historical documentary reels and border patrol footage from our digital archives."
         />
 
-        {/* Featured Video — Full Width Cinematic */}
+        {/* ── Featured Video (Cinematic Exhibition Screen) ── */}
         {featured && (
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="mb-12"
+            className="mb-16"
           >
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center gap-3.5 mb-6">
               <span className="w-2 h-2 rounded-full bg-yellow-500 animate-pulse" />
-              <span className="font-inter text-xs text-yellow-600/70 tracking-[0.3em] uppercase">Featured Documentary</span>
-              <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, rgba(212,160,23,0.3), transparent)' }} />
+              <span className="font-inter text-xs text-yellow-600/70 tracking-[0.3em] uppercase">Now Screening</span>
+              <div className="flex-1 h-px bg-gradient-to-r from-yellow-700/30 to-transparent" />
             </div>
 
-            <div
-              className="relative rounded-2xl overflow-hidden cursor-pointer group"
-              style={{ height: '500px' }}
-              onClick={() => setActiveVideo(featured)}
-              role="button"
-              tabIndex={0}
-              onKeyDown={e => e.key === 'Enter' && setActiveVideo(featured)}
-              aria-label={`Play video: ${featured.title}`}
-            >
-              <img
-                src={featured.thumbnail}
-                alt={featured.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              {/* Cinematic overlay */}
-              <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 30%, rgba(8,10,6,0.98) 100%)' }} />
-              <div className="absolute inset-0" style={{ background: 'rgba(8,10,6,0.25)' }} />
+            {/* Projection Frame */}
+            <div className="museum-wood-frame brass-corners rounded-3xl overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.85)] relative">
+              <div
+                className="relative cursor-pointer group"
+                style={{ height: '520px' }}
+                onClick={() => setActiveVideo(featured)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={e => e.key === 'Enter' && setActiveVideo(featured)}
+                aria-label={`Screen video: ${featured.title}`}
+              >
+                <img
+                  src={featured.thumbnail}
+                  alt={featured.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-[0.75]"
+                />
+                
+                {/* Cinematic Spotlight overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
 
-              {/* Film grain */}
-              <div className="absolute inset-0 opacity-[0.04]" style={{
-                backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E")',
-                backgroundSize: '150px',
-              }} />
+                {/* Projection Screen shimmer line */}
+                <div className="absolute inset-0 opacity-[0.035] pointer-events-none" style={{
+                  backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.95\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")',
+                  backgroundRepeat: 'repeat',
+                  backgroundSize: '128px',
+                }} />
 
-              {/* Content */}
-              <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12">
-                <div className="flex items-end justify-between gap-6">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-4">
-                      <PlayIcon size="lg" />
-                      <div>
-                        <div className="font-inter text-xs text-yellow-500/80 tracking-widest uppercase">Play Documentary</div>
-                        <div className="font-inter text-stone-400 text-xs">{featured.duration} &nbsp;·&nbsp; {featured.year}</div>
+                {/* Content */}
+                <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12">
+                  <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-4 mb-4">
+                        <PlayIcon size="lg" />
+                        <div>
+                          <div className="font-inter text-xs text-yellow-500 tracking-widest uppercase">Start Screening</div>
+                          <div className="font-inter text-stone-400 text-xs mt-0.5">{featured.duration} &nbsp;·&nbsp; Reel Year: {featured.year}</div>
+                        </div>
                       </div>
+                      
+                      <h3 className="font-cinzel text-stone-100 text-2xl md:text-3.5xl mb-3 font-bold leading-snug">
+                        {featured.title}
+                      </h3>
+                      <p className="font-garamond text-stone-300 text-base md:text-lg max-w-3xl leading-relaxed italic">
+                        {featured.description}
+                      </p>
                     </div>
-                    <h3 className="font-cinzel text-stone-100 text-2xl md:text-3xl mb-3 leading-snug">
-                      {featured.title}
-                    </h3>
-                    <p className="font-garamond text-stone-300 text-base md:text-lg max-w-2xl leading-relaxed">
-                      {featured.description}
-                    </p>
-                  </div>
-                  {/* FEATURED badge */}
-                  <div className="hidden md:block flex-shrink-0">
-                    <div
-                      className="px-4 py-2 rounded-lg text-xs font-cinzel text-yellow-400 tracking-[0.2em] uppercase"
-                      style={{ background: 'rgba(8,10,6,0.9)', border: '1px solid rgba(212,160,23,0.3)' }}
-                    >
-                      Featured
+
+                    <div className="hidden md:block flex-shrink-0">
+                      <span className="brass-plate text-xs font-bold px-4 py-1.5">
+                        Historical Reel
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -114,82 +124,69 @@ export default function VideosSection({ videos }: Props) {
           </motion.div>
         )}
 
-        {/* Regular Video Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        {/* ── Secondary Archive Reels (Grid) ────────────────── */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {regular.map((video, i) => {
-            const videoKey = `${video.youtubeId}-${i}`;
-            const isHovered = hoveredId === videoKey;
             return (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.6 }}
-                className="group cursor-pointer rounded-2xl overflow-hidden flex flex-col"
-                style={{
-                  background: 'linear-gradient(145deg, #141a0d, #0d120a)',
-                  border: isHovered ? '1px solid rgba(212,160,23,0.4)' : '1px solid rgba(212,160,23,0.12)',
-                  boxShadow: isHovered ? '0 20px 60px rgba(212,160,23,0.1)' : 'none',
-                  transition: 'all 0.4s ease',
-                  transform: isHovered ? 'translateY(-4px)' : 'none',
-                }}
+                className="group cursor-pointer museum-wood-frame brass-corners rounded-2xl overflow-hidden flex flex-col hover:shadow-[0_15px_40px_rgba(212,160,23,0.18)] transition-all duration-400 transform hover:-translate-y-1.5"
                 onClick={() => setActiveVideo(video)}
-                onMouseEnter={() => setHoveredId(videoKey)}
-                onMouseLeave={() => setHoveredId(null)}
                 role="button"
                 tabIndex={0}
                 onKeyDown={e => e.key === 'Enter' && setActiveVideo(video)}
                 aria-label={`Play video: ${video.title}`}
               >
                 {/* Thumbnail */}
-                <div className="relative overflow-hidden" style={{ height: '200px' }}>
+                <div className="relative overflow-hidden" style={{ height: '220px' }}>
                   <img
                     src={video.thumbnail}
                     alt={video.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 filter brightness-[0.8]"
                   />
-                  <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(8,10,6,0.85) 0%, rgba(8,10,6,0.2) 100%)' }} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0c08] via-transparent to-transparent" />
                   
-                  {/* Play button overlay */}
+                  {/* Play icon overlay */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <PlayIcon size="lg" />
                   </div>
 
-                  {/* Duration badge */}
+                  {/* Reel Duration tag */}
                   <div
-                    className="absolute bottom-3 right-3 font-inter text-xs text-stone-200 px-2 py-0.5 rounded"
-                    style={{ background: 'rgba(8,10,6,0.88)' }}
+                    className="absolute bottom-3 right-3 font-inter text-[10px] tracking-widest text-stone-200 px-2 py-0.5 rounded"
+                    style={{ background: 'rgba(8,10,6,0.92)' }}
                   >
                     {video.duration}
                   </div>
 
-                  {/* Year tag */}
+                  {/* Year badge */}
                   <div className="absolute top-3 left-3">
                     <span
-                      className="font-inter text-[9px] tracking-widest uppercase px-2 py-1 rounded"
-                      style={{ background: 'rgba(8,10,6,0.85)', color: 'rgba(212,160,23,0.8)', border: '1px solid rgba(212,160,23,0.25)' }}
+                      className="font-inter text-[9px] tracking-widest uppercase px-2.5 py-1 rounded bg-[#0a0c08]/90 text-yellow-500 border border-yellow-500/20"
                     >
-                      {video.year}
+                      Reel {video.year}
                     </span>
                   </div>
                 </div>
 
-                {/* Info */}
-                <div className="p-5 flex flex-col flex-1">
-                  <h4 className="font-cinzel text-stone-100 text-base mb-2 leading-snug group-hover:text-yellow-400 transition-colors duration-300">
+                {/* Content */}
+                <div className="p-6 flex flex-col flex-1 bg-gradient-to-b from-[#141a0d] to-[#0a0c08] border-t border-[#443118]/40">
+                  <h4 className="font-cinzel text-stone-100 text-base mb-2 font-bold leading-snug group-hover:text-yellow-400 transition-colors duration-300">
                     {video.title}
                   </h4>
-                  <p className="font-garamond text-stone-400 text-sm leading-relaxed flex-1">{video.description}</p>
+                  <p className="font-garamond text-stone-400 text-sm leading-relaxed flex-1 italic">{video.description}</p>
                   
-                  <div className="mt-4 pt-4 flex items-center justify-between" style={{ borderTop: '1px solid rgba(212,160,23,0.1)' }}>
-                    <div className="flex items-center gap-2 text-yellow-500/60 text-xs font-inter group-hover:text-yellow-400 transition-colors duration-300">
+                  <div className="mt-5 pt-4 flex items-center justify-between border-t border-[#443118]/30">
+                    <div className="flex items-center gap-2 text-yellow-500/70 text-xs font-inter group-hover:text-yellow-400 transition-colors duration-300">
                       <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M8 5v14l11-7z" />
                       </svg>
-                      <span>Watch on YouTube</span>
+                      <span>Watch Archive Reel</span>
                     </div>
-                    <span className="font-inter text-xs text-stone-600">{video.duration}</span>
                   </div>
                 </div>
               </motion.div>
@@ -198,7 +195,7 @@ export default function VideosSection({ videos }: Props) {
         </div>
       </div>
 
-      {/* Video Modal */}
+      {/* ── Projector Screening Modal ──────────────────── */}
       <AnimatePresence>
         {activeVideo && (
           <motion.div
@@ -207,7 +204,7 @@ export default function VideosSection({ videos }: Props) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-8"
-            style={{ background: 'rgba(8,10,6,0.97)', backdropFilter: 'blur(24px)' }}
+            style={{ background: 'rgba(6,8,4,0.98)', backdropFilter: 'blur(30px)' }}
             onClick={() => setActiveVideo(null)}
           >
             <motion.div
@@ -219,31 +216,32 @@ export default function VideosSection({ videos }: Props) {
               onClick={e => e.stopPropagation()}
             >
               {/* Header */}
-              <div className="flex items-start justify-between mb-5">
+              <div className="flex items-start justify-between mb-6">
                 <div>
-                  <div className="font-inter text-xs text-yellow-600/60 tracking-widest uppercase mb-1">Now Playing</div>
-                  <h3 className="font-cinzel text-stone-100 text-lg md:text-xl leading-snug">{activeVideo.title}</h3>
-                  <p className="font-inter text-stone-500 text-sm mt-1">{activeVideo.year} &nbsp;·&nbsp; {activeVideo.duration}</p>
+                  <div className="font-inter text-xs text-yellow-600/70 tracking-widest uppercase mb-1">Archive Playback</div>
+                  <h3 className="font-cinzel text-stone-100 text-lg md:text-xl font-bold leading-snug">{activeVideo.title}</h3>
+                  <p className="font-inter text-stone-500 text-xs mt-1">Reel Date: {activeVideo.year} &nbsp;·&nbsp; Duration: {activeVideo.duration}</p>
                 </div>
+                
                 <button
                   onClick={() => setActiveVideo(null)}
                   className="w-10 h-10 rounded-full border flex items-center justify-center text-stone-400 hover:text-stone-100 hover:border-stone-500 transition-all duration-200 ml-4 flex-shrink-0"
-                  style={{ borderColor: 'rgba(212,160,23,0.2)' }}
-                  aria-label="Close video player"
+                  style={{ borderColor: 'rgba(212,160,23,0.3)' }}
+                  aria-label="Close screening"
                 >
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
               </div>
 
-              {/* YouTube embed */}
+              {/* Projection Box */}
               <div
                 className="relative w-full rounded-2xl overflow-hidden"
                 style={{
                   paddingBottom: '56.25%',
-                  border: '1px solid rgba(212,160,23,0.2)',
-                  boxShadow: '0 0 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(212,160,23,0.1)',
+                  border: '10px solid #2b1d0c',
+                  boxShadow: '0 25px 80px rgba(0,0,0,0.9), 0 0 0 1px rgba(212,160,23,0.2)',
                 }}
               >
                 <iframe
@@ -255,7 +253,7 @@ export default function VideosSection({ videos }: Props) {
                 />
               </div>
 
-              <p className="font-garamond text-stone-400 text-base mt-4 leading-relaxed">{activeVideo.description}</p>
+              <p className="font-garamond text-stone-400 text-base mt-6 leading-relaxed italic">{activeVideo.description}</p>
             </motion.div>
           </motion.div>
         )}

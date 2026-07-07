@@ -104,7 +104,7 @@ export const territorialArmyData = {
       tenure: "Rotational",
       bio: "The Territorial Army is commanded by the Director General, Territorial Army, who holds the rank of Lieutenant General. The post is filled by senior officers of the Indian Army.",
       contribution: "Overall command and policy direction for India's reserve citizen army.",
-      image: "/images/ta_co_1.jpg",
+      image: "/assami/Commanding Officers (CO History)/co-sanjeev-kumar.jpg",
     },
     {
       name: "Lt. Gen. R.K. Sharma (Retd.)",
@@ -112,7 +112,7 @@ export const territorialArmyData = {
       tenure: "2012 – 2014",
       bio: "Led the modernisation of TA training infrastructure and expanded the Ecological Task Force programme to 30+ battalions.",
       contribution: "Expanded the ETF programme and modernised TA training standards.",
-      image: "/images/ta_co_2.jpg",
+      image: "/assami/Commanding Officers (CO History)/co-t-angami.jpg",
     },
     {
       name: "Lt. Gen. M. Mathew",
@@ -120,7 +120,7 @@ export const territorialArmyData = {
       tenure: "2018 – 2020",
       bio: "Known for his emphasis on integrating TA personnel into disaster response frameworks, working closely with NDMA.",
       contribution: "Integrated TA into NDRF-style disaster response protocols.",
-      image: "/images/ta_co_3.jpg",
+      image: "/assami/Commanding Officers (CO History)/co-pk-singh.jpg",
     },
   ],
   gaonBuras: [
