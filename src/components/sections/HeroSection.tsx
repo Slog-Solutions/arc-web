@@ -25,7 +25,7 @@ export default function HeroSection({
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
-  
+
   // Parallax / Zoom effect
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
@@ -45,15 +45,15 @@ export default function HeroSection({
         {/* Darker premium gradient overlays to keep text perfectly readable */}
         <div className="absolute inset-0 bg-gradient-to-t from-olive-950 via-olive-950/60 to-black/60" />
         <div className="absolute inset-0 bg-black/40" />
-        
+
         {/* Vignette effect */}
-        <div 
-          className="absolute inset-0" 
+        <div
+          className="absolute inset-0"
           style={{
             background: 'radial-gradient(ellipse at center, transparent 20%, rgba(10,12,8,0.85) 100%)'
-          }} 
+          }}
         />
-        
+
         {/* Film grain texture */}
         <div className="absolute inset-0 opacity-[0.035] pointer-events-none" style={{
           backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.95\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")',
@@ -75,7 +75,7 @@ export default function HeroSection({
             transition={{ delay: 0.25, duration: 0.6 }}
             className="mb-6"
           >
-            <span 
+            <span
               className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full text-xs font-inter tracking-[0.25em] uppercase border text-yellow-500/90 shadow-lg"
               style={{ background: 'rgba(212,160,23,0.06)', borderColor: 'rgba(212,160,23,0.3)', backdropFilter: 'blur(8px)' }}
             >

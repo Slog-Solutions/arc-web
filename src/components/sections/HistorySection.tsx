@@ -36,6 +36,16 @@ export default function HistorySection({
   heroImage,
   paragraphImages,
 }: Props) {
+  // Helper to pick a museum icon based on chronological content
+  const getTimelineIcon = (title: string, desc: string) => {
+    const text = (title + ' ' + desc).toLowerCase();
+    if (text.includes('battalion') || text.includes('raised') || text.includes('raising') || text.includes('found')) return '📜'; // Scroll/Charter
+    if (text.includes('standoff') || text.includes('vigil') || text.includes('battle') || text.includes('ops') || text.includes('kargil')) return '⚔️'; // Crossed swords
+    if (text.includes('headquarters') || text.includes('base') || text.includes('pasighat') || text.includes('established')) return '🗺️'; // Map
+    if (text.includes('medal') || text.includes('award') || text.includes('honour') || text.includes('commendation')) return '🏅'; // Medal
+    return '🧭'; // Compass fallback
+  };
+
   return (
     <section id="history" className="relative py-32 museum-room-wall spotlight-glow overflow-hidden">
       
@@ -65,7 +75,7 @@ export default function HistorySection({
               <span className="absolute top-2 left-2 text-[8px] text-[#2b1d0c]">✛</span>
               <span className="absolute top-2 right-2 text-[8px] text-[#2b1d0c]">✛</span>
               <span className="absolute bottom-2 left-2 text-[8px] text-[#2b1d0c]">✛</span>
-              <span className="absolute bottom-2 right-2 text-[8px] text-[#2b1d0c]">✛</span>
+              <span className="absolute bottom-2 right-2 text-[#2b1d0c] text-[8px]">✛</span>
               
               <div className="font-cinzel text-3xl md:text-4xl text-gold-gradient font-bold leading-none mb-2">{h.value}</div>
               <div className="font-inter text-[10px] text-stone-500 uppercase tracking-[0.2em]">{h.label}</div>
@@ -200,6 +210,7 @@ export default function HistorySection({
             <div className="flex flex-col gap-16">
               {timeline.map((entry, i) => {
                 const isEven = i % 2 === 0;
+                const exhibitIcon = getTimelineIcon(entry.title, entry.description);
                 return (
                   <div key={i} className="relative flex flex-col md:flex-row items-center gap-6 md:gap-0">
                     
@@ -210,7 +221,7 @@ export default function HistorySection({
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, margin: '-60px' }}
                         transition={{ duration: 0.6 }}
-                        className="vintage-paper-card p-6 rounded-xl hover:shadow-[0_12px_30px_rgba(0,0,0,0.5)] transition-all duration-400 relative"
+                        className="vintage-paper-card p-8 rounded-2xl hover:shadow-[0_12px_30px_rgba(0,0,0,0.5)] transition-all duration-400 relative"
                       >
                         {/* Screws */}
                         <div className="absolute top-2.5 left-2.5 text-[8px] text-stone-600/70">✛</div>
@@ -229,9 +240,12 @@ export default function HistorySection({
                           )}
                         </div>
                         
-                        <h4 className="font-cinzel text-stone-900 text-base md:text-lg mb-2 font-bold leading-tight">
-                          {entry.title}
-                        </h4>
+                        <div className="flex items-center gap-3.5 mb-2">
+                          <span className="text-2xl filter drop-shadow-md select-none">{exhibitIcon}</span>
+                          <h4 className="font-cinzel text-stone-900 text-base md:text-lg font-bold leading-tight">
+                            {entry.title}
+                          </h4>
+                        </div>
                         
                         <div className="h-px bg-stone-400/30 w-12 mb-3" />
                         <p className="font-garamond text-stone-850 text-sm md:text-base leading-relaxed">
@@ -242,8 +256,8 @@ export default function HistorySection({
 
                     {/* Timeline node */}
                     <div className="hidden md:flex md:order-2 w-[10%] justify-center relative" style={{ zIndex: 10 }}>
-                      <div className="w-7 h-7 rounded-full flex items-center justify-center bg-radial-gradient from-yellow-400 to-yellow-600 border-2 border-stone-900 shadow-[0_0_15px_rgba(212,160,23,0.8)]">
-                        <span className="text-[10px] text-stone-950 font-bold font-cinzel">🦏</span>
+                      <div className="w-9 h-9 rounded-full flex items-center justify-center bg-gradient-to-br from-[#f0ca50] to-[#d4a017] border-2 border-stone-900 shadow-[0_0_15px_rgba(212,160,23,0.8)]">
+                        <span className="text-base select-none">{exhibitIcon}</span>
                       </div>
                     </div>
 

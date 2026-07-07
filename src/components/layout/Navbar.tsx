@@ -1,4 +1,4 @@
-// src/components/layout/Navbar.tsx — REFINED (centered links, taller, premium hover)
+// src/components/layout/Navbar.tsx — REFINED (12-Column Ceremonial Museum Grid)
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -10,7 +10,7 @@ export default function Navbar() {
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 60);
+    const handleScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -25,120 +25,136 @@ export default function Navbar() {
   return (
     <>
       <motion.nav
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500"
         style={{
-          background: scrolled
-            ? 'rgba(8, 10, 6, 0.97)'
-            : 'linear-gradient(180deg, rgba(8,10,6,0.9) 0%, rgba(8,10,6,0.4) 80%, transparent 100%)',
-          backdropFilter: scrolled ? 'blur(28px) saturate(1.4)' : 'blur(6px)',
-          borderBottom: scrolled ? '1px solid rgba(212,160,23,0.18)' : 'none',
-          boxShadow: scrolled ? '0 4px 48px rgba(0,0,0,0.55)' : 'none',
+          backgroundColor: '#0A0A0A',
+          backdropFilter: 'blur(10px)',
+          opacity: 0.96,
+          boxShadow: scrolled 
+            ? '0 12px 40px rgba(0,0,0,0.45), inset 0 -1px rgba(255,215,120,0.18), inset 0 1px rgba(255,255,255,0.04)' 
+            : 'inset 0 -1px rgba(255,215,120,0.18), inset 0 1px rgba(255,255,255,0.04)',
         }}
       >
-        {/* Scroll progress line */}
-        <div className="absolute bottom-0 left-0 right-0 h-px opacity-30"
-          style={{ background: 'linear-gradient(90deg, transparent, rgba(212,160,23,0.4), transparent)' }} />
+        {/* Decorative corner ornaments */}
+        <div className="absolute top-2 left-6 text-[#C6A768] text-[10px] opacity-60 pointer-events-none">✦</div>
+        <div className="absolute top-2 right-6 text-[#C6A768] text-[10px] opacity-60 pointer-events-none">✦</div>
 
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12" style={{ height: scrolled ? '68px' : '84px', transition: 'height 0.4s ease', display: 'flex', alignItems: 'center' }}>
-          <div className="w-full flex items-center justify-between gap-4">
-
-            {/* ── Logo ─────────────────────────────────── */}
-            <Link to="/" className="flex items-center gap-3.5 group flex-shrink-0">
-              <div
-                className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-400 group-hover:scale-110"
-                style={{
-                  background: 'radial-gradient(circle at 38% 38%, rgba(212,160,23,0.28) 0%, rgba(10,12,8,0.9) 68%)',
-                  border: '1.5px solid rgba(212,160,23,0.45)',
-                  boxShadow: '0 0 22px rgba(212,160,23,0.12)',
-                }}
-              >
-                <span className="text-[1.35rem] select-none">🦏</span>
-              </div>
-              <div className="hidden sm:block">
-                <div className="font-cinzel text-yellow-400/90 text-sm tracking-[0.18em] leading-snug group-hover:text-yellow-300 transition-colors duration-300">
-                  Assam Regimental Centre
+        {/* Height and generous padding container */}
+        <div 
+          className="w-full mx-auto px-10 md:px-20 lg:px-24 transition-all duration-500" 
+          style={{ height: scrolled ? '86px' : '104px' }}
+        >
+          {/* 12-Column Grid Layout */}
+          <div className="w-full h-full grid grid-cols-12 gap-6 items-center">
+            
+            {/* ── 3 COLUMNS: LOGO (Approx 25%) ── */}
+            <div className="col-span-8 lg:col-span-3 flex items-center">
+              <Link to="/" className="flex items-center gap-6 group">
+                {/* Emblem inside thin antique gold circular ring */}
+                <div
+                  className="w-14 h-14 rounded-full flex items-center justify-center border transition-all duration-300 flex-shrink-0"
+                  style={{
+                    borderColor: 'rgba(198, 167, 104, 0.5)',
+                    background: '#0A0A0A',
+                    boxShadow: 'inset 0 0 15px rgba(198, 167, 104, 0.1), 0 0 15px rgba(198, 167, 104, 0.05)',
+                  }}
+                >
+                  <span className="text-2xl select-none group-hover:scale-105 transition-transform duration-300">🦏</span>
                 </div>
-                <div className="font-inter text-yellow-800/55 text-[9px] tracking-[0.38em] uppercase mt-0.5">
-                  Est. 1941 · Happy Valley, Shillong
-                </div>
-              </div>
-            </Link>
-
-            {/* ── Centered Navigation Links ─────────────── */}
-            <nav className="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
-              {navItems.map((item) => {
-                const isActive = location.pathname === item.path;
-                return (
-                  <Link
-                    key={item.id}
-                    to={item.path}
-                    className="relative group px-5 xl:px-6 py-2"
+                
+                <div className="flex flex-col justify-center">
+                  <span 
+                    className="font-cinzel text-xs lg:text-[13px] tracking-[0.25em] uppercase font-bold leading-tight"
+                    style={{ color: '#F6F2EB', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}
                   >
-                    {/* Hover background pill */}
-                    <span
-                      className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      style={{ background: 'rgba(212,160,23,0.06)' }}
-                    />
-                    {/* Label */}
-                    <span
-                      className={`relative font-cinzel text-[0.8rem] xl:text-[0.85rem] tracking-[0.18em] uppercase transition-all duration-300 ${
-                        isActive ? 'text-yellow-400' : 'text-stone-300/80 group-hover:text-yellow-300'
-                      }`}
-                    >
-                      {item.label}
-                    </span>
-                    {/* Active underline */}
-                    <span
-                      className="absolute bottom-0 left-5 xl:left-6 right-5 xl:right-6 h-[1.5px] rounded-full transition-all duration-400"
-                      style={{
-                        background: 'linear-gradient(90deg, transparent, #d4a017, transparent)',
-                        transform: isActive ? 'scaleX(1)' : 'scaleX(0)',
-                        opacity: isActive ? 1 : 0,
-                      }}
-                    />
-                    {/* Hover underline (non-active) */}
-                    {!isActive && (
-                      <span
-                        className="absolute bottom-0 left-5 xl:left-6 right-5 xl:right-6 h-px rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 scale-x-0 group-hover:scale-x-100"
-                        style={{ background: 'rgba(212,160,23,0.35)', transformOrigin: 'center' }}
-                      />
-                    )}
-                    {/* Active glow dot */}
-                    {isActive && (
-                      <span
-                        className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full"
-                        style={{ background: '#d4a017', boxShadow: '0 0 8px rgba(212,160,23,0.9)' }}
-                      />
-                    )}
-                  </Link>
-                );
-              })}
-            </nav>
+                    Assam Regiment
+                  </span>
+                  <span 
+                    className="font-cinzel text-[9px] lg:text-[10px] tracking-[0.4em] uppercase leading-tight mt-1"
+                    style={{ color: '#8A7A58' }}
+                  >
+                    Digital Museum
+                  </span>
+                </div>
+              </Link>
+            </div>
 
-            {/* ── Right: Badge + Hamburger ───────────────── */}
-            <div className="flex items-center gap-4 flex-shrink-0">
-              <div
-                className="hidden xl:flex items-center gap-2 px-3.5 py-1.5 rounded-full"
+            {/* ── 7 COLUMNS: NAVIGATION GROUP (Approx 55%) ── */}
+            <div className="hidden lg:flex col-span-7 justify-center">
+              {/* Compact cluster, not stretched */}
+              <div className="flex items-center gap-12">
+                {navItems.map((item) => {
+                  const isActive = location.pathname === item.path;
+                  return (
+                    <Link
+                      key={item.id}
+                      to={item.path}
+                      className="relative group py-3 flex flex-col items-center"
+                    >
+                      <motion.span
+                        className="font-cinzel text-[13px] tracking-[0.2em] uppercase font-semibold transition-all duration-300"
+                        style={{ color: isActive ? '#E2C98A' : '#C6A768' }}
+                        whileHover={{ y: -2, color: '#E2C98A', textShadow: '0 0 8px rgba(226, 201, 138, 0.4)' }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {item.label}
+                      </motion.span>
+                      
+                      {/* Active indicator: glowing gold line expanding from center with faded edges */}
+                      <span
+                        className="absolute bottom-0 h-[2px] transition-all duration-500"
+                        style={{
+                          width: isActive ? '100%' : '0%',
+                          background: 'linear-gradient(90deg, transparent, #E2C98A, transparent)',
+                          boxShadow: isActive ? '0 0 8px rgba(226, 201, 138, 0.6)' : 'none',
+                          opacity: isActive ? 1 : 0,
+                          borderRadius: '100%',
+                        }}
+                      />
+
+                      {/* Hover line transition */}
+                      {!isActive && (
+                        <span
+                          className="absolute bottom-0 h-[1.5px] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"
+                          style={{ 
+                            width: '100%', 
+                            background: 'linear-gradient(90deg, transparent, #C6A768, transparent)',
+                            borderRadius: '100%'
+                          }}
+                        />
+                      )}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* ── 2 COLUMNS: MOTTO BADGE (Approx 20%) ── */}
+            <div className="hidden lg:flex col-span-2 justify-end">
+              <div 
+                className="font-cinzel text-[10px] tracking-[0.25em] uppercase px-5 py-2.5 rounded-[4px] transition-all duration-300 flex items-center justify-center whitespace-nowrap"
                 style={{
-                  background: 'rgba(212,160,23,0.06)',
-                  border: '1px solid rgba(212,160,23,0.18)',
+                  border: '1px solid rgba(198, 167, 104, 0.4)',
+                  backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                  color: '#C6A768',
+                  boxShadow: 'inset 0 1px 3px rgba(255, 255, 255, 0.05), 0 4px 15px rgba(0, 0, 0, 0.5)',
+                  textShadow: '0 1px 2px rgba(0,0,0,0.8)'
                 }}
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse" />
-                <span className="font-cinzel text-yellow-700/80 text-[10px] tracking-[0.28em] uppercase whitespace-nowrap">
-                  Rhino Charge!
-                </span>
+                Asam Vikram • Tagra Raho
               </div>
+            </div>
 
-              {/* Hamburger */}
+            {/* Mobile menu trigger */}
+            <div className="col-span-4 lg:hidden flex justify-end">
               <button
-                className="lg:hidden w-10 h-10 rounded-lg flex flex-col items-center justify-center gap-[5px] transition-all duration-300"
+                className="w-12 h-12 rounded flex flex-col items-center justify-center gap-1.5 transition-all duration-300"
                 style={{
-                  background: menuOpen ? 'rgba(212,160,23,0.12)' : 'rgba(212,160,23,0.04)',
-                  border: '1px solid rgba(212,160,23,0.2)',
+                  background: 'rgba(0,0,0,0.4)',
+                  border: '1px solid rgba(198, 167, 104, 0.3)',
                 }}
                 onClick={() => setMenuOpen(!menuOpen)}
                 aria-label="Toggle menu"
@@ -147,16 +163,16 @@ export default function Navbar() {
                 {[0, 1, 2].map((i) => (
                   <span
                     key={i}
-                    className="block h-px bg-yellow-500 transition-all duration-300"
+                    className="block h-[1.5px] bg-[#C6A768] transition-all duration-300"
                     style={{
-                      width: '18px',
+                      width: '22px',
                       opacity: i === 1 && menuOpen ? 0 : 1,
                       transform:
                         menuOpen
                           ? i === 0
-                            ? 'rotate(45deg) translate(4px, 4px)'
+                            ? 'rotate(45deg) translate(5px, 5px)'
                             : i === 2
-                            ? 'rotate(-45deg) translate(4px, -4px)'
+                            ? 'rotate(-45deg) translate(5px, -5px)'
                             : 'none'
                           : 'none',
                     }}
@@ -164,71 +180,44 @@ export default function Navbar() {
                 ))}
               </button>
             </div>
+
           </div>
         </div>
+
+        {/* Embossed thin gold bottom divider */}
+        <div 
+          className="w-full h-[1px] absolute bottom-0 left-0" 
+          style={{ 
+            background: 'linear-gradient(90deg, transparent, #C6A768, transparent)',
+            opacity: 0.8,
+            boxShadow: '0 1px 3px rgba(0,0,0,0.8)'
+          }} 
+        />
       </motion.nav>
 
-      {/* ── Full-screen Mobile Menu ──────────────────────── */}
+      {/* Mobile view panel */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, clipPath: 'inset(0 0 100% 0)' }}
-            animate={{ opacity: 1, clipPath: 'inset(0 0 0% 0)' }}
-            exit={{ opacity: 0, clipPath: 'inset(0 0 100% 0)' }}
-            transition={{ duration: 0.45, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 z-40 flex flex-col"
-            style={{ background: 'rgba(6, 8, 4, 0.99)', backdropFilter: 'blur(32px)' }}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.45 }}
+            className="fixed inset-0 z-40 flex flex-col justify-center"
+            style={{ background: '#0A0A0A', borderTop: '1px solid rgba(198,167,104,0.3)' }}
           >
-            {/* Top accent */}
-            <div className="h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, #d4a017, transparent)' }} />
-
-            {/* Logo row */}
-            <div className="flex items-center gap-3 p-6">
-              <span className="text-2xl">🦏</span>
-              <span className="font-cinzel text-yellow-500/70 text-sm tracking-wider">Assam Regimental Centre</span>
+            <div className="flex flex-col items-center gap-8">
+              {navItems.map((item) => (
+                <Link
+                  key={item.id}
+                  to={item.path}
+                  className="font-cinzel text-xl md:text-2xl tracking-[0.25em] uppercase hover:text-[#E2C98A]"
+                  style={{ color: '#C6A768' }}
+                >
+                  {item.label}
+                </Link>
+              ))}
             </div>
-
-            {/* Links */}
-            <div className="flex flex-col items-start gap-2 px-8 pt-4 flex-1">
-              {navItems.map((item, i) => {
-                const isActive = location.pathname === item.path;
-                return (
-                  <motion.div
-                    key={item.id}
-                    initial={{ opacity: 0, x: -32 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -32 }}
-                    transition={{ delay: 0.08 + i * 0.06 }}
-                    className="w-full"
-                  >
-                    <Link
-                      to={item.path}
-                      className={`flex items-center gap-5 py-4 px-5 rounded-xl w-full transition-all duration-300 ${
-                        isActive ? 'text-yellow-400' : 'text-stone-300 hover:text-yellow-300'
-                      }`}
-                      style={{
-                        background: isActive ? 'rgba(212,160,23,0.08)' : 'transparent',
-                        borderLeft: isActive ? '2px solid #d4a017' : '2px solid transparent',
-                      }}
-                    >
-                      <span className="font-cinzel text-2xl tracking-widest uppercase">{item.label}</span>
-                    </Link>
-                  </motion.div>
-                );
-              })}
-            </div>
-
-            {/* Bottom motto */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="p-8 flex flex-col gap-1"
-            >
-              <div className="h-px w-24 mb-4" style={{ background: 'linear-gradient(90deg, #d4a017, transparent)' }} />
-              <div className="font-cinzel text-yellow-600/55 text-xs tracking-[0.4em] uppercase">Asam Vikram · Unique Valour</div>
-              <div className="font-garamond text-stone-600 text-sm italic mt-0.5">Est. 15 June 1941 · Happy Valley, Shillong</div>
-            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

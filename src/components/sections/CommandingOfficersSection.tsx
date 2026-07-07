@@ -1,4 +1,4 @@
-// src/components/sections/CommandingOfficersSection.tsx - REFINED (3D Flip Cards)
+// src/components/sections/CommandingOfficersSection.tsx - REFINED (Large Museum Portraits)
 import { motion } from 'framer-motion';
 import SectionHeader from './SectionHeader';
 import type { CommandingOfficer, GaonBura } from '../../types';
@@ -17,105 +17,132 @@ const PORTRAIT_FALLBACKS = [
 
 export default function CommandingOfficersSection({ officers, gaonBuras }: Props) {
   return (
-    <section id="commanding-officers" className="relative section-xl" style={{ background: 'linear-gradient(180deg, #0a0c08 0%, #0e1309 50%, #0a0c08 100%)' }}>
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12">
+    <section id="commanding-officers" className="relative py-32 museum-room-wall spotlight-glow">
+      <div className="museum-container">
+        
+        {/* Section Header */}
         <SectionHeader
-          tag="Leadership Chronicles"
+          tag="Portrait Gallery"
           title="Commanding Officers"
-          subtitle="Hover or tap any card to view their biography and key contributions to the regiment."
+          subtitle="Hover or tap a portrait frame to inspect the service records, military biography and key accomplishments."
         />
 
-        {/* Officers Grid - 3D Flip Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-24">
+        {/* ── Large Portrait Grid (3D Flip Plaque Layout) ── */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-12 mb-28">
           {officers.map((officer, i) => {
             const officerImg = officer.image || PORTRAIT_FALLBACKS[i % PORTRAIT_FALLBACKS.length];
             return (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 35 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.08, duration: 0.6 }}
-                className="flip-card w-full h-[450px]"
+                transition={{ delay: i * 0.1, duration: 0.7 }}
+                className="flip-card w-full h-[580px]"
               >
                 <div className="flip-card-inner w-full h-full">
-                  {/* Card Front */}
-                  <div className="flip-card-front w-full h-full bg-gradient-to-b from-[#141a0d] to-[#0a0c08] border border-yellow-700/20 shadow-2xl flex flex-col justify-between">
-                    <div className="relative w-full h-[320px] overflow-hidden group img-zoom-container">
+                  
+                  {/* Front Side: Large Framed Portrait */}
+                  <div className="flip-card-front w-full h-full bg-gradient-to-b from-[#141a0d] to-[#0a0c08] border-8 border-[#2b1d0c] shadow-[0_20px_50px_rgba(0,0,0,0.85)] flex flex-col justify-between p-4 relative">
+                    {/* Brass corner indicators */}
+                    <div className="absolute top-2 left-2 text-[#d4a017] text-[10px]">✦</div>
+                    <div className="absolute top-2 right-2 text-[#d4a017] text-[10px]">✦</div>
+                    <div className="absolute bottom-2 left-2 text-[#d4a017] text-[10px]">✦</div>
+                    <div className="absolute bottom-2 right-2 text-[#d4a017] text-[10px]">✦</div>
+
+                    <div className="relative w-full h-[400px] overflow-hidden img-zoom-container rounded-lg border border-[#2b1d0c]">
                       <img
                         src={officerImg}
                         alt={officer.name}
-                        className="w-full h-full object-cover object-top filter contrast-[1.05] brightness-[0.9]"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src = PORTRAIT_FALLBACKS[i % PORTRAIT_FALLBACKS.length];
-                        }}
+                        className="w-full h-full object-cover object-top filter contrast-[1.05] brightness-[0.85]"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
                       
-                      {/* Rank tag */}
-                      <div className="absolute bottom-4 left-4 px-3 py-1 rounded text-[10px] font-inter uppercase tracking-widest text-yellow-500 border border-yellow-700/30"
-                        style={{ background: 'rgba(10,12,8,0.85)', backdropFilter: 'blur(4px)' }}>
-                        {officer.rank}
+                      {/* Interactive Flip Hint */}
+                      <div className="absolute top-4 right-4 px-2.5 py-1 bg-yellow-500/10 text-yellow-500 text-[8px] font-inter uppercase tracking-widest border border-yellow-500/35 rounded backdrop-blur-sm">
+                        Hover to inspect
                       </div>
                     </div>
 
-                    <div className="p-5 flex-1 flex flex-col justify-center">
-                      <div className="font-cinzel text-yellow-500/90 text-[11px] tracking-widest uppercase mb-1">{officer.rank}</div>
-                      <h3 className="font-cinzel text-stone-100 text-lg mb-1 leading-snug">{officer.name}</h3>
-                      <div className="font-inter text-stone-500 text-xs tracking-wider">{officer.tenure}</div>
+                    {/* Bottom Label Plate */}
+                    <div className="p-4 text-center bg-[#0d120a] border-t border-[#443118]/50 rounded-b-md">
+                      <div className="font-cinzel text-yellow-500/90 text-xs tracking-[0.2em] uppercase mb-1">{officer.rank}</div>
+                      <h3 className="font-cinzel text-stone-100 text-lg md:text-xl font-bold leading-tight mb-1">{officer.name}</h3>
+                      <div className="font-inter text-stone-500 text-[10px] tracking-widest uppercase">{officer.tenure}</div>
                     </div>
                   </div>
 
-                  {/* Card Back */}
-                  <div className="flip-card-back w-full h-full p-6 flex flex-col justify-between overflow-y-auto">
+                  {/* Back Side: Information Exhibit Plaque (Vintage Paper) */}
+                  <div className="flip-card-back w-full h-full p-8 flex flex-col justify-between bg-gradient-to-b from-[#f3ede2] to-[#e4d7be] border-8 border-[#2b1d0c] shadow-[0_20px_50px_rgba(0,0,0,0.85)]">
+                    
                     <div>
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="h-6 w-0.5 bg-yellow-500 rounded-full" />
+                      {/* Metal bar divider */}
+                      <div className="flex items-center gap-3.5 mb-5">
+                        <div className="h-9 w-[3px] bg-yellow-600 rounded-full" />
                         <div>
-                          <div className="font-cinzel text-stone-200 text-base leading-snug">{officer.name}</div>
-                          <div className="font-inter text-stone-500 text-[10px] tracking-wider uppercase">{officer.tenure}</div>
+                          <div className="font-cinzel text-stone-900 text-base font-bold leading-tight">{officer.name}</div>
+                          <div className="font-inter text-stone-600 text-[9px] tracking-widest uppercase mt-0.5">{officer.rank} · {officer.tenure}</div>
                         </div>
                       </div>
-                      <div className="h-px bg-yellow-700/10 mb-4" />
-                      <div className="font-inter text-stone-500 text-[10px] tracking-widest uppercase mb-2">Biography</div>
-                      <p className="font-garamond text-stone-300 text-[14px] leading-relaxed mb-4">{officer.bio}</p>
+                      
+                      <div className="h-px bg-stone-400/40 w-16 mb-5" />
+                      
+                      {/* Biography */}
+                      <div className="mb-6">
+                        <div className="font-inter text-stone-700 text-[9px] tracking-widest uppercase font-bold mb-1.5">Regimental Biography</div>
+                        <p className="font-garamond text-stone-900 text-[15px] leading-relaxed italic">{officer.bio}</p>
+                      </div>
                     </div>
 
-                    <div className="border-t border-yellow-700/10 pt-4 mt-auto">
-                      <div className="font-inter text-stone-500 text-[10px] tracking-widest uppercase mb-1">Key Contribution</div>
-                      <p className="font-inter text-stone-400 text-xs leading-relaxed italic">{officer.contribution}</p>
+                    {/* Contributions / Historical Importance */}
+                    <div className="border-t border-stone-400/40 pt-4 mt-auto">
+                      <div className="font-inter text-stone-700 text-[9px] tracking-widest uppercase font-bold mb-1">Key Contributions</div>
+                      <p className="font-inter text-stone-850 text-xs leading-relaxed">{officer.contribution}</p>
                     </div>
+
                   </div>
+
                 </div>
               </motion.div>
             );
           })}
         </div>
 
-        {/* Gaon Buras Section */}
+        {/* ── Gaon Buras Heritage Section ────────────────── */}
         {gaonBuras && gaonBuras.length > 0 && (
           <>
-            <div className="divider-gold mb-24" />
+            <div className="room-divider">
+              <div className="room-divider-line" />
+              <div className="room-divider-flourish">
+                <span>✦</span>
+                <span className="font-cinzel text-xs tracking-[0.35em] uppercase">Exhibition Annex · Community Pillars</span>
+                <span>✦</span>
+              </div>
+              <div className="room-divider-line" />
+            </div>
+
             <SectionHeader
-              tag="Community Pillars"
+              tag="Cultural Pillars"
               title="Gaon Buras"
-              subtitle="The village elders and community chieftains who served as the vital link between the regiment and local tribes."
+              subtitle="The village elders and community leaders who served as the vital bridge between the regiment and local tribes."
             />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
               {gaonBuras.map((gb, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.1, duration: 0.6 }}
-                  className="flip-card w-full h-[400px]"
+                  transition={{ delay: i * 0.12, duration: 0.7 }}
+                  className="flip-card w-full h-[500px]"
                 >
                   <div className="flip-card-inner w-full h-full">
-                    {/* Front */}
-                    <div className="flip-card-front w-full h-full bg-gradient-to-b from-[#141a0d] to-[#0a0c08] border border-yellow-700/20 shadow-2xl p-7 flex flex-col justify-between">
+                    
+                    {/* Front: Framed Heritage Portrait Card */}
+                    <div className="flip-card-front w-full h-full bg-gradient-to-b from-[#141a0d] to-[#0a0c08] border-8 border-[#2b1d0c] shadow-2xl p-6 flex flex-col justify-between relative">
                       <div className="w-16 h-16 rounded-full flex items-center justify-center border border-yellow-500/20 bg-yellow-500/5 mb-4">
-                        <span className="text-3xl select-none">👴</span>
+                        <span className="text-4xl select-none">👴</span>
                       </div>
                       
                       <div className="flex-1 flex flex-col justify-end">
