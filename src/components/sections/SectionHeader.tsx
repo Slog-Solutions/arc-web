@@ -1,10 +1,11 @@
 // src/components/sections/SectionHeader.tsx
 import { motion } from 'framer-motion';
+import type { ReactNode } from 'react';
 
 interface Props {
   tag?: string;
   title: string;
-  subtitle?: string;
+  subtitle?: ReactNode;
   centered?: boolean;
 }
 
@@ -16,6 +17,7 @@ export default function SectionHeader({ tag, title, subtitle, centered = true }:
       viewport={{ once: true }}
       transition={{ duration: 0.7 }}
       className={`mb-16 ${centered ? 'text-center' : ''}`}
+      style={{ textAlign: centered ? 'center' : 'left' }}
     >
       {tag && (
         <div className={`flex items-center gap-3 mb-4 ${centered ? 'justify-center' : ''}`}>
@@ -28,7 +30,19 @@ export default function SectionHeader({ tag, title, subtitle, centered = true }:
         <span className="text-gold-gradient">{title}</span>
       </h2>
       {subtitle && (
-        <p className="mt-4 font-garamond text-lg md:text-xl text-stone-400 max-w-3xl mx-auto leading-relaxed">
+        <p
+          className="
+        mt-4
+        max-w-3xl
+        mx-auto
+        text-center
+        font-garamond
+        text-lg
+        md:text-xl
+        text-stone-400
+        leading-relaxed
+    "
+        >
           {subtitle}
         </p>
       )}
