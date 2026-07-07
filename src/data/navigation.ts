@@ -3,7 +3,7 @@ export const navItems = [
   {
     id: "arc",
     label: "Assam Regimental Centre",
-    path: "/",
+    path: "/arc",
     shortLabel: "ARC",
     color: "#d4a017",
   },

@@ -10,6 +10,7 @@ import AssamRiflesPage from './pages/AssamRiflesPage';
 import ArunachalScoutsPage from './pages/ArunachalScoutsPage';
 import RashtriyaRiflesPage from './pages/RashtriyaRiflesPage';
 import TerritorialArmyPage from './pages/TerritorialArmyPage';
+import HomeScreen from './pages/HomeScreen';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -25,13 +26,14 @@ export default function App() {
   return (
     <HelmetProvider>
       <div className="min-h-screen" style={{ background: '#0a0c08' }}>
-        <ScrollProgress />
+        {location.pathname !== '/' && <ScrollProgress />}
         <Navbar />
         <ScrollToTop />
         <main>
           <AnimatePresence mode="wait" initial={false}>
             <Routes location={location} key={location.pathname}>
-              <Route path="/" element={<ARCPage />} />
+              <Route path="/" element={<HomeScreen />} />
+              <Route path="/arc" element={<ARCPage />} />
               <Route path="/assam-rifles" element={<AssamRiflesPage />} />
               <Route path="/arunachal-scouts" element={<ArunachalScoutsPage />} />
               <Route path="/rashtriya-rifles" element={<RashtriyaRiflesPage />} />
@@ -39,7 +41,7 @@ export default function App() {
             </Routes>
           </AnimatePresence>
         </main>
-        <Footer />
+        {location.pathname !== '/' && <Footer />}
       </div>
     </HelmetProvider>
   );

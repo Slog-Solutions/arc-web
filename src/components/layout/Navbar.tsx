@@ -1,22 +1,14 @@
-// src/components/layout/Navbar.tsx — REFINED (12-Column Ceremonial Museum Grid)
+// src/components/layout/Navbar.tsx
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { navItems } from '../../data/navigation';
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 30);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   useEffect(() => { setMenuOpen(false); }, [location]);
-
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
@@ -25,197 +17,332 @@ export default function Navbar() {
   return (
     <>
       <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500"
+        className="absolute z-50"
         style={{
-          backgroundColor: '#0A0A0A',
-          backdropFilter: 'blur(10px)',
-          opacity: 0.96,
-          boxShadow: scrolled 
-            ? '0 12px 40px rgba(0,0,0,0.45), inset 0 -1px rgba(255,215,120,0.18), inset 0 1px rgba(255,255,255,0.04)' 
-            : 'inset 0 -1px rgba(255,215,120,0.18), inset 0 1px rgba(255,255,255,0.04)',
+          top: '10px',
+          left: '10px',
+          right: '10px',
         }}
       >
-        {/* Decorative corner ornaments */}
-        <div className="absolute top-2 left-6 text-[#C6A768] text-[10px] opacity-60 pointer-events-none">✦</div>
-        <div className="absolute top-2 right-6 text-[#C6A768] text-[10px] opacity-60 pointer-events-none">✦</div>
-
-        {/* Height and generous padding container */}
-        <div 
-          className="w-full mx-auto px-10 md:px-20 lg:px-24 transition-all duration-500" 
-          style={{ height: scrolled ? '86px' : '104px' }}
+        {/* ── Three Stars Tab centered on top ── */}
+        <div
+          className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-2"
+          style={{
+            top: '-13px',
+            zIndex: 10,
+            width: '80px',
+            height: '22px',
+            background: '#0e0c0a',
+            border: '1px solid #8a6820',
+            borderBottom: 'none',
+            borderTopLeftRadius: '8px',
+            borderTopRightRadius: '8px',
+          }}
         >
-          {/* 12-Column Grid Layout */}
-          <div className="w-full h-full grid grid-cols-12 gap-6 items-center">
-            
-            {/* ── 3 COLUMNS: LOGO (Approx 25%) ── */}
-            <div className="col-span-8 lg:col-span-3 flex items-center">
-              <Link to="/" className="flex items-center gap-6 group">
-                {/* Emblem inside thin antique gold circular ring */}
-                <div
-                  className="w-14 h-14 rounded-full flex items-center justify-center border transition-all duration-300 flex-shrink-0"
-                  style={{
-                    borderColor: 'rgba(198, 167, 104, 0.5)',
-                    background: '#0A0A0A',
-                    boxShadow: 'inset 0 0 15px rgba(198, 167, 104, 0.1), 0 0 15px rgba(198, 167, 104, 0.05)',
-                  }}
-                >
-                  <span className="text-2xl select-none group-hover:scale-105 transition-transform duration-300">🦏</span>
-                </div>
-                
-                <div className="flex flex-col justify-center">
-                  <span 
-                    className="font-cinzel text-xs lg:text-[13px] tracking-[0.25em] uppercase font-bold leading-tight"
-                    style={{ color: '#F6F2EB', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}
-                  >
-                    Assam Regiment
-                  </span>
-                  <span 
-                    className="font-cinzel text-[9px] lg:text-[10px] tracking-[0.4em] uppercase leading-tight mt-1"
-                    style={{ color: '#8A7A58' }}
-                  >
-                    Digital Museum
-                  </span>
-                </div>
-              </Link>
-            </div>
+          <span style={{ color: '#b8922a', fontSize: '9px', opacity: 0.6 }}>★</span>
+          <span style={{ color: '#d4a830', fontSize: '12px' }}>★</span>
+          <span style={{ color: '#b8922a', fontSize: '9px', opacity: 0.6 }}>★</span>
+        </div>
 
-            {/* ── 7 COLUMNS: NAVIGATION GROUP (Approx 55%) ── */}
-            <div className="hidden lg:flex col-span-7 justify-center">
-              {/* Compact cluster, not stretched */}
-              <div className="flex items-center gap-12">
-                {navItems.map((item) => {
-                  const isActive = location.pathname === item.path;
-                  return (
+        {/* ── Main Bar ── */}
+        <div
+          className="relative w-full flex items-center"
+          style={{
+            height: '96px',
+            background: 'linear-gradient(180deg, #1a1510 0%, #0e0c09 40%, #0b0906 100%)',
+            border: '1px solid #8a6820',
+            borderRadius: '12px',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.7), inset 0 1px 0 rgba(200,163,93,0.12), inset 0 0 40px rgba(0,0,0,0.3)',
+          }}
+        >
+          {/* Inner top highlight */}
+          <div
+            className="absolute top-0 left-[60px] right-[60px] h-[1px] pointer-events-none"
+            style={{ background: 'linear-gradient(90deg, transparent, rgba(200,163,93,0.25), transparent)' }}
+          />
+
+          {/* ── LEFT: Large Logo Circle ── */}
+          <div className="flex-shrink-0 flex items-center" style={{ paddingLeft: '0px' }}>
+            {/* The circle extends outside the bar — position it absolutely on the left */}
+            <Link to="/" className="group" style={{ marginLeft: '-4px', flexShrink: 0 }}>
+              <div
+                className="relative flex items-center justify-center rounded-full transition-transform duration-500 group-hover:scale-105"
+                style={{
+                  width: '160px',
+                  height: '160px',
+                  background: 'radial-gradient(circle at 38% 32%, #211a0e 0%, #100d07 55%, #070503 100%)',
+                  border: '2px solid #9a7828',
+                  boxShadow: '0 0 0 1px rgba(154,120,40,0.2), 0 0 20px rgba(0,0,0,0.8), inset 0 0 25px rgba(0,0,0,0.5), 0 0 12px rgba(154,120,40,0.12)',
+                }}
+              >
+                {/* Inner ring */}
+                <div
+                  className="absolute rounded-full pointer-events-none"
+                  style={{
+                    inset: '5px',
+                    border: '1px solid rgba(154,120,40,0.25)',
+                    borderRadius: '50%',
+                  }}
+                />
+                <img
+                  src="/assami/navbar%20logo.png"
+                  alt="Assam Regiment"
+                  style={{ width: '200%', objectFit: 'contain', filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.6))' }}
+                />
+              </div>
+            </Link>
+          </div>
+
+          {/* ── LEFT TEXT: Assam Regiment / Digital Museum ── */}
+          <div className="hidden md:flex flex-col justify-center flex-shrink-0" style={{ marginLeft: '20px', marginRight: '4px' }}>
+            <span
+              className="font-cinzel uppercase leading-tight"
+              style={{
+                fontSize: '20px',
+                letterSpacing: '3px',
+                color: '#c8a040',
+                fontWeight: 600,
+                textShadow: '0 1px 3px rgba(0,0,0,0.8)',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              Assam Regiment
+            </span>
+            <span
+              className="font-cinzel uppercase leading-tight"
+              style={{
+                fontSize: '11px',
+                letterSpacing: '3.5px',
+                color: '#9a7830',
+                marginTop: '5px',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              Digital Museum
+            </span>
+          </div>
+
+          {/* ── LEFT SEPARATOR ── */}
+          <div
+            className="hidden md:block flex-shrink-0"
+            style={{
+              width: '1px',
+              height: '44px',
+              margin: '0 18px',
+              background: 'linear-gradient(180deg, transparent, #8a6820, transparent)',
+            }}
+          />
+
+          {/* ── CENTER: Nav Links ── */}
+          <div className="hidden lg:flex flex-1 items-center justify-center">
+            <div className="flex items-center">
+              {navItems.map((item, i) => {
+                const isActive = location.pathname === item.path;
+                return (
+                  <div key={item.id} className="flex items-center">
                     <Link
-                      key={item.id}
                       to={item.path}
-                      className="relative group py-3 flex flex-col items-center"
+                      className="relative group flex flex-col items-center"
+                      style={{ padding: '6px 20px' }}
                     >
+                      {/* Active glow spotlight */}
+                      {isActive && (
+                        <div
+                          className="absolute inset-0 pointer-events-none"
+                          style={{
+                            background: 'radial-gradient(ellipse at center, rgba(200,163,93,0.07) 0%, transparent 70%)',
+                          }}
+                        />
+                      )}
                       <motion.span
-                        className="font-cinzel text-[13px] tracking-[0.2em] uppercase font-semibold transition-all duration-300"
-                        style={{ color: isActive ? '#E2C98A' : '#C6A768' }}
-                        whileHover={{ y: -2, color: '#E2C98A', textShadow: '0 0 8px rgba(226, 201, 138, 0.4)' }}
-                        transition={{ duration: 0.3 }}
+                        className="font-cinzel uppercase relative z-10"
+                        style={{
+                          fontSize: '13px',
+                          letterSpacing: '2.5px',
+                          fontWeight: 500,
+                          color: isActive ? '#f0c84a' : '#c8a040',
+                          whiteSpace: 'nowrap',
+                          textShadow: isActive ? '0 0 10px rgba(240,200,74,0.35)' : 'none',
+                          lineHeight: 1,
+                        }}
+                        whileHover={{ color: '#f0c84a', textShadow: '0 0 10px rgba(240,200,74,0.35)' }}
+                        transition={{ duration: 0.2 }}
                       >
                         {item.label}
                       </motion.span>
-                      
-                      {/* Active indicator: glowing gold line expanding from center with faded edges */}
-                      <span
-                        className="absolute bottom-0 h-[2px] transition-all duration-500"
-                        style={{
-                          width: isActive ? '100%' : '0%',
-                          background: 'linear-gradient(90deg, transparent, #E2C98A, transparent)',
-                          boxShadow: isActive ? '0 0 8px rgba(226, 201, 138, 0.6)' : 'none',
-                          opacity: isActive ? 1 : 0,
-                          borderRadius: '100%',
-                        }}
-                      />
 
-                      {/* Hover line transition */}
+                      {/* Active underline */}
+                      <motion.span
+                        className="absolute"
+                        style={{
+                          bottom: '3px',
+                          left: '20px',
+                          right: '20px',
+                          height: '1.5px',
+                          background: 'linear-gradient(90deg, transparent, #f0c84a, transparent)',
+                          boxShadow: '0 0 8px rgba(240,200,74,0.5)',
+                          originX: '0.5',
+                          scaleX: isActive ? 1 : 0,
+                        }}
+                        animate={{ scaleX: isActive ? 1 : 0 }}
+                        transition={{ duration: 0.35 }}
+                      />
+                      {/* Hover underline */}
                       {!isActive && (
                         <span
-                          className="absolute bottom-0 h-[1.5px] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"
-                          style={{ 
-                            width: '100%', 
-                            background: 'linear-gradient(90deg, transparent, #C6A768, transparent)',
-                            borderRadius: '100%'
+                          className="absolute scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"
+                          style={{
+                            bottom: '3px',
+                            left: '20px',
+                            right: '20px',
+                            height: '1px',
+                            background: 'linear-gradient(90deg, transparent, #a87e35, transparent)',
                           }}
                         />
                       )}
                     </Link>
-                  );
-                })}
-              </div>
-            </div>
 
-            {/* ── 2 COLUMNS: MOTTO BADGE (Approx 20%) ── */}
-            <div className="hidden lg:flex col-span-2 justify-end">
-              <div 
-                className="font-cinzel text-[10px] tracking-[0.25em] uppercase px-5 py-2.5 rounded-[4px] transition-all duration-300 flex items-center justify-center whitespace-nowrap"
-                style={{
-                  border: '1px solid rgba(198, 167, 104, 0.4)',
-                  backgroundColor: 'rgba(0, 0, 0, 0.6)',
-                  color: '#C6A768',
-                  boxShadow: 'inset 0 1px 3px rgba(255, 255, 255, 0.05), 0 4px 15px rgba(0, 0, 0, 0.5)',
-                  textShadow: '0 1px 2px rgba(0,0,0,0.8)'
-                }}
-              >
-                Asam Vikram • Tagra Raho
-              </div>
+                    {/* Bullet separator */}
+                    {i < navItems.length - 1 && (
+                      <span
+                        style={{ color: '#6a5020', fontSize: '8px', lineHeight: 1, flexShrink: 0 }}
+                      >
+                        ◆
+                      </span>
+                    )}
+                  </div>
+                );
+              })}
             </div>
-
-            {/* Mobile menu trigger */}
-            <div className="col-span-4 lg:hidden flex justify-end">
-              <button
-                className="w-12 h-12 rounded flex flex-col items-center justify-center gap-1.5 transition-all duration-300"
-                style={{
-                  background: 'rgba(0,0,0,0.4)',
-                  border: '1px solid rgba(198, 167, 104, 0.3)',
-                }}
-                onClick={() => setMenuOpen(!menuOpen)}
-                aria-label="Toggle menu"
-                id="mobile-menu-btn"
-              >
-                {[0, 1, 2].map((i) => (
-                  <span
-                    key={i}
-                    className="block h-[1.5px] bg-[#C6A768] transition-all duration-300"
-                    style={{
-                      width: '22px',
-                      opacity: i === 1 && menuOpen ? 0 : 1,
-                      transform:
-                        menuOpen
-                          ? i === 0
-                            ? 'rotate(45deg) translate(5px, 5px)'
-                            : i === 2
-                            ? 'rotate(-45deg) translate(5px, -5px)'
-                            : 'none'
-                          : 'none',
-                    }}
-                  />
-                ))}
-              </button>
-            </div>
-
           </div>
-        </div>
 
-        {/* Embossed thin gold bottom divider */}
-        <div 
-          className="w-full h-[1px] absolute bottom-0 left-0" 
-          style={{ 
-            background: 'linear-gradient(90deg, transparent, #C6A768, transparent)',
-            opacity: 0.8,
-            boxShadow: '0 1px 3px rgba(0,0,0,0.8)'
-          }} 
-        />
+          {/* ── RIGHT SEPARATOR ── */}
+          <div
+            className="hidden lg:block flex-shrink-0"
+            style={{
+              width: '1px',
+              height: '44px',
+              margin: '0 18px',
+              background: 'linear-gradient(180deg, transparent, #8a6820, transparent)',
+            }}
+          />
+
+          {/* ── RIGHT: Mini Badge + Motto ── */}
+          <div className="hidden lg:flex items-center flex-shrink-0" style={{ paddingRight: '20px', gap: '10px' }}>
+            {/* Small bordered square with miniature logo */}
+            <div
+              className="flex items-center justify-center rounded"
+              style={{
+                width: '52px',
+                height: '52px',
+                border: '1px solid #8a6820',
+                background: 'radial-gradient(circle, #1a1408, #0a0806)',
+                boxShadow: 'inset 0 0 8px rgba(0,0,0,0.5)',
+                flexShrink: 0,
+              }}
+            >
+              <img
+                src="/assami/navbar%20logo.png"
+                alt="Crest"
+                style={{ width: '78%', height: '78%', objectFit: 'contain', opacity: 0.9 }}
+              />
+            </div>
+            {/* Motto text */}
+            <div className="flex flex-col" style={{ gap: '3px' }}>
+              <span
+                className="font-cinzel uppercase"
+                style={{ fontSize: '10px', letterSpacing: '1.5px', color: '#c8a040', whiteSpace: 'nowrap', lineHeight: 1.3 }}
+              >
+                Asam Vikram
+              </span>
+              <span
+                className="font-cinzel uppercase"
+                style={{ fontSize: '10px', letterSpacing: '1.5px', color: '#c8a040', whiteSpace: 'nowrap', lineHeight: 1.3 }}
+              >
+                Tagra Raho
+              </span>
+            </div>
+          </div>
+
+          {/* ── Mobile Hamburger ── */}
+          <div className="lg:hidden ml-auto" style={{ paddingRight: '16px' }}>
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="flex flex-col items-center justify-center gap-[5px] w-10 h-10 rounded"
+              style={{ border: '1px solid rgba(138,104,32,0.4)', background: 'rgba(12,10,8,0.6)' }}
+              aria-label="Toggle menu"
+            >
+              {[0, 1, 2].map(i => (
+                <span
+                  key={i}
+                  className="block transition-all duration-300"
+                  style={{
+                    width: '20px',
+                    height: '1.5px',
+                    background: '#c8a040',
+                    opacity: i === 1 && menuOpen ? 0 : 1,
+                    transform: menuOpen
+                      ? i === 0 ? 'rotate(45deg) translate(4px,4px)' : i === 2 ? 'rotate(-45deg) translate(4px,-4px)' : 'none'
+                      : 'none',
+                  }}
+                />
+              ))}
+            </button>
+          </div>
+
+          {/* ── Left & Right decorative endcaps ── */}
+          <div
+            className="absolute left-0 top-1/2 -translate-y-1/2 pointer-events-none"
+            style={{
+              width: '3px',
+              height: '28px',
+              background: 'linear-gradient(180deg, transparent, #9a7828, transparent)',
+              borderRadius: '2px',
+            }}
+          />
+          <div
+            className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none"
+            style={{
+              width: '3px',
+              height: '28px',
+              background: 'linear-gradient(180deg, transparent, #9a7828, transparent)',
+              borderRadius: '2px',
+            }}
+          />
+        </div>
       </motion.nav>
 
-      {/* Mobile view panel */}
+      {/* ── Mobile Panel ── */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.45 }}
-            className="fixed inset-0 z-40 flex flex-col justify-center"
-            style={{ background: '#0A0A0A', borderTop: '1px solid rgba(198,167,104,0.3)' }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-40 flex flex-col items-center justify-center"
+            style={{ background: 'rgba(10,8,6,0.97)', backdropFilter: 'blur(16px)' }}
           >
             <div className="flex flex-col items-center gap-8">
-              {navItems.map((item) => (
-                <Link
+              {navItems.map((item, i) => (
+                <motion.div
                   key={item.id}
-                  to={item.path}
-                  className="font-cinzel text-xl md:text-2xl tracking-[0.25em] uppercase hover:text-[#E2C98A]"
-                  style={{ color: '#C6A768' }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.07, duration: 0.35 }}
                 >
-                  {item.label}
-                </Link>
+                  <Link
+                    to={item.path}
+                    className="font-cinzel uppercase tracking-[4px] text-xl transition-colors duration-300 hover:text-[#f0c84a]"
+                    style={{ color: location.pathname === item.path ? '#f0c84a' : '#a87e35' }}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                </motion.div>
               ))}
             </div>
           </motion.div>
