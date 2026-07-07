@@ -7,9 +7,9 @@ export default function AssamRiflesPage() {
   return (
     <UnitPageLayout
       data={assamRiflesData as unknown as UnitData}
-      heroImage="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=1920&q=80"
-      badge="Oldest Paramilitary Force of India"
-      historyImage="https://images.unsplash.com/photo-1589561253898-768105ca91a8?w=1200&q=80"
+      heroImage="/assami/17 Assam Rifles/ar-patrol-green.jpg"
+      badge="India's Oldest Paramilitary Force — Est. 1835"
+      historyImage="/assami/17 Assam Rifles/ar-parade-shillong.jpg"
     />
   );
 }

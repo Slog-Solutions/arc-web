@@ -7,9 +7,10 @@ export default function ArunachalScoutsPage() {
   return (
     <UnitPageLayout
       data={arunachalScoutsData as unknown as UnitData}
-      heroImage="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920&q=80"
-      badge="Mountain Infantry Regiment · Est. 2010"
-      historyImage="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80"
+      heroImage="/assami/Arunachal Scouts/scouts-border-patrol.jpg"
+      badge="Mountain Infantry Regiment · Est. 9 November 2010"
+      historyImage="/assami/Arunachal Scouts/scouts-high-altitude.jpg"
     />
   );
 }
+

@@ -48,6 +48,7 @@ export interface GalleryItem {
   caption: string;
   category: string;
   year: string;
+  history?: string;
 }
 
 export interface VideoItem {

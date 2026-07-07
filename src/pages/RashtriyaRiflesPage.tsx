@@ -7,9 +7,10 @@ export default function RashtriyaRiflesPage() {
   return (
     <UnitPageLayout
       data={rashtriyaRiflesData as unknown as UnitData}
-      heroImage="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=1920&q=80"
-      badge="India's Premier Counter-Insurgency Force"
-      historyImage="https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=1200&q=80"
+      heroImage="/assami/Rashtriya Rifles/rr-ops-kashmir.jpg"
+      badge="India's Premier Counter-Insurgency Force · Est. 1990"
+      historyImage="/assami/Rashtriya Rifles/rr-terrain-valley.jpg"
     />
   );
 }
+

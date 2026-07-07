@@ -290,24 +290,24 @@ body {
 
 /* Masonry grid */
 .masonry-grid {
-  columns: 4;
-  column-gap: 1rem;
+  columns: 3;
+  column-gap: 1.25rem;
 }
 
 .masonry-item {
   break-inside: avoid;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 
 @media (max-width: 1280px) {
   .masonry-grid { columns: 3; }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .masonry-grid { columns: 2; }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 540px) {
   .masonry-grid { columns: 1; }
 }
 
@@ -371,3 +371,111 @@ body {
     left: 20px;
   }
 }
+
+/* ── 3D Flip Card ──────────────────────────────────── */
+.flip-card {
+  perspective: 1200px;
+  cursor: pointer;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(145deg, #141a0d, #1e2f0e);
+  border: 1px solid rgba(212, 160, 23, 0.3);
+}
+
+/* ── Premium Timeline ──────────────────────────────── */
+.timeline-dot-lg {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #f0ca50, #d4a017);
+  border: 3px solid #0a0c08;
+  box-shadow: 0 0 0 3px rgba(212, 160, 23, 0.25), 0 0 24px rgba(212, 160, 23, 0.5);
+  flex-shrink: 0;
+}
+
+/* ── Fade-up reveal ────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-up {
+  animation: fadeUp 0.7s ease both;
+}
+
+/* ── Section breathing room ────────────────────────── */
+.section-xl { padding-top: 7rem; padding-bottom: 7rem; }
+.section-lg { padding-top: 5rem; padding-bottom: 5rem; }
+
+/* ── Wider content containers ──────────────────────── */
+.container-wide   { max-width: 1440px; margin-inline: auto; padding-inline: 3rem; }
+.container-normal { max-width: 1280px; margin-inline: auto; padding-inline: 2rem; }
+
+@media (max-width: 768px) {
+  .container-wide,
+  .container-normal { padding-inline: 1.25rem; }
+}
+
+/* ── Gallery feature card ──────────────────────────── */
+.gallery-feature {
+  grid-column: span 2;
+}
+
+@media (max-width: 768px) {
+  .gallery-feature { grid-column: span 1; }
+}
+
+/* ── Smooth image reveal ───────────────────────────── */
+img {
+  display: block;
+}
+
+/* ── Cinematic hover lift ──────────────────────────── */
+.hover-lift {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(212,160,23,0.15);
+}
+
+/* ── Paragraph ornament line ───────────────────────── */
+.para-ornament {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+.para-ornament::before {
+  content: '';
+  width: 3px;
+  min-height: 100%;
+  background: linear-gradient(180deg, #d4a017 0%, transparent 100%);
+  flex-shrink: 0;
+  margin-top: 0.3rem;
+  border-radius: 2px;
+}
+

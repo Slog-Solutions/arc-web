@@ -19,9 +19,10 @@ const unitCards = [
     path: '/assam-rifles',
     est: '1835',
     role: 'Oldest Paramilitary Force',
-    motto: 'Sentinels of the North East',
+    motto: '"Sentinels of the North East"',
     icon: '🦅',
-    image: 'https://images.unsplash.com/photo-1589561253898-768105ca91a8?w=600&q=80',
+    image: '/assami/17 Assam Rifles/ar-patrol-green.jpg',
+    description: 'India\'s oldest paramilitary force, established in 1835, guarding 1,643 km of the Indo-Myanmar border and maintaining peace across the seven sister states of Northeast India.',
   },
   {
     id: 'arunachal-scouts',
@@ -29,9 +30,10 @@ const unitCards = [
     path: '/arunachal-scouts',
     est: '2010',
     role: 'Mountain Infantry Regiment',
-    motto: 'Prabal Parakram',
+    motto: '"Prabal Parakram"',
     icon: '⛰️',
-    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80',
+    image: '/assami/Arunachal Scouts/scouts-border-patrol.jpg',
+    description: 'Recruited from 26+ indigenous tribes of Arunachal Pradesh, these mountain warriors guard India\'s most sensitive border with China at altitudes exceeding 17,000 feet.',
   },
   {
     id: 'rashtriya-rifles',
@@ -39,9 +41,10 @@ const unitCards = [
     path: '/rashtriya-rifles',
     est: '1990',
     role: "India's Premier COIN Force",
-    motto: 'Duty, Integrity, Honour',
+    motto: '"Duty, Integrity, Honour"',
     icon: '🛡️',
-    image: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=600&q=80',
+    image: '/assami/Rashtriya Rifles/rr-ops-kashmir.jpg',
+    description: 'India\'s premier counter-insurgency force, with 65+ battalions deployed across Jammu & Kashmir, earning 1,500+ gallantry awards in three decades of operations.',
   },
   {
     id: 'territorial-army',
@@ -49,9 +52,10 @@ const unitCards = [
     path: '/territorial-army',
     est: '1949',
     role: 'Citizen-Soldier Reserve Force',
-    motto: 'Savdhani Va Shoorta',
+    motto: '"Savdhani Va Shoorta"',
     icon: '🇮🇳',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80',
+    image: '/assami/Territorial Army/ta-parade-assam.jpg',
+    description: 'Unique citizen-soldier reserve force where professionals — engineers, doctors, lawyers — train alongside their careers to defend the nation when called upon.',
   },
 ];
 
@@ -69,7 +73,7 @@ export default function ARCPage() {
 
       <SectionNav />
 
-      {/* Hero */}
+      {/* Hero — use best ARC photo that complements dark bg */}
       <HeroSection
         title="Assam Regimental Centre"
         subtitle="Happy Valley, Shillong · Meghalaya"
@@ -77,7 +81,7 @@ export default function ARCPage() {
         mottoMeaning="Unique Valour"
         established="1941"
         badge="Est. 15 June 1941"
-        backgroundImage="https://images.unsplash.com/photo-1471644946846-4ce53acaab6b?w=1920&q=80"
+        backgroundImage="/assami/Assam Regimental Centre/arc-passing-out-parade.jpg"
       />
 
       {/* Affiliated Units Showcase */}
@@ -88,7 +92,7 @@ export default function ARCPage() {
             title="Affiliated Units"
             subtitle="Four distinguished forces operating under the stewardship of the Assam Regimental Centre."
           />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
             {unitCards.map((unit, i) => (
               <motion.div
                 key={unit.id}
@@ -97,25 +101,28 @@ export default function ARCPage() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.6 }}
               >
-                <Link to={unit.path} className="group block">
-                  <div className="heritage-card rounded-xl overflow-hidden h-full">
+                <Link to={unit.path} className="group block h-full">
+                  <div className="heritage-card rounded-xl overflow-hidden h-full flex flex-col">
                     {/* Image */}
-                    <div className="relative img-zoom-container" style={{ height: '200px' }}>
-                      <img src={unit.image} alt={unit.title} className="w-full h-full object-cover" />
+                    <div className="relative img-zoom-container flex-shrink-0" style={{ height: '240px' }}>
+                      <img src={unit.image} alt={unit.title} className="w-full h-full object-cover" loading="lazy" />
                       <div className="absolute inset-0 hero-overlay-dark" />
                       <div className="absolute top-4 left-4 text-3xl">{unit.icon}</div>
                       <div className="absolute bottom-4 left-4">
-                        <div className="font-inter text-xs text-yellow-500/70 tracking-widest">Est. {unit.est}</div>
+                        <div className="font-inter text-xs text-yellow-500/80 tracking-widest">Est. {unit.est}</div>
                       </div>
+                      {/* Hover overlay */}
+                      <div className="absolute inset-0 bg-yellow-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
                     {/* Content */}
-                    <div className="p-5">
+                    <div className="p-5 flex flex-col flex-1">
                       <h3 className="font-cinzel text-stone-100 text-lg mb-1 group-hover:text-yellow-400 transition-colors duration-300">
                         {unit.title}
                       </h3>
-                      <div className="font-inter text-xs text-stone-500 mb-3">{unit.role}</div>
-                      <div className="font-garamond text-yellow-600/70 text-sm italic mb-4">"{unit.motto}"</div>
-                      <div className="flex items-center gap-2 text-yellow-500/70 text-xs font-inter tracking-wider group-hover:text-yellow-400 transition-colors duration-300">
+                      <div className="font-inter text-xs text-stone-500 mb-2">{unit.role}</div>
+                      <div className="font-garamond text-yellow-600/70 text-sm italic mb-3">{unit.motto}</div>
+                      <p className="font-inter text-stone-400 text-xs leading-relaxed mb-4 flex-1">{unit.description}</p>
+                      <div className="flex items-center gap-2 text-yellow-500/70 text-xs font-inter tracking-wider group-hover:text-yellow-400 transition-colors duration-300 mt-auto">
                         <span>Explore</span>
                         <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -137,7 +144,7 @@ export default function ARCPage() {
         timeline={arcData.history.timeline}
         quotes={arcData.history.quotes}
         highlights={arcData.history.highlights}
-        heroImage="https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=1200&q=80"
+        heroImage="/assami/Assam Regimental Centre/arc-raising-day.jpg"
       />
 
       <div className="divider-gold" />

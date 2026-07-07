@@ -1,4 +1,4 @@
-// src/components/sections/HistorySection.tsx
+// src/components/sections/HistorySection.tsx — REFINED
 import { motion } from 'framer-motion';
 import SectionHeader from './SectionHeader';
 import type { TimelineEntry, Quote, Highlight } from '../../types';
@@ -10,148 +10,275 @@ interface Props {
   quotes: Quote[];
   highlights: Highlight[];
   heroImage?: string;
+  // Per-paragraph images from real assami folder — passed from parent
+  paragraphImages?: string[];
 }
 
-export default function HistorySection({ overview, paragraphs, timeline, quotes, highlights, heroImage }: Props) {
+// Real history photos from assami/History folder
+const HISTORY_IMAGES = [
+  '/assami/History/history-01.jpg',
+  '/assami/History/history-02.jpg',
+  '/assami/History/history-03.jpg',
+  '/assami/History/history-04.jpg',
+  '/assami/Assam Regimental Centre/arc-training-recruits.jpg',
+  '/assami/Assam Regiment Soldiers/soldiers-guardians.jpg',
+];
+
+const IMAGE_CAPTIONS = [
+  'Historic photograph — early days of the Assam Regiment, 1941–45',
+  'Colour presentation ceremony — a tradition of honour and sacrifice',
+  'Regiment archives — records of service spanning eight decades',
+  'Burma Campaign veterans — men who shaped the regiment\'s character',
+  'Parade at Happy Valley — the annual tradition since 1941',
+  'Soldiers of the regiment — guardians of the Northeast frontier',
+];
+
+export default function HistorySection({
+  overview, paragraphs, timeline, quotes, highlights, heroImage, paragraphImages,
+}: Props) {
   return (
-    <section id="history" className="relative py-24 section-pattern">
-      <div className="max-w-[1200px] mx-auto px-6 md:px-12">
+    <section id="history" className="relative section-xl section-pattern">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         <SectionHeader tag="Heritage & Legacy" title="History" subtitle={overview} />
 
-        {/* Stats highlights */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20">
+        {/* ── Stat highlights ───────────────────────────── */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mb-24">
           {highlights.map((h, i) => (
             <motion.div
               key={h.label}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.6, ease: 'easeOut' }}
-              className="stat-card rounded-lg p-6 text-center"
+              transition={{ delay: i * 0.1, duration: 0.6 }}
+              className="stat-card rounded-xl p-7 text-center"
             >
-              <div className="font-cinzel text-3xl md:text-4xl text-gold-gradient mb-2">{h.value}</div>
-              <div className="font-inter text-xs text-stone-500 tracking-widest uppercase">{h.label}</div>
+              <div className="font-cinzel text-4xl md:text-5xl text-gold-gradient mb-2 leading-none">{h.value}</div>
+              <div className="font-inter text-xs text-stone-500 tracking-widest uppercase mt-1">{h.label}</div>
             </motion.div>
           ))}
         </div>
 
-        {/* Large banner image */}
+        {/* ── Full-width banner image ────────────────────── */}
         {heroImage && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
+            initial={{ opacity: 0, scale: 0.97 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="relative rounded-xl overflow-hidden mb-20 img-zoom-container"
-            style={{ height: '400px' }}
+            transition={{ duration: 0.9 }}
+            className="relative rounded-2xl overflow-hidden mb-24 img-zoom-container"
+            style={{ height: '480px' }}
           >
-            <img src={heroImage} alt="Historical" className="w-full h-full object-cover" />
+            <img src={heroImage} alt="Historical archive" className="w-full h-full object-cover" />
             <div className="absolute inset-0 hero-overlay-dark" />
-            <div className="absolute bottom-8 left-8">
-              <div className="font-cinzel text-yellow-500/80 text-xs tracking-widest uppercase mb-1">Historical Archive</div>
-              <div className="font-garamond text-stone-200 text-xl italic">Preserving the legacy of valour</div>
+            {/* Bottom caption */}
+            <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
+              <div className="max-w-2xl">
+                <div className="font-inter text-xs text-yellow-500/70 tracking-[0.3em] uppercase mb-2">Historical Archive</div>
+                <div className="font-cinzel text-stone-100 text-2xl md:text-3xl mb-2">Preserving the Legacy of Valour</div>
+                <div className="font-garamond text-stone-300/80 text-base italic">
+                  Eight decades of duty, honour, and sacrifice — the living heritage of the Assam Regimental Centre
+                </div>
+              </div>
             </div>
           </motion.div>
         )}
 
-        {/* Alternating text + image paragraphs */}
-        <div className="space-y-16 mb-20">
-          {paragraphs.map((para, i) => (
-            <motion.div
+        {/* ── Alternating image + text paragraphs ──────── */}
+        <div className="space-y-20 mb-24">
+          {paragraphs.map((para, i) => {
+            const imgSrc = paragraphImages?.[i] ?? HISTORY_IMAGES[i % HISTORY_IMAGES.length];
+            const caption = IMAGE_CAPTIONS[i % IMAGE_CAPTIONS.length];
+            const isEven = i % 2 === 0;
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.7, ease: 'easeOut' }}
+                className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} gap-10 items-center`}
+              >
+                {/* Image */}
+                <motion.div
+                  className="w-full md:w-1/2 img-zoom-container rounded-2xl overflow-hidden shadow-2xl flex-shrink-0"
+                  style={{ height: '320px' }}
+                  whileHover={{ scale: 1.01 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <img
+                    src={imgSrc}
+                    alt={caption}
+                    className="w-full h-full object-cover"
+                  />
+                  {/* Caption overlay */}
+                  <div
+                    className="absolute bottom-0 left-0 right-0 p-4"
+                    style={{ background: 'linear-gradient(0deg, rgba(8,10,6,0.9) 0%, transparent 100%)' }}
+                  >
+                    <div className="font-inter text-stone-400 text-xs italic">{caption}</div>
+                  </div>
+                </motion.div>
+
+                {/* Text */}
+                <div className="w-full md:w-1/2">
+                  <div className="flex items-start gap-5">
+                    <div
+                      className="mt-1 flex-shrink-0 w-1 rounded-full"
+                      style={{
+                        height: '80px',
+                        background: 'linear-gradient(180deg, #d4a017 0%, transparent 100%)',
+                      }}
+                    />
+                    <div>
+                      <div className="font-inter text-xs text-yellow-600/60 tracking-[0.3em] uppercase mb-3">
+                        Chapter {String(i + 1).padStart(2, '0')}
+                      </div>
+                      <p className="font-garamond text-stone-300/90 text-lg md:text-xl leading-[1.85]">{para}</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* ── Quote blocks ──────────────────────────────── */}
+        <div className="space-y-8 mb-24">
+          {quotes.map((q, i) => (
+            <motion.blockquote
               key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.08, duration: 0.6, ease: 'easeOut' }}
-              className={`flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 items-center`}
+              transition={{ duration: 0.7 }}
+              className="quote-block pl-8 pr-8 py-10 rounded-r-2xl"
             >
-              <div className="w-full md:w-1/2 img-zoom-container rounded-lg overflow-hidden" style={{ height: '260px' }}>
-                <img
-                  src={`https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=600&q=80`}
-                  alt={`Historical context ${i + 1}`}
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = `https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80`;
-                  }}
-                />
-              </div>
-              <div className="w-full md:w-1/2">
-                <div className="flex items-start gap-4">
-                  <div className="mt-2 w-px h-16 bg-gradient-to-b from-yellow-600/80 to-transparent flex-shrink-0" />
-                  <p className="font-garamond text-lg text-stone-300 leading-relaxed">{para}</p>
+              <div className="text-yellow-600/40 font-cinzel text-6xl leading-none mb-3 select-none">"</div>
+              <p className="font-garamond text-2xl md:text-3xl text-stone-200 italic leading-[1.6] mb-6">{q.text}</p>
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-px" style={{ background: '#d4a017' }} />
+                <div>
+                  <div className="font-cinzel text-yellow-500/90 text-sm tracking-wider">{q.author}</div>
+                  <div className="font-inter text-stone-500 text-xs mt-0.5">{q.designation}</div>
                 </div>
               </div>
-            </motion.div>
+            </motion.blockquote>
           ))}
         </div>
 
-        {/* Quote block */}
-        {quotes.map((q, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="quote-block pl-8 pr-6 py-8 rounded-r-lg mb-12"
-          >
-            <div className="text-yellow-600/50 font-cinzel text-5xl leading-none mb-2">"</div>
-            <p className="font-garamond text-xl md:text-2xl text-stone-200 italic leading-relaxed mb-4">{q.text}</p>
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-px bg-yellow-700" />
-              <div>
-                <div className="font-cinzel text-yellow-500/90 text-sm">{q.author}</div>
-                <div className="font-inter text-stone-500 text-xs">{q.designation}</div>
-              </div>
-            </div>
-          </motion.div>
-        ))}
+        {/* ── Premium Alternating Timeline ─────────────── */}
+        <div className="mt-8">
+          <SectionHeader tag="Chronological Record" title="Timeline" centered />
 
-        {/* Timeline */}
-        <div className="mt-24">
-          <SectionHeader tag="Chronological Record" title="Timeline" centered={true} />
-          <div className="relative">
-            {/* Center line */}
-            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2"
-              style={{ background: 'linear-gradient(180deg, transparent, rgba(212,160,23,0.4) 10%, rgba(212,160,23,0.4) 90%, transparent)' }} />
+          <div className="relative mt-16">
+            {/* Center vertical line */}
+            <div
+              className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2"
+              style={{ background: 'linear-gradient(180deg, transparent, rgba(212,160,23,0.45) 8%, rgba(212,160,23,0.45) 92%, transparent)' }}
+            />
 
-            <div className="space-y-8">
-              {timeline.map((entry, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.05, duration: 0.5, ease: 'easeOut' }}
-                  className={`relative flex flex-col md:flex-row gap-6 md:gap-0 ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
-                >
-                  {/* Content */}
-                  <div className={`w-full md:w-[45%] ${i % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12 md:text-left'}`}>
-                    <div className="heritage-card rounded-lg p-6 hover:border-yellow-600/40 transition-all duration-300">
-                      <div className="font-cinzel text-yellow-500 text-2xl mb-1">{entry.year}</div>
-                      <div className="font-cinzel text-stone-200 text-base mb-2">{entry.title}</div>
-                      <p className="font-garamond text-stone-400 text-base leading-relaxed">{entry.description}</p>
-                      {entry.significance && (
-                        <div className="mt-3 inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-inter text-yellow-600/80 border border-yellow-700/30"
-                          style={{ background: 'rgba(212,160,23,0.06)' }}>
-                          {entry.significance}
+            <div className="flex flex-col gap-12">
+              {timeline.map((entry, i) => {
+                const isEven = i % 2 === 0;
+                return (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-60px' }}
+                    transition={{ delay: i * 0.04, duration: 0.6, ease: 'easeOut' }}
+                    className="relative flex flex-col md:flex-row items-center gap-4 md:gap-0"
+                  >
+                    {/* Card — left side (even) or invisible spacer */}
+                    <div className={`w-full md:w-[46%] ${isEven ? 'md:pr-14' : 'md:order-3 md:pl-14'}`}>
+                      {(isEven ? true : false) ? null : null}
+                      <div
+                        className="group rounded-2xl p-7 hover-lift"
+                        style={{
+                          background: 'linear-gradient(145deg, #141a0d, #1c2912)',
+                          border: '1px solid rgba(212,160,23,0.15)',
+                        }}
+                      >
+                        <div className="flex items-start justify-between gap-4 mb-3">
+                          <div className="font-cinzel text-yellow-500 text-3xl leading-none">{entry.year}</div>
+                          {entry.significance && (
+                            <span className="font-inter text-[10px] text-yellow-600/70 tracking-widest uppercase px-2.5 py-1 rounded-full flex-shrink-0"
+                              style={{ background: 'rgba(212,160,23,0.08)', border: '1px solid rgba(212,160,23,0.2)' }}>
+                              {entry.significance}
+                            </span>
+                          )}
                         </div>
-                      )}
+                        <div className="font-cinzel text-stone-100 text-base mb-2 group-hover:text-yellow-300 transition-colors duration-300">{entry.title}</div>
+                        <div className="w-8 h-px mb-3" style={{ background: 'linear-gradient(90deg, #d4a017, transparent)' }} />
+                        <p className="font-garamond text-stone-400 text-base leading-relaxed">{entry.description}</p>
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Dot */}
-                  <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full border-2 border-yellow-600 top-8"
-                    style={{ background: '#0a0c08', boxShadow: '0 0 16px rgba(212,160,23,0.5)' }} />
+                    {/* Centre dot */}
+                    <div className="hidden md:flex md:order-2 w-[8%] justify-center flex-shrink-0 relative" style={{ zIndex: 2 }}>
+                      <div className="timeline-dot-lg" />
+                    </div>
 
-                  {/* Spacer */}
-                  <div className="hidden md:block w-[10%]" />
-                  <div className="hidden md:block w-[45%]" />
-                </motion.div>
-              ))}
+                    {/* Spacer opposite side */}
+                    <div className={`hidden md:block w-[46%] ${isEven ? 'md:order-3' : 'md:order-1'}`} />
+
+                    {/* Swap order for odd items */}
+                    {!isEven && (
+                      <div className={`w-full md:w-[46%] md:order-1 md:pr-14`}>
+                        <div
+                          className="group rounded-2xl p-7 hover-lift"
+                          style={{
+                            background: 'linear-gradient(145deg, #141a0d, #1c2912)',
+                            border: '1px solid rgba(212,160,23,0.15)',
+                          }}
+                        >
+                          <div className="flex items-start justify-between gap-4 mb-3">
+                            <div className="font-cinzel text-yellow-500 text-3xl leading-none">{entry.year}</div>
+                            {entry.significance && (
+                              <span className="font-inter text-[10px] text-yellow-600/70 tracking-widest uppercase px-2.5 py-1 rounded-full flex-shrink-0"
+                                style={{ background: 'rgba(212,160,23,0.08)', border: '1px solid rgba(212,160,23,0.2)' }}>
+                                {entry.significance}
+                              </span>
+                            )}
+                          </div>
+                          <div className="font-cinzel text-stone-100 text-base mb-2 group-hover:text-yellow-300 transition-colors duration-300">{entry.title}</div>
+                          <div className="w-8 h-px mb-3" style={{ background: 'linear-gradient(90deg, #d4a017, transparent)' }} />
+                          <p className="font-garamond text-stone-400 text-base leading-relaxed">{entry.description}</p>
+                        </div>
+                      </div>
+                    )}
+
+                    {isEven && (
+                      <div className="w-full md:w-[46%] md:order-3 md:pl-14 hidden md:block">
+                        <div
+                          className="group rounded-2xl p-7 hover-lift"
+                          style={{
+                            background: 'linear-gradient(145deg, #141a0d, #1c2912)',
+                            border: '1px solid rgba(212,160,23,0.15)',
+                          }}
+                        >
+                          <div className="flex items-start justify-between gap-4 mb-3">
+                            <div className="font-cinzel text-yellow-500 text-3xl leading-none">{entry.year}</div>
+                            {entry.significance && (
+                              <span className="font-inter text-[10px] text-yellow-600/70 tracking-widest uppercase px-2.5 py-1 rounded-full flex-shrink-0"
+                                style={{ background: 'rgba(212,160,23,0.08)', border: '1px solid rgba(212,160,23,0.2)' }}>
+                                {entry.significance}
+                              </span>
+                            )}
+                          </div>
+                          <div className="font-cinzel text-stone-100 text-base mb-2 group-hover:text-yellow-300 transition-colors duration-300">{entry.title}</div>
+                          <div className="w-8 h-px mb-3" style={{ background: 'linear-gradient(90deg, #d4a017, transparent)' }} />
+                          <p className="font-garamond text-stone-400 text-base leading-relaxed">{entry.description}</p>
+                        </div>
+                      </div>
+                    )}
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </div>
+
       </div>
     </section>
   );
