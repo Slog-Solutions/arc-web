@@ -1,6 +1,6 @@
 // src/components/sections/HeroSection.tsx - REFINED
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 
 interface Props {
   title: string;
@@ -10,6 +10,7 @@ interface Props {
   motto?: string;
   mottoMeaning?: string;
   backgroundImage?: string;
+  backgroundImages?: string[];
   badge?: string;
 }
 
@@ -21,10 +22,30 @@ export default function HeroSection({
   motto,
   mottoMeaning,
   backgroundImage,
+  backgroundImages,
   badge,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const rawImages = backgroundImages && backgroundImages.length > 0
+    ? backgroundImages
+    : backgroundImage
+      ? [backgroundImage]
+      : [];
+
+  // Safely encode URLs to handle spaces in filenames
+  const images = rawImages.map(img => encodeURI(img));
+
+  useEffect(() => {
+    if (images.length <= 1) return;
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [images]);
 
   // Parallax / Zoom effect
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
@@ -38,13 +59,25 @@ export default function HeroSection({
         className="absolute inset-0 w-full h-full"
         style={{ y, scale }}
       >
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${backgroundImage})` }}
-        />
+        <AnimatePresence initial={false}>
+          {images.map((img, idx) => (
+            idx === currentImageIndex && (
+              <motion.div
+                key={img}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.5 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1.5, ease: 'easeInOut' }}
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                style={{ backgroundImage: `url(${img})` }}
+              />
+            )
+          ))}
+        </AnimatePresence>
+
         {/* Darker premium gradient overlays to keep text perfectly readable */}
         <div className="absolute inset-0 bg-gradient-to-t from-olive-950 via-olive-950/60 to-black/60" />
-        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-black/45" />
 
         {/* Vignette effect */}
         <div

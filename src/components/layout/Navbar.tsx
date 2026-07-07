@@ -67,7 +67,7 @@ export default function Navbar() {
           {/* ── LEFT: Large Logo Circle ── */}
           <div className="flex-shrink-0 flex items-center" style={{ paddingLeft: '0px' }}>
             {/* The circle extends outside the bar — position it absolutely on the left */}
-            <Link to="/" className="group" style={{ marginLeft: '-4px', flexShrink: 0 }}>
+            <Link to="/" className="group" style={{ marginLeft: '-4px', flexShrink: 0, position: 'relative', top: '24px' }}>
               <div
                 className="relative flex items-center justify-center rounded-full transition-transform duration-500 group-hover:scale-105"
                 style={{
@@ -90,7 +90,13 @@ export default function Navbar() {
                 <img
                   src="/assami/navbar%20logo.png"
                   alt="Assam Regiment"
-                  style={{ width: '200%', objectFit: 'contain', filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.6))' }}
+                  style={{
+                    width: "88%",
+                    height: "88%",
+                    objectFit: "contain",
+                    display: "block",
+                    filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.6))",
+                  }}
                 />
               </div>
             </Link>
@@ -251,20 +257,7 @@ export default function Navbar() {
               />
             </div>
             {/* Motto text */}
-            <div className="flex flex-col" style={{ gap: '3px' }}>
-              <span
-                className="font-cinzel uppercase"
-                style={{ fontSize: '10px', letterSpacing: '1.5px', color: '#c8a040', whiteSpace: 'nowrap', lineHeight: 1.3 }}
-              >
-                Asam Vikram
-              </span>
-              <span
-                className="font-cinzel uppercase"
-                style={{ fontSize: '10px', letterSpacing: '1.5px', color: '#c8a040', whiteSpace: 'nowrap', lineHeight: 1.3 }}
-              >
-                Tagra Raho
-              </span>
-            </div>
+
           </div>
 
           {/* ── Mobile Hamburger ── */}

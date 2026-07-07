@@ -13,6 +13,7 @@ import type { UnitData } from '../types';
 interface Props {
   data: UnitData;
   heroImage?: string;
+  heroImages?: string[];
   badge?: string;
   historyImage?: string;
 }
@@ -38,7 +39,7 @@ function RoomDivider({ title }: { title: string }) {
   );
 }
 
-export default function UnitPageLayout({ data, heroImage, badge, historyImage }: Props) {
+export default function UnitPageLayout({ data, heroImage, heroImages, badge, historyImage }: Props) {
   const { meta, history, commandingOfficers, gaonBuras, achievements, gallery, videos } = data;
 
   const title = typeof meta.name === 'string' ? meta.name : '';
@@ -70,6 +71,7 @@ export default function UnitPageLayout({ data, heroImage, badge, historyImage }:
         mottoMeaning={mottoMeaning}
         established={established?.replace('15 June ', '').replace('October 1, ', '').replace('October 9, ', '').replace('9 November ', '')}
         backgroundImage={heroImage}
+        backgroundImages={heroImages}
         badge={badge}
       />
 

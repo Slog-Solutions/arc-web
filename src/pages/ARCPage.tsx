@@ -73,7 +73,6 @@ export default function ARCPage() {
 
       <SectionNav />
 
-      {/* Hero — use best ARC photo that complements dark bg */}
       <HeroSection
         title="Assam Regimental Centre"
         subtitle="Happy Valley, Shillong · Meghalaya"
@@ -82,6 +81,13 @@ export default function ARCPage() {
         established="1941"
         badge="Est. 15 June 1941"
         backgroundImage="/assami/Assam Regimental Centre/arc-passing-out-parade.jpg"
+        backgroundImages={[
+          "/assami/Assam Regimental Centre/arc-passing-out-parade.jpg",
+          "/assami/Assam Regimental Centre/arc-raising-day.jpg",
+          "/assami/Assam Regimental Centre/arc-training-recruits.jpg",
+          "/assami/Assam Regimental Centre/arc-museum-lobby.jpg",
+          "/assami/Assam Regimental Centre/arc-regimental-flag.jpg"
+        ]}
       />
 
       {/* Affiliated Units Showcase */}
