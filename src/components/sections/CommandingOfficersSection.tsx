@@ -15,11 +15,18 @@ const PORTRAIT_FALLBACKS = [
   '/assami/Commanding Officers (CO History)/co-ak-sharma.jpg',
 ];
 
+const GAON_BURA_FALLBACKS = [
+  '/assami/Assam Regiment Soldiers/soldiers-guardians.jpg',
+  '/assami/Assam Regiment Soldiers/soldiers-image.jpg',
+  '/assami/Assam Regiment Soldiers/soldiers-flag-scarlet.jpg',
+  '/assami/Assam Regiment Soldiers/soldiers-training-camp.jpg',
+];
+
 export default function CommandingOfficersSection({ officers, gaonBuras }: Props) {
   return (
     <section id="commanding-officers" className="relative py-32 museum-room-wall spotlight-glow">
       <div className="museum-container">
-        
+
         {/* Section Header */}
         <SectionHeader
           tag="Portrait Gallery"
@@ -41,69 +48,84 @@ export default function CommandingOfficersSection({ officers, gaonBuras }: Props
                 className="flip-card w-full h-[580px]"
               >
                 <div className="flip-card-inner w-full h-full">
-                  
-                  {/* Front Side: Large Framed Portrait */}
-                  <div className="flip-card-front w-full h-full bg-gradient-to-b from-[#141a0d] to-[#0a0c08] border-8 border-[#2b1d0c] shadow-[0_20px_50px_rgba(0,0,0,0.85)] flex flex-col justify-between p-4 relative">
-                    {/* Brass corner indicators */}
-                    <div className="absolute top-2 left-2 text-[#d4a017] text-[10px]">✦</div>
-                    <div className="absolute top-2 right-2 text-[#d4a017] text-[10px]">✦</div>
-                    <div className="absolute bottom-2 left-2 text-[#d4a017] text-[10px]">✦</div>
-                    <div className="absolute bottom-2 right-2 text-[#d4a017] text-[10px]">✦</div>
-
-                    <div className="relative w-full h-[400px] overflow-hidden img-zoom-container rounded-lg border border-[#2b1d0c]">
-                      <img
-                        src={officerImg}
-                        alt={officer.name}
-                        className="w-full h-full object-cover object-top filter contrast-[1.05] brightness-[0.85]"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
-                      
-                      {/* Interactive Flip Hint */}
-                      <div className="absolute top-4 right-4 px-2.5 py-1 bg-yellow-500/10 text-yellow-500 text-[8px] font-inter uppercase tracking-widest border border-yellow-500/35 rounded backdrop-blur-sm">
-                        Hover to inspect
-                      </div>
-                    </div>
-
-                    {/* Bottom Label Plate */}
-                    <div className="p-4 text-center bg-[#0d120a] border-t border-[#443118]/50 rounded-b-md">
-                      <div className="font-cinzel text-yellow-500/90 text-xs tracking-[0.2em] uppercase mb-1">{officer.rank}</div>
-                      <h3 className="font-cinzel text-stone-100 text-lg md:text-xl font-bold leading-tight mb-1">{officer.name}</h3>
-                      <div className="font-inter text-stone-500 text-[10px] tracking-widest uppercase">{officer.tenure}</div>
-                    </div>
-                  </div>
-
-                  {/* Back Side: Information Exhibit Plaque (Vintage Paper) */}
-                  <div className="flip-card-back w-full h-full p-8 flex flex-col justify-between bg-gradient-to-b from-[#f3ede2] to-[#e4d7be] border-8 border-[#2b1d0c] shadow-[0_20px_50px_rgba(0,0,0,0.85)]">
-                    
-                    <div>
-                      {/* Metal bar divider */}
-                      <div className="flex items-center gap-3.5 mb-5">
-                        <div className="h-9 w-[3px] bg-yellow-600 rounded-full" />
-                        <div>
-                          <div className="font-cinzel text-stone-900 text-base font-bold leading-tight">{officer.name}</div>
-                          <div className="font-inter text-stone-600 text-[9px] tracking-widest uppercase mt-0.5">{officer.rank} · {officer.tenure}</div>
+                    <div className="flip-card-front w-full h-full bg-[#11130d] border-[6px] border-[#2b1d0c] shadow-2xl flex flex-col relative group">
+                      <div className="relative flex-1 w-full overflow-hidden img-zoom-container">
+                        <img
+                          src={officerImg}
+                          alt={officer.name}
+                          className="w-full h-full object-cover object-top filter contrast-[1.05] brightness-[0.85] transition-transform duration-700 group-hover:scale-[1.03]"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#11130d] via-transparent to-transparent opacity-90" />
+                        
+                        {/* Interactive Flip Hint */}
+                        <div className="absolute top-4 right-4 px-2.5 py-1 bg-yellow-500/10 text-yellow-500 text-[8px] font-inter uppercase tracking-widest border border-yellow-500/35 rounded backdrop-blur-sm z-20">
+                          Hover to inspect
                         </div>
                       </div>
-                      
-                      <div className="h-px bg-stone-400/40 w-16 mb-5" />
-                      
-                      {/* Biography */}
-                      <div className="mb-6">
-                        <div className="font-inter text-stone-700 text-[9px] tracking-widest uppercase font-bold mb-1.5">Regimental Biography</div>
-                        <p className="font-garamond text-stone-900 text-[15px] leading-relaxed italic">{officer.bio}</p>
+
+                      {/* Bottom Label Plate (Integrated) */}
+                      <div className="px-6 pb-6 pt-2 text-center relative z-10 flex-shrink-0">
+                        <div className="font-cinzel text-[#d4a017] text-xs tracking-[0.2em] uppercase mb-1">{officer.rank}</div>
+                        <h3 className="font-cinzel text-stone-100 text-lg md:text-xl font-bold leading-tight mb-1 filter drop-shadow-md">{officer.name}</h3>
+                        <div className="font-inter text-stone-500 text-[10px] tracking-widest uppercase">{officer.tenure}</div>
                       </div>
                     </div>
 
-                    {/* Contributions / Historical Importance */}
-                    <div className="border-t border-stone-400/40 pt-4 mt-auto">
-                      <div className="font-inter text-stone-700 text-[9px] tracking-widest uppercase font-bold mb-1">Key Contributions</div>
-                      <p className="font-inter text-stone-850 text-xs leading-relaxed">{officer.contribution}</p>
+                    {/* Back Side: Premium Info Plaque (Dark Military Theme) */}
+                    <div className="flip-card-back w-full h-full p-8 flex flex-col bg-gradient-to-br from-[#1c2415] via-[#0f140a] to-[#0a0c08] border-[6px] border-[#2b1d0c] shadow-[inset_0_0_80px_rgba(0,0,0,0.9),_0_20px_50px_rgba(0,0,0,0.85)] relative overflow-hidden group">
+                      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(212,160,23,0.05)_0%,_transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                      
+                      {/* Top Section */}
+                      <div className="flex-shrink-0 flex flex-col items-center text-center relative z-10">
+                        <div className="w-8 h-8 mb-4 flex items-center justify-center border border-yellow-500/20 bg-yellow-500/10 rounded-full shadow-[0_0_15px_rgba(212,160,23,0.2)]">
+                          <span className="text-yellow-500 text-sm">✦</span>
+                        </div>
+                        <div className="font-inter text-[#d4a017] opacity-80 text-[10px] tracking-[0.3em] uppercase mb-2">
+                          {officer.rank}
+                        </div>
+                        <div className="font-cinzel text-transparent bg-clip-text bg-gradient-to-r from-[#f0ca50] via-[#d4a017] to-[#f0ca50] text-3xl font-bold leading-tight mb-2 filter drop-shadow-md">
+                          {officer.name}
+                        </div>
+                        <div className="font-inter text-stone-400 text-xs tracking-widest uppercase mb-6">
+                          {officer.tenure}
+                        </div>
+                        
+                        <div className="flex items-center w-full max-w-[80%] mx-auto gap-3">
+                          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#d4a017]/50 to-transparent" />
+                          <div className="w-1.5 h-1.5 bg-[#d4a017]/80 transform rotate-45" />
+                          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#d4a017]/50 to-transparent" />
+                        </div>
+                      </div>
+
+                      {/* Center Section (Biography) */}
+                      <div className="flex-1 flex flex-col justify-center py-6 relative z-10">
+                        <p className="font-garamond text-stone-300 text-[16px] md:text-[17px] leading-relaxed text-center px-4 italic">
+                          {officer.bio}
+                        </p>
+                      </div>
+
+                      {/* Bottom Section (Contributions) */}
+                      <div className="flex-shrink-0 relative z-10 flex flex-col items-center">
+                        <div className="flex items-center w-full max-w-[50%] mx-auto gap-3 mb-6">
+                          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#d4a017]/30 to-transparent" />
+                          <div className="w-1 h-1 bg-[#d4a017]/50 transform rotate-45" />
+                          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#d4a017]/30 to-transparent" />
+                        </div>
+                        <div className="font-inter text-[#d4a017] text-[10px] tracking-[0.25em] uppercase font-bold mb-4 text-center">
+                          Key Contributions
+                        </div>
+                        <ul className="font-inter text-stone-400 text-[12px] leading-relaxed space-y-3 px-2 w-full max-w-[90%] mx-auto">
+                          {officer.contribution.split(';').map((point, idx) => (
+                            <li key={idx} className="flex items-start gap-3">
+                              <span className="text-[#d4a017] mt-1 text-[8px]">❖</span>
+                              <span className="flex-1 text-left">{point.trim() + (point.trim().endsWith('.') ? '' : '.')}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
-
                   </div>
-
-                </div>
-              </motion.div>
+                </motion.div>
             );
           })}
         </div>
@@ -140,38 +162,77 @@ export default function CommandingOfficersSection({ officers, gaonBuras }: Props
                   <div className="flip-card-inner w-full h-full">
                     
                     {/* Front: Framed Heritage Portrait Card */}
-                    <div className="flip-card-front w-full h-full bg-gradient-to-b from-[#141a0d] to-[#0a0c08] border-8 border-[#2b1d0c] shadow-2xl p-6 flex flex-col justify-between relative">
-                      <div className="w-16 h-16 rounded-full flex items-center justify-center border border-yellow-500/20 bg-yellow-500/5 mb-4">
-                        <span className="text-4xl select-none">👴</span>
+                    <div className="flip-card-front w-full h-full bg-[#11130d] border-[6px] border-[#2b1d0c] shadow-2xl flex flex-col relative group">
+                      <div className="relative flex-1 w-full overflow-hidden img-zoom-container">
+                        <img
+                          src={GAON_BURA_FALLBACKS[i % GAON_BURA_FALLBACKS.length]}
+                          alt={gb.name}
+                          className="w-full h-full object-cover object-top filter contrast-[1.05] brightness-[0.8] sepia-[0.2] transition-transform duration-700 group-hover:scale-[1.03]"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#11130d] via-[#11130d]/40 to-transparent opacity-90" />
+                        <div className="absolute top-4 right-4 px-2.5 py-1 bg-yellow-500/10 text-yellow-500 text-[8px] font-inter uppercase tracking-widest border border-yellow-500/35 rounded backdrop-blur-sm z-20">Hover to view</div>
                       </div>
-                      
-                      <div className="flex-1 flex flex-col justify-end">
-                        <span className="font-inter text-yellow-600/70 text-xs tracking-wider uppercase mb-1">{gb.tribe}</span>
-                        <h4 className="font-cinzel text-stone-100 text-xl mb-2">{gb.name}</h4>
-                        <div className="font-inter text-stone-500 text-xs tracking-widest">{gb.era}</div>
-                        <div className="mt-4 font-inter text-yellow-500/80 text-[11px] uppercase tracking-widest flex items-center gap-2">
-                          <span>Hover to view history</span>
-                          <svg className="w-3 h-3 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                          </svg>
-                        </div>
+
+                      <div className="px-6 pb-6 pt-2 text-center relative z-10 flex-shrink-0">
+                        <div className="font-cinzel text-[#d4a017] text-xs tracking-[0.2em] uppercase mb-1">{gb.tribe}</div>
+                        <h3 className="font-cinzel text-stone-100 text-lg md:text-xl font-bold leading-tight mb-1 filter drop-shadow-md">{gb.name}</h3>
+                        <div className="font-inter text-stone-500 text-[10px] tracking-widest uppercase">{gb.era}</div>
                       </div>
                     </div>
 
-                    {/* Back */}
-                    <div className="flip-card-back w-full h-full p-7 flex flex-col justify-between overflow-y-auto">
-                      <div>
-                        <div className="font-cinzel text-stone-200 text-base leading-snug mb-1">{gb.name}</div>
-                        <div className="font-inter text-yellow-600/60 text-[10px] tracking-wider uppercase mb-4">{gb.tribe} · {gb.era}</div>
-                        <div className="h-px bg-yellow-700/10 mb-4" />
-                        <div className="font-inter text-stone-500 text-[10px] tracking-widest uppercase mb-1">Community Role</div>
-                        <p className="font-garamond text-stone-300 text-[14px] leading-relaxed mb-4">{gb.role}</p>
-                      </div>
+                    {/* Back: Premium Info Plaque (Dark Military Theme) */}
+                    <div className="flip-card-back w-full h-full p-8 flex flex-col bg-gradient-to-br from-[#1c2415] via-[#0f140a] to-[#0a0c08] border-[6px] border-[#2b1d0c] shadow-[inset_0_0_80px_rgba(0,0,0,0.9),_0_20px_50px_rgba(0,0,0,0.85)] relative overflow-hidden group">
+                      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(212,160,23,0.05)_0%,_transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                       
-                      <div className="border-t border-yellow-700/10 pt-4 mt-auto">
-                        <div className="font-inter text-stone-500 text-[10px] tracking-widest uppercase mb-1">Historical Importance</div>
-                        <p className="font-garamond text-stone-400 text-xs leading-relaxed italic">{gb.contribution}</p>
+                      {/* Top Section */}
+                      <div className="flex-shrink-0 flex flex-col items-center text-center relative z-10">
+                        <div className="w-8 h-8 mb-4 flex items-center justify-center border border-yellow-500/20 bg-yellow-500/10 rounded-full shadow-[0_0_15px_rgba(212,160,23,0.2)]">
+                          <span className="text-yellow-500 text-sm">✧</span>
+                        </div>
+                        <div className="font-inter text-[#d4a017] opacity-80 text-[10px] tracking-[0.3em] uppercase mb-2">
+                          Community Elder · {gb.tribe}
+                        </div>
+                        <div className="font-cinzel text-transparent bg-clip-text bg-gradient-to-r from-[#f0ca50] via-[#d4a017] to-[#f0ca50] text-3xl font-bold leading-tight mb-2 filter drop-shadow-md">
+                          {gb.name}
+                        </div>
+                        <div className="font-inter text-stone-400 text-xs tracking-widest uppercase mb-6">
+                          {gb.era}
+                        </div>
+                        
+                        <div className="flex items-center w-full max-w-[80%] mx-auto gap-3">
+                          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#d4a017]/50 to-transparent" />
+                          <div className="w-1.5 h-1.5 bg-[#d4a017]/80 transform rotate-45" />
+                          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#d4a017]/50 to-transparent" />
+                        </div>
                       </div>
+
+                      {/* Center Section (Role) */}
+                      <div className="flex-1 flex flex-col justify-center py-6 relative z-10">
+                        <p className="font-garamond text-stone-300 text-[16px] md:text-[17px] leading-relaxed text-center px-4 italic">
+                          {gb.role}
+                        </p>
+                      </div>
+
+                      {/* Bottom Section (Contributions Footer) */}
+                      <div className="flex-shrink-0 relative z-10 flex flex-col items-center">
+                        <div className="flex items-center w-full max-w-[50%] mx-auto gap-3 mb-6">
+                          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#d4a017]/30 to-transparent" />
+                          <div className="w-1 h-1 bg-[#d4a017]/50 transform rotate-45" />
+                          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#d4a017]/30 to-transparent" />
+                        </div>
+                        <div className="font-inter text-[#d4a017] text-[10px] tracking-[0.25em] uppercase font-bold mb-4 text-center">
+                          Historical Importance
+                        </div>
+                        <ul className="font-inter text-stone-400 text-[12px] leading-relaxed space-y-3 px-2 w-full max-w-[90%] mx-auto">
+                          {gb.contribution.split(';').map((point, idx) => (
+                            <li key={idx} className="flex items-start gap-3">
+                              <span className="text-[#d4a017] mt-1 text-[8px]">❖</span>
+                              <span className="flex-1 text-left">{point.trim() + (point.trim().endsWith('.') ? '' : '.')}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
                     </div>
                   </div>
                 </motion.div>

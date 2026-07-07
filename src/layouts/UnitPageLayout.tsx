@@ -4,7 +4,6 @@ import { Helmet } from 'react-helmet-async';
 import HeroSection from '../components/sections/HeroSection';
 import HistorySection from '../components/sections/HistorySection';
 import CommandingOfficersSection from '../components/sections/CommandingOfficersSection';
-import AchievementsSection from '../components/sections/AchievementsSection';
 import GallerySection from '../components/sections/GallerySection';
 import VideosSection from '../components/sections/VideosSection';
 import SectionNav from '../components/layout/SectionNav';
@@ -40,7 +39,7 @@ function RoomDivider({ title }: { title: string }) {
 }
 
 export default function UnitPageLayout({ data, heroImage, heroImages, badge, historyImage }: Props) {
-  const { meta, history, commandingOfficers, gaonBuras, achievements, gallery, videos } = data;
+  const { meta, history, commandingOfficers, gaonBuras, gallery, videos } = data;
 
   const title = typeof meta.name === 'string' ? meta.name : '';
   const motto = typeof meta.motto === 'string' ? meta.motto : undefined;
@@ -93,18 +92,11 @@ export default function UnitPageLayout({ data, heroImage, heroImages, badge, his
         gaonBuras={gaonBuras}
       />
 
-      <RoomDivider title="Exhibition Room III · Hall of Honour" />
-
-      <AchievementsSection
-        achievements={achievements}
-        highlights={history.highlights}
-      />
-
-      <RoomDivider title="Exhibition Room IV · Photography Archives" />
+      <RoomDivider title="Exhibition Room III · Photography Archives" />
 
       <GallerySection gallery={gallery} />
 
-      <RoomDivider title="Exhibition Room V · Regimental Cinema" />
+      <RoomDivider title="Exhibition Room IV · Regimental Cinema" />
 
       <VideosSection videos={videos} />
     </motion.div>

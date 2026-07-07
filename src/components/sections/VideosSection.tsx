@@ -57,7 +57,7 @@ export default function VideosSection({ videos }: Props) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="mb-16"
+            style={{ marginBottom: '96px' }}
           >
             <div className="flex items-center gap-3.5 mb-6">
               <span className="w-2 h-2 rounded-full bg-yellow-500 animate-pulse" />

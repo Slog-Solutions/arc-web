@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 const sections = [
   { id: 'history', label: 'History', icon: '📜' },
   { id: 'commanding-officers', label: 'Commanding Officers', icon: '⭐' },
-  { id: 'achievements', label: 'Achievements', icon: '🎖️' },
   { id: 'gallery', label: 'Gallery', icon: '🖼️' },
   { id: 'videos', label: 'Videos', icon: '🎬' },
 ];
@@ -15,27 +14,50 @@ export default function SectionNav() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const showOnScroll = () => setVisible(window.scrollY > 400);
-    window.addEventListener('scroll', showOnScroll, { passive: true });
-    return () => window.removeEventListener('scroll', showOnScroll);
-  }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
-      },
-      { rootMargin: '-50% 0px -50% 0px' }
-    );
-    sections.forEach(s => {
-      const el = document.getElementById(s.id);
-      if (el) observer.observe(el);
-    });
-    return () => observer.disconnect();
+    const handleScroll = () => {
+      setVisible(window.scrollY > 400);
+      
+      const scrollPosition = window.scrollY + 300; // offset threshold
+      let currentActive = 'history';
+      
+      for (let i = 0; i < sections.length; i++) {
+        const section = sections[i];
+        const el = document.getElementById(section.id);
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.scrollY;
+          if (scrollPosition >= top) {
+            currentActive = section.id;
+          }
+        }
+      }
+      
+      // Auto-activate the last section when near the bottom of the page
+      const scrollHeight = Math.max(
+        document.documentElement.scrollHeight,
+        document.body.scrollHeight
+      );
+      const isAtBottom = window.innerHeight + window.scrollY >= scrollHeight - 200;
+      if (isAtBottom && sections.length > 0) {
+        currentActive = sections[sections.length - 1].id;
+      }
+      
+      setActive(currentActive);
+    };
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // run once on mount
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    const el = document.getElementById(id);
+    if (el) {
+      const offsetTop = el.getBoundingClientRect().top + window.scrollY - 130;
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
+      });
+    }
   };
 
   return (

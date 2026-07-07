@@ -9,7 +9,7 @@ interface Props {
   centered?: boolean;
 }
 
-export default function SectionHeader({ tag, title, subtitle, centered = true }: Props) {
+export default function SectionHeader({ tag, title, subtitle: _subtitle, centered = true }: Props) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}

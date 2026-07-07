@@ -20,7 +20,7 @@ export default function Navbar() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute z-50"
+        className="fixed z-50"
         style={{
           top: '10px',
           left: '10px',

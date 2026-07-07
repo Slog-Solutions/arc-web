@@ -5,7 +5,6 @@ import { Helmet } from 'react-helmet-async';
 import HeroSection from '../components/sections/HeroSection';
 import HistorySection from '../components/sections/HistorySection';
 import CommandingOfficersSection from '../components/sections/CommandingOfficersSection';
-import AchievementsSection from '../components/sections/AchievementsSection';
 import GallerySection from '../components/sections/GallerySection';
 import VideosSection from '../components/sections/VideosSection';
 import SectionNav from '../components/layout/SectionNav';
@@ -193,23 +192,7 @@ export default function ARCPage() {
         <div className="room-divider-line" />
         <div className="room-divider-flourish">
           <span>✦</span>
-          <span className="font-cinzel text-xs tracking-[0.35em] uppercase">Exhibition Room III · Hall of Honour</span>
-          <span>✦</span>
-        </div>
-        <div className="room-divider-line" />
-      </div>
-
-      {/* Achievements */}
-      <AchievementsSection
-        achievements={arcData.achievements}
-        highlights={arcData.history.highlights}
-      />
-
-      <div className="room-divider">
-        <div className="room-divider-line" />
-        <div className="room-divider-flourish">
-          <span>✦</span>
-          <span className="font-cinzel text-xs tracking-[0.35em] uppercase">Exhibition Room IV · Photography Archives</span>
+          <span className="font-cinzel text-xs tracking-[0.35em] uppercase">Exhibition Room III · Photography Archives</span>
           <span>✦</span>
         </div>
         <div className="room-divider-line" />
@@ -222,7 +205,7 @@ export default function ARCPage() {
         <div className="room-divider-line" />
         <div className="room-divider-flourish">
           <span>✦</span>
-          <span className="font-cinzel text-xs tracking-[0.35em] uppercase">Exhibition Room V · Regimental Cinema</span>
+          <span className="font-cinzel text-xs tracking-[0.35em] uppercase">Exhibition Room IV · Regimental Cinema</span>
           <span>✦</span>
         </div>
         <div className="room-divider-line" />
