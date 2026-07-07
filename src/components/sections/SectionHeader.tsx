@@ -16,8 +16,8 @@ export default function SectionHeader({ tag, title, subtitle, centered = true }:
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.7 }}
-      className={`mb-16 ${centered ? 'text-center' : ''}`}
-      style={{ textAlign: centered ? 'center' : 'left' }}
+      className={`${centered ? 'text-center' : ''}`}
+      style={{ textAlign: centered ? 'center' : 'left', marginBottom: '4rem' }}
     >
       {tag && (
         <div className={`flex items-center gap-3 mb-4 ${centered ? 'justify-center' : ''}`}>
@@ -29,23 +29,6 @@ export default function SectionHeader({ tag, title, subtitle, centered = true }:
       <h2 className="font-cinzel text-3xl md:text-4xl lg:text-5xl text-stone-100 tracking-wide">
         <span className="text-gold-gradient">{title}</span>
       </h2>
-      {subtitle && (
-        <p
-          className="
-        mt-4
-        max-w-3xl
-        mx-auto
-        text-center
-        font-garamond
-        text-lg
-        md:text-xl
-        text-stone-400
-        leading-relaxed
-    "
-        >
-          {subtitle}
-        </p>
-      )}
       <div className={`mt-6 flex items-center gap-3 ${centered ? 'justify-center' : ''}`}>
         <div className="h-px w-16 bg-gradient-to-r from-transparent via-yellow-600/80 to-yellow-600/20" />
         <div className="w-1.5 h-1.5 rounded-full bg-yellow-600" />

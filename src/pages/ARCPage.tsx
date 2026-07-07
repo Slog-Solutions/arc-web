@@ -96,7 +96,13 @@ export default function ARCPage() {
           <SectionHeader
             tag="Exhibition Rooms"
             title="Affiliated Units"
-            subtitle="Explore the individual history, heritage, achievements and media files of our four affiliated commands."
+            subtitle={
+              <>
+                Explore the history and heritage
+                <br />
+                of our four affiliated units.
+              </>
+            }
           />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mt-16">
             {unitCards.map((unit, i) => (
@@ -114,7 +120,7 @@ export default function ARCPage() {
                       <img src={unit.image} alt={unit.title} className="w-full h-full object-cover filter brightness-[0.88] contrast-[1.05]" loading="lazy" />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#0d120a] via-transparent to-transparent" />
                       <div className="absolute top-4 left-4 text-4xl filter drop-shadow-md">{unit.icon}</div>
-                      
+
                       {/* Small museum badge */}
                       <div className="absolute bottom-4 left-4">
                         <span className="font-inter text-[9px] tracking-widest uppercase bg-yellow-500/10 text-yellow-500 border border-yellow-500/30 px-2 py-0.5 rounded">
@@ -122,7 +128,7 @@ export default function ARCPage() {
                         </span>
                       </div>
                     </div>
-                    
+
                     {/* Content (at bottom) */}
                     <div className="p-6 flex flex-col flex-1 bg-gradient-to-b from-[#141a0d] to-[#0a0c08] border-t border-[#443118]/50">
                       <div className="font-inter text-[10px] text-yellow-600/70 tracking-widest uppercase mb-1">Est. {unit.est}</div>
@@ -131,7 +137,7 @@ export default function ARCPage() {
                       </h3>
                       <div className="font-inter text-[11px] text-stone-500 mb-3">{unit.role}</div>
                       <p className="font-garamond text-stone-400 text-sm leading-relaxed mb-6 flex-1">{unit.description}</p>
-                      
+
                       <div className="flex items-center gap-2 text-yellow-500/70 text-xs font-inter tracking-widest uppercase group-hover:text-yellow-400 transition-colors duration-300 mt-auto">
                         <span>Enter Exhibit</span>
                         <svg className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
