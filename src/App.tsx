@@ -3,7 +3,6 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { HelmetProvider } from 'react-helmet-async';
 import Navbar from './components/layout/Navbar';
-import Footer from './components/layout/Footer';
 import ScrollProgress from './components/layout/ScrollProgress';
 import ARCPage from './pages/ARCPage';
 import AssamRiflesPage from './pages/AssamRiflesPage';
@@ -41,7 +40,6 @@ export default function App() {
             </Routes>
           </AnimatePresence>
         </main>
-        {location.pathname !== '/' && <Footer />}
       </div>
     </HelmetProvider>
   );
