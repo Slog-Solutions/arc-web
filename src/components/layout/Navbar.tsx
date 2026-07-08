@@ -143,8 +143,11 @@ export default function Navbar() {
           />
 
           {/* ── CENTER: Nav Links ── */}
-          <div className="hidden lg:flex flex-1 items-center justify-center">
-            <div className="flex items-center">
+          <div 
+            className="hidden lg:flex flex-1 items-center overflow-x-auto [&::-webkit-scrollbar]:hidden"
+            style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}
+          >
+            <div className="flex items-center min-w-max mx-auto px-2">
               {navItems.map((item, i) => {
                 const isActive = location.pathname === item.path;
                 return (
@@ -152,7 +155,7 @@ export default function Navbar() {
                     <Link
                       to={item.path}
                       className="relative group flex flex-col items-center"
-                      style={{ padding: '6px 20px' }}
+                      style={{ padding: '6px 14px' }}
                     >
                       {/* Active glow spotlight */}
                       {isActive && (
@@ -166,8 +169,8 @@ export default function Navbar() {
                       <motion.span
                         className="font-cinzel uppercase relative z-10"
                         style={{
-                          fontSize: '13px',
-                          letterSpacing: '2.5px',
+                          fontSize: '11px',
+                          letterSpacing: '1.5px',
                           fontWeight: 500,
                           color: isActive ? '#f0c84a' : '#c8a040',
                           whiteSpace: 'nowrap',
@@ -185,8 +188,8 @@ export default function Navbar() {
                         className="absolute"
                         style={{
                           bottom: '3px',
-                          left: '20px',
-                          right: '20px',
+                          left: '14px',
+                          right: '14px',
                           height: '1.5px',
                           background: 'linear-gradient(90deg, transparent, #f0c84a, transparent)',
                           boxShadow: '0 0 8px rgba(240,200,74,0.5)',
@@ -202,8 +205,8 @@ export default function Navbar() {
                           className="absolute scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"
                           style={{
                             bottom: '3px',
-                            left: '20px',
-                            right: '20px',
+                            left: '14px',
+                            right: '14px',
                             height: '1px',
                             background: 'linear-gradient(90deg, transparent, #a87e35, transparent)',
                           }}
