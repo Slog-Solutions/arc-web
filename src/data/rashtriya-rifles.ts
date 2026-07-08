@@ -244,7 +244,7 @@ export const rashtriyaRiflesData = {
       featured: false,
     },
     {
-      title: "Assam Rifles — Sentinels of the Northeast",
+      title: "Assam Units — Sentinels of the Northeast",
       description: "A DD News special exploring the history of India's paramilitary forces in the Northeast and their operational legacy in counterinsurgency operations.",
       youtubeId: "eRWyVzOBdJQ",
       thumbnail: "/assami/Rashtriya Rifles/rr-sadbhavna-hearts.jpg",

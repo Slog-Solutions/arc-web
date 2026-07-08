@@ -17,12 +17,14 @@ export default function HomeScreen() {
       </Helmet>
 
       {/* Background Image: the image is set to cover the top area exactly so the navbar fits */}
-      <div 
-        className="absolute inset-0 z-0 w-full h-full"
+      <div
+        className="absolute z-0 w-full"
         style={{
+          top: '70px',
+          bottom: '0',
           backgroundImage: 'url("/assami/home screen.png")',
           backgroundSize: 'cover',
-          backgroundPosition: 'center -40px',
+          backgroundPosition: 'center top',
           backgroundRepeat: 'no-repeat',
         }}
       />

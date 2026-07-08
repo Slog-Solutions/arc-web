@@ -1,0 +1,27 @@
+// src/pages/arc/ARCGaonBurasPage.tsx
+import SubPageLayout from '../../components/layout/SubPageLayout';
+import CommandingOfficersSection from '../../components/sections/CommandingOfficersSection';
+import { arcData } from '../../data/arc';
+
+export default function ARCGaonBurasPage() {
+  const breadcrumbs = [
+    { label: 'Assam Regimental Centre', path: '/arc' },
+    { label: 'Gaon Buras & Officers' },
+  ];
+
+  return (
+    <SubPageLayout
+      title="Gaon Buras & Commanding Officers"
+      subtitle="Exhibition Room III"
+      metaTitle="Gaon Buras & Officers | Assam Regimental Centre"
+      metaDesc="Meet the commanding officers and traditional community elders (Gaon Buras) who built and sustained the legacy of the Assam Regimental Centre."
+      breadcrumbs={breadcrumbs}
+      backPath="/arc"
+    >
+      <CommandingOfficersSection
+        officers={arcData.commandingOfficers}
+        gaonBuras={arcData.gaonBuras}
+      />
+    </SubPageLayout>
+  );
+}

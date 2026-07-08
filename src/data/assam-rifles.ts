@@ -1,7 +1,7 @@
 // src/data/assam-rifles.ts
 export const assamRiflesData = {
   meta: {
-    name: "Assam Rifles",
+    name: "Assam Units",
     shortName: "AR",
     motto: "The Sentinel of the North-East",
     established: "1835",
@@ -14,13 +14,13 @@ export const assamRiflesData = {
     colors: "Olive Green & Dark Red",
   },
   history: {
-    overview: `The Assam Rifles is India's oldest paramilitary force, with a distinguished history spanning nearly two centuries. Born in 1835 as a humble frontier police to protect British tea estates, it has evolved into a formidable border guarding and counter-insurgency force — the silent sentinel of India's northeastern frontier.`,
+    overview: `The Assam Units is India's oldest paramilitary force, with a distinguished history spanning nearly two centuries. Born in 1835 as a humble frontier police to protect British tea estates, it has evolved into a formidable border guarding and counter-insurgency force — the silent sentinel of India's northeastern frontier.`,
     paragraphs: [
-      `The story of the Assam Rifles begins on the rough tea gardens of colonial Assam in 1835, when the British East India Company raised the Cachar Levy — a small armed constabulary tasked with protecting European planters from the raids of hill tribes. This modest beginning was the seed of what would grow into one of India's most formidable security forces.`,
+      `The story of the Assam Units begins on the rough tea gardens of colonial Assam in 1835, when the British East India Company raised the Cachar Levy — a small armed constabulary tasked with protecting European planters from the raids of hill tribes. This modest beginning was the seed of what would grow into one of India's most formidable security forces.`,
       `As the British consolidated their hold over the Northeast, the force expanded and its mandate grew. In 1883, it was renamed the Assam Frontier Police, and in 1891, the Assam Military Police. The force was at the forefront of the suppression of numerous tribal uprisings and the exploration and demarcation of India's eastern frontiers.`,
-      `World War I marked a turning point. In recognition of the force's military character and its contributions to the war effort, it was redesignated as the Assam Rifles in 1917 — a name it carries with pride to this day. During World War II, the Assam Rifles played an indispensable role in the defence of Kohima and Imphal, becoming known as the "Backstay of the Chindit's Operations."`,
-      `Post-Independence, the Assam Rifles was brought under a unique dual control structure — administratively under the Ministry of Home Affairs and operationally under the Indian Army. This arrangement has allowed the force to serve both as a border guardian and as a first-line counter-insurgency force in the seven sister states of Northeast India.`,
-      `Today, with 46+ battalions and over 65,000 personnel, the Assam Rifles stands as a formidable testament to continuity, adaptability, and courage. Its dual identities as "Sentinels of the North East" and "Friends of the Hill People" capture the essence of its mission — to protect and to serve.`,
+      `World War I marked a turning point. In recognition of the force's military character and its contributions to the war effort, it was redesignated as the Assam Units in 1917 — a name it carries with pride to this day. During World War II, the Assam Units played an indispensable role in the defence of Kohima and Imphal, becoming known as the "Backstay of the Chindit's Operations."`,
+      `Post-Independence, the Assam Units was brought under a unique dual control structure — administratively under the Ministry of Home Affairs and operationally under the Indian Army. This arrangement has allowed the force to serve both as a border guardian and as a first-line counter-insurgency force in the seven sister states of Northeast India.`,
+      `Today, with 46+ battalions and over 65,000 personnel, the Assam Units stands as a formidable testament to continuity, adaptability, and courage. Its dual identities as "Sentinels of the North East" and "Friends of the Hill People" capture the essence of its mission — to protect and to serve.`,
     ],
     timeline: [
       {
@@ -40,13 +40,13 @@ export const assamRiflesData = {
       },
       {
         year: "1917",
-        title: "Assam Rifles — The Name Endures",
-        description: "Renamed the Assam Rifles in recognition of its WWI service — the name that has stood for over a century.",
+        title: "Assam Units — The Name Endures",
+        description: "Renamed the Assam Units in recognition of its WWI service — the name that has stood for over a century.",
       },
       {
         year: "1944",
         title: "Battle of Kohima",
-        description: "The Assam Rifles plays a pivotal role in the Battle of Kohima — the 'Stalingrad of the East' — halting the Japanese advance.",
+        description: "The Assam Units plays a pivotal role in the Battle of Kohima — the 'Stalingrad of the East' — halting the Japanese advance.",
       },
       {
         year: "1947",
@@ -56,12 +56,12 @@ export const assamRiflesData = {
       {
         year: "1962",
         title: "Sino-Indian Conflict",
-        description: "The Assam Rifles battles Chinese forces along the McMahon Line, suffering significant casualties while defending Indian territory.",
+        description: "The Assam Units battles Chinese forces along the McMahon Line, suffering significant casualties while defending Indian territory.",
       },
       {
         year: "1971",
         title: "Bangladesh Liberation War",
-        description: "The Assam Rifles plays a significant role in the 1971 conflict, supporting regular army operations.",
+        description: "The Assam Units plays a significant role in the 1971 conflict, supporting regular army operations.",
       },
       {
         year: "1990s",
@@ -70,18 +70,18 @@ export const assamRiflesData = {
       },
       {
         year: "2003",
-        title: "Assam Rifles Act",
-        description: "The Assam Rifles Act 1941 is replaced with the comprehensive Assam Rifles Act 2006 (effective 2003).",
+        title: "Assam Units Act",
+        description: "The Assam Units Act 1941 is replaced with the comprehensive Assam Units Act 2006 (effective 2003).",
       },
     ],
     quotes: [
       {
-        text: "The Assam Rifles has been the sheet anchor of security in the Northeast. Its men know the jungles, know the people, and know how to win.",
+        text: "The Assam Units has been the sheet anchor of security in the Northeast. Its men know the jungles, know the people, and know how to win.",
         author: "A Former Army Chief of Staff",
         designation: "Indian Army",
       },
       {
-        text: "In the darkest hours of the Kohima battle, it was the men of the Assam Rifles who held the line and changed the course of the war.",
+        text: "In the darkest hours of the Kohima battle, it was the men of the Assam Units who held the line and changed the course of the war.",
         author: "Historical Account",
         designation: "Battle of Kohima, 1944",
       },
@@ -98,7 +98,7 @@ export const assamRiflesData = {
       name: "Inspector General (Various)",
       rank: "Inspector General / Director General",
       tenure: "1947 – Present",
-      bio: "The Assam Rifles is headed by the Director General, Assam Rifles (DGAR), who holds the rank of Lieutenant General. The post rotates between senior Indian Army officers.",
+      bio: "The Assam Units is headed by the Director General, Assam Units (DGAR), who holds the rank of Lieutenant General. The post rotates between senior Indian Army officers.",
       contribution: "Command and operational direction of the force across the seven sister states.",
       image: "/assami/17 Assam Rifles/ar-commandant.jpg",
     },
@@ -106,7 +106,7 @@ export const assamRiflesData = {
       name: "Lt. Gen. P.C. Nair",
       rank: "Lieutenant General",
       tenure: "2015 – 2017",
-      bio: "Led the Assam Rifles through a critical period of modernisation, digitisation of records, and enhanced border management along the Indo-Myanmar border.",
+      bio: "Led the Assam Units through a critical period of modernisation, digitisation of records, and enhanced border management along the Indo-Myanmar border.",
       contribution: "Modernisation programme and border infrastructure development.",
       image: "/assami/17 Assam Rifles/ar-director-general.jpg",
     },
@@ -124,29 +124,29 @@ export const assamRiflesData = {
       name: "Zapu Phizo (Historical Context)",
       tribe: "Naga Community",
       era: "1940s–1950s",
-      role: "Community leader whose movement shaped the relationship between the Assam Rifles and Naga communities.",
-      contribution: "Understanding of Naga political aspirations guided the Assam Rifles' community policing model.",
+      role: "Community leader whose movement shaped the relationship between the Assam Units and Naga communities.",
+      contribution: "Understanding of Naga political aspirations guided the Assam Units' community policing model.",
     },
     {
       name: "Various Village Headmen",
       tribe: "Multiple NE Tribes",
       era: "1835–Present",
       role: "Traditional Gaon Buras and village chieftains serving as community liaisons",
-      contribution: "Bridge between the Assam Rifles and tribal communities, facilitating peacekeeping through community trust.",
+      contribution: "Bridge between the Assam Units and tribal communities, facilitating peacekeeping through community trust.",
     },
   ],
   achievements: [
     {
       category: "Battle Honours",
       title: "Battle of Kohima 1944",
-      description: "The Assam Rifles played a pivotal role in the Battle of Kohima, which Churchill called 'The Stalingrad of the East.' Their tenacious defence halted the Japanese Operation U-GO.",
+      description: "The Assam Units played a pivotal role in the Battle of Kohima, which Churchill called 'The Stalingrad of the East.' Their tenacious defence halted the Japanese Operation U-GO.",
       year: "1944",
       icon: "🎖️",
     },
     {
       category: "Border Security",
       title: "India-Myanmar Border Management",
-      description: "The Assam Rifles guards 1,643 km of the Indo-Myanmar border, preventing smuggling, infiltration, and cross-border terrorism.",
+      description: "The Assam Units guards 1,643 km of the Indo-Myanmar border, preventing smuggling, infiltration, and cross-border terrorism.",
       year: "1947–Present",
       icon: "🛡️",
     },
@@ -167,14 +167,14 @@ export const assamRiflesData = {
     {
       category: "International",
       title: "UN Peacekeeping Missions",
-      description: "Assam Rifles personnel have served in multiple UN peacekeeping missions across Africa and Asia.",
+      description: "Assam Units personnel have served in multiple UN peacekeeping missions across Africa and Asia.",
       year: "2000s–Present",
       icon: "🌏",
     },
     {
       category: "Disaster Relief",
       title: "Flood & Earthquake Relief Operations",
-      description: "The Assam Rifles has consistently been among the first responders to natural disasters across the Northeast.",
+      description: "The Assam Units has consistently been among the first responders to natural disasters across the Northeast.",
       year: "Multiple",
       icon: "🚁",
     },
@@ -183,18 +183,18 @@ export const assamRiflesData = {
     {
       id: 1,
       src: "/assami/17 Assam Rifles/ar-patrol-green.jpg",
-      caption: "Assam Rifles troops — Sentinels of the Northeast frontier",
+      caption: "Assam Units troops — Sentinels of the Northeast frontier",
       category: "Operations",
       year: "Modern",
-      history: "The Assam Rifles operates across the challenging terrain of the seven sister states. Their green berets and olive uniforms are a symbol of authority and protection across remote villages and international borders of Northeast India.",
+      history: "The Assam Units operates across the challenging terrain of the seven sister states. Their green berets and olive uniforms are a symbol of authority and protection across remote villages and international borders of Northeast India.",
     },
     {
       id: 2,
       src: "/assami/17 Assam Rifles/ar-parade-shillong.jpg",
-      caption: "Assam Rifles Parade — 189 Years of Guardianship",
+      caption: "Assam Units Parade — 189 Years of Guardianship",
       category: "Ceremonies",
       year: "Modern",
-      history: "The Assam Rifles has been on continuous service for 189 years, making it the oldest paramilitary force in India. Their annual parade is a spectacle of discipline and pride, tracing back to 1835 when the Cachar Levy was first raised.",
+      history: "The Assam Units has been on continuous service for 189 years, making it the oldest paramilitary force in India. Their annual parade is a spectacle of discipline and pride, tracing back to 1835 when the Cachar Levy was first raised.",
     },
     {
       id: 3,
@@ -207,10 +207,10 @@ export const assamRiflesData = {
     {
       id: 4,
       src: "/assami/17 Assam Rifles/ar-border-patrol.jpg",
-      caption: "Assam Rifles — Border Patrol Operations, Indo-Myanmar Border",
+      caption: "Assam Units — Border Patrol Operations, Indo-Myanmar Border",
       category: "Operations",
       year: "Modern",
-      history: "The Assam Rifles guards 1,643 km of the India-Myanmar border. Their border patrols are among the most challenging in the world, traversing dense jungles, river crossings, and remote highland terrain in all weather conditions.",
+      history: "The Assam Units guards 1,643 km of the India-Myanmar border. Their border patrols are among the most challenging in the world, traversing dense jungles, river crossings, and remote highland terrain in all weather conditions.",
     },
     {
       id: 5,
@@ -218,20 +218,20 @@ export const assamRiflesData = {
       caption: "Community Outreach — Friends of the Hill People",
       category: "Community",
       year: "Modern",
-      history: "The Assam Rifles' 'Friends of the Hill People' programme has built over 200 schools, 150 health centres, and hundreds of kilometres of roads in remote Northeast communities. This dual role of guardian and friend defines the unique character of this force.",
+      history: "The Assam Units' 'Friends of the Hill People' programme has built over 200 schools, 150 health centres, and hundreds of kilometres of roads in remote Northeast communities. This dual role of guardian and friend defines the unique character of this force.",
     },
     {
       id: 6,
       src: "/assami/17 Assam Rifles/ar-heritage-sentinel.jpg",
-      caption: "Assam Rifles — Heritage and Legacy",
+      caption: "Assam Units — Heritage and Legacy",
       category: "Heritage",
       year: "Heritage",
-      history: "From the Cachar Levy of 1835 to the modern Assam Rifles of today, this force has been at the forefront of India's security for 189 years. Their legacy is written in the difficult jungles, mountain passes, and border outposts of Northeast India.",
+      history: "From the Cachar Levy of 1835 to the modern Assam Units of today, this force has been at the forefront of India's security for 189 years. Their legacy is written in the difficult jungles, mountain passes, and border outposts of Northeast India.",
     },
   ],
   videos: [
     {
-      title: "Assam Rifles — Sentinels of the Northeast | Independence Day Special",
+      title: "Assam Units — Sentinels of the Northeast | Independence Day Special",
       description: "A comprehensive documentary by DD News on India's oldest paramilitary force — tracing its 189-year legacy from the Cachar Levy to its current role as the guardian of the Indo-Myanmar border and peacekeepers of the Northeast.",
       youtubeId: "eRWyVzOBdJQ",
       thumbnail: "/assami/17 Assam Rifles/ar-patrol-green.jpg",
@@ -240,8 +240,8 @@ export const assamRiflesData = {
       featured: true,
     },
     {
-      title: "Battle of Kohima 1944 — Assam Rifles' Finest Hour",
-      description: "The role of the Assam Rifles in the decisive Battle of Kohima that turned the tide of World War II in Asia. A Naga People's perspective on the battle that defined a generation.",
+      title: "Battle of Kohima 1944 — Assam Units' Finest Hour",
+      description: "The role of the Assam Units in the decisive Battle of Kohima that turned the tide of World War II in Asia. A Naga People's perspective on the battle that defined a generation.",
       youtubeId: "1UXMSR2LgZQ",
       thumbnail: "/assami/17 Assam Rifles/ar-joint-training.jpg",
       duration: "39:25",

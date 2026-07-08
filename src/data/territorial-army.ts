@@ -229,7 +229,7 @@ export const territorialArmyData = {
       featured: true,
     },
     {
-      title: "Assam Rifles — Sentinels of the Northeast | DD News Special",
+      title: "Assam Units — Sentinels of the Northeast | DD News Special",
       description: "A comprehensive documentary on the forces that protect India's Northeast — including the Territorial Army's role in maintaining security across the seven sister states of Northeast India.",
       youtubeId: "eRWyVzOBdJQ",
       thumbnail: "/assami/Territorial Army/ta-annual-camp.jpg",

@@ -156,8 +156,8 @@ export const arunachalScoutsData = {
       featured: false,
     },
     {
-      title: "Assam Rifles — Sentinels of Northeast India",
-      description: "A DD News special documentary on the force that protects the Northeast — the Assam Rifles and affiliated units including the Arunachal Scouts, dedicated to guarding India's frontier.",
+      title: "Assam Units — Sentinels of Northeast India",
+      description: "A DD News special documentary on the force that protects the Northeast — the Assam Units and affiliated units including the Arunachal Scouts, dedicated to guarding India's frontier.",
       youtubeId: "eRWyVzOBdJQ",
       thumbnail: "/assami/Arunachal Scouts/scouts-raising-ceremony.jpg",
       duration: "57:30",

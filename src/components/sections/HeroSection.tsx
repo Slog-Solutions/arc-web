@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 
 interface Props {
-  title: string;
+  title: string | React.ReactNode;
   subtitle?: string;
   tagline?: string;
   established?: string;
@@ -97,8 +97,8 @@ export default function HeroSection({
 
       {/* Hero Content Container */}
       <motion.div
-        className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col items-center text-center justify-center pt-16"
-        style={{ opacity }}
+        className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col items-center text-center justify-center"
+        style={{ opacity, paddingTop: '180px' }}
       >
         {/* Badge */}
         {badge && (

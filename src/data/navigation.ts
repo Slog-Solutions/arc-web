@@ -9,7 +9,7 @@ export const navItems = [
   },
   {
     id: "assam-rifles",
-    label: "Assam Rifles",
+    label: "Assam Units",
     path: "/assam-rifles",
     shortLabel: "AR",
     color: "#8c5500",
