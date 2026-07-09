@@ -2,7 +2,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import SubPageLayout from '../../components/layout/SubPageLayout';
 import CommandingOfficersSection from '../../components/sections/CommandingOfficersSection';
 import { ARUNACHAL_SCOUTS_UNITS } from '../ArunachalScoutsPage';
-import { arunachalScoutsData } from '../../data/arunachal-scouts';
+import { getMergedSubUnitData } from '../../admin/store/adminStore';
 
 export default function ArunachalScoutsUnitGaonBurasPage() {
   const { unitId } = useParams<{ unitId: string }>();
@@ -21,7 +21,7 @@ export default function ArunachalScoutsUnitGaonBurasPage() {
       breadcrumbs={breadcrumbs}
       backPath={`/arunachal-scouts/${unit.id}`}
     >
-      <CommandingOfficersSection officers={arunachalScoutsData.commandingOfficers || []} gaonBuras={arunachalScoutsData.gaonBuras || []} />
+      <CommandingOfficersSection officers={(getMergedSubUnitData('arunachal-scouts', unitId || '')).commandingOfficers || []} gaonBuras={(getMergedSubUnitData('arunachal-scouts', unitId || '')).gaonBuras || []} />
     </SubPageLayout>
   );
 }

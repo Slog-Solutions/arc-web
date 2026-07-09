@@ -2,7 +2,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import SubPageLayout from '../../components/layout/SubPageLayout';
 import CommandingOfficersSection from '../../components/sections/CommandingOfficersSection';
 import { TERRITORIAL_ARMY_UNITS } from '../TerritorialArmyPage';
-import { territorialArmyData } from '../../data/territorial-army';
+import { getMergedSubUnitData } from '../../admin/store/adminStore';
 
 export default function TerritorialArmyUnitGaonBurasPage() {
   const { unitId } = useParams<{ unitId: string }>();
@@ -21,7 +21,7 @@ export default function TerritorialArmyUnitGaonBurasPage() {
       breadcrumbs={breadcrumbs}
       backPath={`/territorial-army/${unit.id}`}
     >
-      <CommandingOfficersSection officers={territorialArmyData.commandingOfficers || []} gaonBuras={territorialArmyData.gaonBuras || []} />
+      <CommandingOfficersSection officers={(getMergedSubUnitData('territorial-army', unitId || '')).commandingOfficers || []} gaonBuras={(getMergedSubUnitData('territorial-army', unitId || '')).gaonBuras || []} />
     </SubPageLayout>
   );
 }

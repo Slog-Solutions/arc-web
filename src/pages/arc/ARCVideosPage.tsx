@@ -1,7 +1,7 @@
 // src/pages/arc/ARCVideosPage.tsx
 import SubPageLayout from '../../components/layout/SubPageLayout';
 import VideosSection from '../../components/sections/VideosSection';
-import { arcData } from '../../data/arc';
+import { getUnitData } from '../../admin/store/adminStore';
 
 export default function ARCVideosPage() {
   const breadcrumbs = [
@@ -18,7 +18,7 @@ export default function ARCVideosPage() {
       breadcrumbs={breadcrumbs}
       backPath="/arc"
     >
-      <VideosSection videos={arcData.videos} />
+      <VideosSection videos={getUnitData('arc').videos} />
     </SubPageLayout>
   );
 }

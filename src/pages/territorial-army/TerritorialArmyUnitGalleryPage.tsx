@@ -2,7 +2,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import SubPageLayout from '../../components/layout/SubPageLayout';
 import GallerySection from '../../components/sections/GallerySection';
 import { TERRITORIAL_ARMY_UNITS } from '../TerritorialArmyPage';
-import { territorialArmyData } from '../../data/territorial-army';
+import { getMergedSubUnitData } from '../../admin/store/adminStore';
 
 export default function TerritorialArmyUnitGalleryPage() {
   const { unitId } = useParams<{ unitId: string }>();
@@ -21,7 +21,7 @@ export default function TerritorialArmyUnitGalleryPage() {
       breadcrumbs={breadcrumbs}
       backPath={`/territorial-army/${unit.id}`}
     >
-      <GallerySection gallery={territorialArmyData.gallery || []} />
+      <GallerySection gallery={(getMergedSubUnitData('territorial-army', unitId || '')).gallery || []} />
     </SubPageLayout>
   );
 }

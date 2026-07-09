@@ -2,7 +2,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import SubPageLayout from '../../components/layout/SubPageLayout';
 import HistorySection from '../../components/sections/HistorySection';
 import { RASHTRIYA_RIFLES_UNITS } from '../RashtriyaRiflesPage';
-import { rashtriyaRiflesData } from '../../data/rashtriya-rifles';
+import { getMergedSubUnitData } from '../../admin/store/adminStore';
 
 export default function RashtriyaRiflesUnitHistoryPage() {
   const { unitId } = useParams<{ unitId: string }>();
@@ -15,7 +15,7 @@ export default function RashtriyaRiflesUnitHistoryPage() {
     { label: 'History' },
   ];
 
-  const tailoredOverview = `The ${unit.name} (${unit.shortName}) inherits and builds upon a proud legacy. ${rashtriyaRiflesData.history.overview}`;
+  const tailoredOverview = `The ${unit.name} (${unit.shortName}) inherits and builds upon a proud legacy. ${(getMergedSubUnitData('rashtriya-rifles', unitId || '')).history.overview}`;
 
   return (
     <SubPageLayout
@@ -25,10 +25,10 @@ export default function RashtriyaRiflesUnitHistoryPage() {
     >
       <HistorySection
         overview={tailoredOverview}
-        paragraphs={rashtriyaRiflesData.history.paragraphs}
-        timeline={rashtriyaRiflesData.history.timeline}
-        quotes={rashtriyaRiflesData.history.quotes}
-        highlights={rashtriyaRiflesData.history.highlights}
+        paragraphs={(getMergedSubUnitData('rashtriya-rifles', unitId || '')).history.paragraphs}
+        timeline={(getMergedSubUnitData('rashtriya-rifles', unitId || '')).history.timeline}
+        quotes={(getMergedSubUnitData('rashtriya-rifles', unitId || '')).history.quotes}
+        highlights={(getMergedSubUnitData('rashtriya-rifles', unitId || '')).history.highlights}
         heroImage="/assami/Rashtriya Rifles/rr-ops-kashmir.jpg"
       />
     </SubPageLayout>

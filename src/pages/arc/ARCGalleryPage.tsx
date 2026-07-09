@@ -1,7 +1,7 @@
 // src/pages/arc/ARCGalleryPage.tsx
 import SubPageLayout from '../../components/layout/SubPageLayout';
 import GallerySection from '../../components/sections/GallerySection';
-import { arcData } from '../../data/arc';
+import { getUnitData } from '../../admin/store/adminStore';
 
 export default function ARCGalleryPage() {
   const breadcrumbs = [
@@ -18,7 +18,7 @@ export default function ARCGalleryPage() {
       breadcrumbs={breadcrumbs}
       backPath="/arc"
     >
-      <GallerySection gallery={arcData.gallery} />
+      <GallerySection gallery={getUnitData('arc').gallery} />
     </SubPageLayout>
   );
 }

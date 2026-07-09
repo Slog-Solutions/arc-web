@@ -2,7 +2,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import SubPageLayout from '../../components/layout/SubPageLayout';
 import AchievementsSection from '../../components/sections/AchievementsSection';
 import { ARUNACHAL_SCOUTS_UNITS } from '../ArunachalScoutsPage';
-import { arunachalScoutsData } from '../../data/arunachal-scouts';
+import { getMergedSubUnitData } from '../../admin/store/adminStore';
 
 export default function ArunachalScoutsUnitAwardsPage() {
   const { unitId } = useParams<{ unitId: string }>();
@@ -21,7 +21,7 @@ export default function ArunachalScoutsUnitAwardsPage() {
       breadcrumbs={breadcrumbs}
       backPath={`/arunachal-scouts/${unit.id}`}
     >
-      <AchievementsSection achievements={arunachalScoutsData.achievements || []} />
+      <AchievementsSection achievements={(getMergedSubUnitData('arunachal-scouts', unitId || '')).achievements || []} />
     </SubPageLayout>
   );
 }

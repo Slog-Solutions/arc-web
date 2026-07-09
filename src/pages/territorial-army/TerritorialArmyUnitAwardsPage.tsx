@@ -2,7 +2,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import SubPageLayout from '../../components/layout/SubPageLayout';
 import AchievementsSection from '../../components/sections/AchievementsSection';
 import { TERRITORIAL_ARMY_UNITS } from '../TerritorialArmyPage';
-import { territorialArmyData } from '../../data/territorial-army';
+import { getMergedSubUnitData } from '../../admin/store/adminStore';
 
 export default function TerritorialArmyUnitAwardsPage() {
   const { unitId } = useParams<{ unitId: string }>();
@@ -21,7 +21,7 @@ export default function TerritorialArmyUnitAwardsPage() {
       breadcrumbs={breadcrumbs}
       backPath={`/territorial-army/${unit.id}`}
     >
-      <AchievementsSection achievements={territorialArmyData.achievements || []} />
+      <AchievementsSection achievements={(getMergedSubUnitData('territorial-army', unitId || '')).achievements || []} />
     </SubPageLayout>
   );
 }

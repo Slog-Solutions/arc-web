@@ -2,7 +2,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import SubPageLayout from '../../components/layout/SubPageLayout';
 import CommandingOfficersSection from '../../components/sections/CommandingOfficersSection';
 import { RASHTRIYA_RIFLES_UNITS } from '../RashtriyaRiflesPage';
-import { rashtriyaRiflesData } from '../../data/rashtriya-rifles';
+import { getMergedSubUnitData } from '../../admin/store/adminStore';
 
 export default function RashtriyaRiflesUnitGaonBurasPage() {
   const { unitId } = useParams<{ unitId: string }>();
@@ -21,7 +21,7 @@ export default function RashtriyaRiflesUnitGaonBurasPage() {
       breadcrumbs={breadcrumbs}
       backPath={`/rashtriya-rifles/${unit.id}`}
     >
-      <CommandingOfficersSection officers={rashtriyaRiflesData.commandingOfficers || []} gaonBuras={rashtriyaRiflesData.gaonBuras || []} />
+      <CommandingOfficersSection officers={(getMergedSubUnitData('rashtriya-rifles', unitId || '')).commandingOfficers || []} gaonBuras={(getMergedSubUnitData('rashtriya-rifles', unitId || '')).gaonBuras || []} />
     </SubPageLayout>
   );
 }

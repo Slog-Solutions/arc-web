@@ -1,7 +1,7 @@
 // src/pages/arc/ARCHistoryPage.tsx
 import SubPageLayout from '../../components/layout/SubPageLayout';
 import HistorySection from '../../components/sections/HistorySection';
-import { arcData } from '../../data/arc';
+import { getUnitData } from '../../admin/store/adminStore';
 
 export default function ARCHistoryPage() {
   const breadcrumbs = [
@@ -19,11 +19,11 @@ export default function ARCHistoryPage() {
       backPath="/arc"
     >
       <HistorySection
-        overview={arcData.history.overview}
-        paragraphs={arcData.history.paragraphs}
-        timeline={arcData.history.timeline}
-        quotes={arcData.history.quotes}
-        highlights={arcData.history.highlights}
+        overview={getUnitData('arc').history.overview}
+        paragraphs={getUnitData('arc').history.paragraphs}
+        timeline={getUnitData('arc').history.timeline}
+        quotes={getUnitData('arc').history.quotes}
+        highlights={getUnitData('arc').history.highlights}
         heroImage="/assami/Assam Regimental Centre/arc-raising-day.jpg"
       />
     </SubPageLayout>

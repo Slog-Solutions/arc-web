@@ -3,7 +3,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import SubPageLayout from '../../components/layout/SubPageLayout';
 import GallerySection from '../../components/sections/GallerySection';
 import { ASSAM_RIFLES_UNITS } from '../AssamRiflesPage';
-import { assamRiflesData } from '../../data/assam-rifles';
+import { getMergedSubUnitData } from '../../admin/store/adminStore';
 
 export default function AssamRiflesUnitGalleryPage() {
   const { unitId } = useParams<{ unitId: string }>();
@@ -28,7 +28,7 @@ export default function AssamRiflesUnitGalleryPage() {
       breadcrumbs={breadcrumbs}
       backPath={`/assam-rifles/${unit.id}`}
     >
-      <GallerySection gallery={assamRiflesData.gallery} />
+      <GallerySection gallery={(getMergedSubUnitData('assam-rifles', unitId || '')).gallery} />
     </SubPageLayout>
   );
 }

@@ -2,7 +2,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import SubPageLayout from '../../components/layout/SubPageLayout';
 import HistorySection from '../../components/sections/HistorySection';
 import { ARUNACHAL_SCOUTS_UNITS } from '../ArunachalScoutsPage';
-import { arunachalScoutsData } from '../../data/arunachal-scouts';
+import { getMergedSubUnitData } from '../../admin/store/adminStore';
 
 export default function ArunachalScoutsUnitHistoryPage() {
   const { unitId } = useParams<{ unitId: string }>();
@@ -15,7 +15,7 @@ export default function ArunachalScoutsUnitHistoryPage() {
     { label: 'History' },
   ];
 
-  const tailoredOverview = `The ${unit.name} (${unit.shortName}) inherits and builds upon a proud legacy. ${arunachalScoutsData.history.overview}`;
+  const tailoredOverview = `The ${unit.name} (${unit.shortName}) inherits and builds upon a proud legacy. ${(getMergedSubUnitData('arunachal-scouts', unitId || '')).history.overview}`;
 
   return (
     <SubPageLayout
@@ -25,10 +25,10 @@ export default function ArunachalScoutsUnitHistoryPage() {
     >
       <HistorySection
         overview={tailoredOverview}
-        paragraphs={arunachalScoutsData.history.paragraphs}
-        timeline={arunachalScoutsData.history.timeline}
-        quotes={arunachalScoutsData.history.quotes}
-        highlights={arunachalScoutsData.history.highlights}
+        paragraphs={(getMergedSubUnitData('arunachal-scouts', unitId || '')).history.paragraphs}
+        timeline={(getMergedSubUnitData('arunachal-scouts', unitId || '')).history.timeline}
+        quotes={(getMergedSubUnitData('arunachal-scouts', unitId || '')).history.quotes}
+        highlights={(getMergedSubUnitData('arunachal-scouts', unitId || '')).history.highlights}
         heroImage="/assami/Arunachal Scouts/scouts-border-patrol.jpg"
       />
     </SubPageLayout>

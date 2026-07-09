@@ -1,7 +1,7 @@
 // src/pages/arc/ARCGaonBurasPage.tsx
 import SubPageLayout from '../../components/layout/SubPageLayout';
 import CommandingOfficersSection from '../../components/sections/CommandingOfficersSection';
-import { arcData } from '../../data/arc';
+import { getUnitData } from '../../admin/store/adminStore';
 
 export default function ARCGaonBurasPage() {
   const breadcrumbs = [
@@ -19,8 +19,8 @@ export default function ARCGaonBurasPage() {
       backPath="/arc"
     >
       <CommandingOfficersSection
-        officers={arcData.commandingOfficers}
-        gaonBuras={arcData.gaonBuras}
+        officers={getUnitData('arc').commandingOfficers}
+        gaonBuras={getUnitData('arc').gaonBuras}
       />
     </SubPageLayout>
   );

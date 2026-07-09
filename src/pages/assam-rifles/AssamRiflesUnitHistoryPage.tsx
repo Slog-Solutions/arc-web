@@ -3,7 +3,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import SubPageLayout from '../../components/layout/SubPageLayout';
 import HistorySection from '../../components/sections/HistorySection';
 import { ASSAM_RIFLES_UNITS } from '../AssamRiflesPage';
-import { assamRiflesData } from '../../data/assam-rifles';
+import { getMergedSubUnitData } from '../../admin/store/adminStore';
 
 export default function AssamRiflesUnitHistoryPage() {
   const { unitId } = useParams<{ unitId: string }>();
@@ -20,7 +20,7 @@ export default function AssamRiflesUnitHistoryPage() {
   ];
 
   // Dynamically tailor the overview for this unit
-  const tailoredOverview = `As a vital unit within the Assam Units, the ${unit.name} (${unit.shortName}) inherits and builds upon the illustrious heritage of India's oldest paramilitary force. ${assamRiflesData.history.overview}`;
+  const tailoredOverview = `As a vital unit within the Assam Units, the ${unit.name} (${unit.shortName}) inherits and builds upon the illustrious heritage of India's oldest paramilitary force. ${(getMergedSubUnitData('assam-rifles', unitId || '')).history.overview}`;
 
   return (
     <SubPageLayout
@@ -33,10 +33,10 @@ export default function AssamRiflesUnitHistoryPage() {
     >
       <HistorySection
         overview={tailoredOverview}
-        paragraphs={unit.history || assamRiflesData.history.paragraphs}
-        timeline={assamRiflesData.history.timeline}
-        quotes={assamRiflesData.history.quotes}
-        highlights={assamRiflesData.history.highlights}
+        paragraphs={unit.history || (getMergedSubUnitData('assam-rifles', unitId || '')).history.paragraphs}
+        timeline={(getMergedSubUnitData('assam-rifles', unitId || '')).history.timeline}
+        quotes={(getMergedSubUnitData('assam-rifles', unitId || '')).history.quotes}
+        highlights={(getMergedSubUnitData('assam-rifles', unitId || '')).history.highlights}
         heroImage="/assami/17 Assam Rifles/ar-parade-shillong.jpg"
       />
     </SubPageLayout>

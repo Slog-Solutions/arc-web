@@ -2,7 +2,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import SubPageLayout from '../../components/layout/SubPageLayout';
 import HistorySection from '../../components/sections/HistorySection';
 import { TERRITORIAL_ARMY_UNITS } from '../TerritorialArmyPage';
-import { territorialArmyData } from '../../data/territorial-army';
+import { getMergedSubUnitData } from '../../admin/store/adminStore';
 
 export default function TerritorialArmyUnitHistoryPage() {
   const { unitId } = useParams<{ unitId: string }>();
@@ -15,7 +15,7 @@ export default function TerritorialArmyUnitHistoryPage() {
     { label: 'History' },
   ];
 
-  const tailoredOverview = `The ${unit.name} (${unit.shortName}) inherits and builds upon a proud legacy. ${territorialArmyData.history.overview}`;
+  const tailoredOverview = `The ${unit.name} (${unit.shortName}) inherits and builds upon a proud legacy. ${(getMergedSubUnitData('territorial-army', unitId || '')).history.overview}`;
 
   return (
     <SubPageLayout
@@ -25,10 +25,10 @@ export default function TerritorialArmyUnitHistoryPage() {
     >
       <HistorySection
         overview={tailoredOverview}
-        paragraphs={territorialArmyData.history.paragraphs}
-        timeline={territorialArmyData.history.timeline}
-        quotes={territorialArmyData.history.quotes}
-        highlights={territorialArmyData.history.highlights}
+        paragraphs={(getMergedSubUnitData('territorial-army', unitId || '')).history.paragraphs}
+        timeline={(getMergedSubUnitData('territorial-army', unitId || '')).history.timeline}
+        quotes={(getMergedSubUnitData('territorial-army', unitId || '')).history.quotes}
+        highlights={(getMergedSubUnitData('territorial-army', unitId || '')).history.highlights}
         heroImage="/assami/Territorial Army/ta-parade-assam.jpg"
       />
     </SubPageLayout>

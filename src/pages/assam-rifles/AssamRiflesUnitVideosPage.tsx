@@ -3,7 +3,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import SubPageLayout from '../../components/layout/SubPageLayout';
 import VideosSection from '../../components/sections/VideosSection';
 import { ASSAM_RIFLES_UNITS } from '../AssamRiflesPage';
-import { assamRiflesData } from '../../data/assam-rifles';
+import { getMergedSubUnitData } from '../../admin/store/adminStore';
 
 export default function AssamRiflesUnitVideosPage() {
   const { unitId } = useParams<{ unitId: string }>();
@@ -28,7 +28,7 @@ export default function AssamRiflesUnitVideosPage() {
       breadcrumbs={breadcrumbs}
       backPath={`/assam-rifles/${unit.id}`}
     >
-      <VideosSection videos={assamRiflesData.videos} />
+      <VideosSection videos={(getMergedSubUnitData('assam-rifles', unitId || '')).videos} />
     </SubPageLayout>
   );
 }

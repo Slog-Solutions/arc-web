@@ -182,24 +182,6 @@ export default function HeroSection({
             {tagline}
           </motion.div>
         )}
-
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.1, duration: 0.5 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2.5"
-        >
-          <span className="font-inter text-[10px] text-stone-500 tracking-[0.25em] uppercase">Scroll to enter</span>
-          <div className="w-px h-14 relative overflow-hidden bg-stone-800">
-            <motion.div
-              className="absolute top-0 left-0 w-full bg-gradient-to-b from-yellow-500 to-transparent"
-              style={{ height: '70%' }}
-              animate={{ y: ['-100%', '200%'] }}
-              transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-            />
-          </div>
-        </motion.div>
       </motion.div>
     </div>
   );

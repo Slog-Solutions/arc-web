@@ -3,7 +3,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import SubPageLayout from '../../components/layout/SubPageLayout';
 import CommandingOfficersSection from '../../components/sections/CommandingOfficersSection';
 import { ASSAM_RIFLES_UNITS } from '../AssamRiflesPage';
-import { assamRiflesData } from '../../data/assam-rifles';
+import { getMergedSubUnitData } from '../../admin/store/adminStore';
 
 export default function AssamRiflesUnitGaonBurasPage() {
   const { unitId } = useParams<{ unitId: string }>();
@@ -29,8 +29,8 @@ export default function AssamRiflesUnitGaonBurasPage() {
       backPath={`/assam-rifles/${unit.id}`}
     >
       <CommandingOfficersSection
-        officers={assamRiflesData.commandingOfficers}
-        gaonBuras={assamRiflesData.gaonBuras}
+        officers={(getMergedSubUnitData('assam-rifles', unitId || '')).commandingOfficers}
+        gaonBuras={(getMergedSubUnitData('assam-rifles', unitId || '')).gaonBuras}
       />
     </SubPageLayout>
   );

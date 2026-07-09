@@ -2,7 +2,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import SubPageLayout from '../../components/layout/SubPageLayout';
 import GallerySection from '../../components/sections/GallerySection';
 import { RASHTRIYA_RIFLES_UNITS } from '../RashtriyaRiflesPage';
-import { rashtriyaRiflesData } from '../../data/rashtriya-rifles';
+import { getMergedSubUnitData } from '../../admin/store/adminStore';
 
 export default function RashtriyaRiflesUnitGalleryPage() {
   const { unitId } = useParams<{ unitId: string }>();
@@ -21,7 +21,7 @@ export default function RashtriyaRiflesUnitGalleryPage() {
       breadcrumbs={breadcrumbs}
       backPath={`/rashtriya-rifles/${unit.id}`}
     >
-      <GallerySection gallery={rashtriyaRiflesData.gallery || []} />
+      <GallerySection gallery={(getMergedSubUnitData('rashtriya-rifles', unitId || '')).gallery || []} />
     </SubPageLayout>
   );
 }

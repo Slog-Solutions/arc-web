@@ -2,7 +2,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import SubPageLayout from '../../components/layout/SubPageLayout';
 import GallerySection from '../../components/sections/GallerySection';
 import { ARUNACHAL_SCOUTS_UNITS } from '../ArunachalScoutsPage';
-import { arunachalScoutsData } from '../../data/arunachal-scouts';
+import { getMergedSubUnitData } from '../../admin/store/adminStore';
 
 export default function ArunachalScoutsUnitGalleryPage() {
   const { unitId } = useParams<{ unitId: string }>();
@@ -21,7 +21,7 @@ export default function ArunachalScoutsUnitGalleryPage() {
       breadcrumbs={breadcrumbs}
       backPath={`/arunachal-scouts/${unit.id}`}
     >
-      <GallerySection gallery={arunachalScoutsData.gallery || []} />
+      <GallerySection gallery={(getMergedSubUnitData('arunachal-scouts', unitId || '')).gallery || []} />
     </SubPageLayout>
   );
 }

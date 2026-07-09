@@ -2,7 +2,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import SubPageLayout from '../../components/layout/SubPageLayout';
 import AchievementsSection from '../../components/sections/AchievementsSection';
 import { RASHTRIYA_RIFLES_UNITS } from '../RashtriyaRiflesPage';
-import { rashtriyaRiflesData } from '../../data/rashtriya-rifles';
+import { getMergedSubUnitData } from '../../admin/store/adminStore';
 
 export default function RashtriyaRiflesUnitAwardsPage() {
   const { unitId } = useParams<{ unitId: string }>();
@@ -21,7 +21,7 @@ export default function RashtriyaRiflesUnitAwardsPage() {
       breadcrumbs={breadcrumbs}
       backPath={`/rashtriya-rifles/${unit.id}`}
     >
-      <AchievementsSection achievements={rashtriyaRiflesData.achievements || []} />
+      <AchievementsSection achievements={(getMergedSubUnitData('rashtriya-rifles', unitId || '')).achievements || []} />
     </SubPageLayout>
   );
 }

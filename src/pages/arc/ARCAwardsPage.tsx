@@ -1,7 +1,7 @@
 // src/pages/arc/ARCAwardsPage.tsx
 import SubPageLayout from '../../components/layout/SubPageLayout';
 import AchievementsSection from '../../components/sections/AchievementsSection';
-import { arcData } from '../../data/arc';
+import { getUnitData } from '../../admin/store/adminStore';
 
 export default function ARCAwardsPage() {
   const breadcrumbs = [
@@ -18,7 +18,7 @@ export default function ARCAwardsPage() {
       breadcrumbs={breadcrumbs}
       backPath="/arc"
     >
-      <AchievementsSection achievements={arcData.achievements} />
+      <AchievementsSection achievements={getUnitData('arc').achievements} />
     </SubPageLayout>
   );
 }
