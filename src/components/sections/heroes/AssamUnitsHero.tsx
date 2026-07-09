@@ -17,7 +17,7 @@ interface Props {
   showDividerBelowSubtitle?: boolean;
 }
 
-export default function HeroSection({
+export default function AssamUnitsHero({
   title,
   subtitle,
   tagline,

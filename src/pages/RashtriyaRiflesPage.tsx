@@ -2,7 +2,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import HeroSection from '../components/sections/HeroSection';
+import RashtriyaRiflesHero from '../components/sections/heroes/RashtriyaRiflesHero';
 
 export const RASHTRIYA_RIFLES_UNITS = [
   { id: '3-rr', name: '3rd Battalion, Rashtriya Rifles', shortName: '3 RR', established: '1990', location: 'Jammu & Kashmir' },
@@ -74,7 +74,7 @@ export default function RashtriyaRiflesPage() {
         <meta name="description" content="Explore the units and history of the Rashtriya Rifles." />
       </Helmet>
 
-      <HeroSection
+      <RashtriyaRiflesHero
         compact={true}
         title="Rashtriya Rifles"
         subtitle="India's Premier Counter-Insurgency Force"

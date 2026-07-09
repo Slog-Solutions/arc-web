@@ -2,7 +2,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import HeroSection from '../components/sections/HeroSection';
+import TerritorialArmyHero from '../components/sections/heroes/TerritorialArmyHero';
 
 export const TERRITORIAL_ARMY_UNITS = [
   { id: '119-ta', name: '119 Infantry Battalion (TA)', shortName: '119 TA', established: '1948', location: 'Assam' },
@@ -75,7 +75,7 @@ export default function TerritorialArmyPage() {
         <meta name="description" content="Explore the units and history of the Territorial Army." />
       </Helmet>
 
-      <HeroSection
+      <TerritorialArmyHero
         compact={true}
         title="Territorial Army"
         subtitle="Citizen Soldiers' Force"

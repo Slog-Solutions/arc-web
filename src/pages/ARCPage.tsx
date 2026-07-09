@@ -1,7 +1,7 @@
 // src/pages/ARCPage.tsx — Premium Museum Plaque Redesign (Adaptive Viewport Layout)
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import HeroSection from '../components/sections/HeroSection';
+import ARCHero from '../components/sections/heroes/ARCHero';
 import RoomSelector from '../components/sections/RoomSelector';
 
 export default function ARCPage() {
@@ -18,7 +18,7 @@ export default function ARCPage() {
         <meta name="description" content="The official digital heritage museum of the Assam Regimental Centre, Shillong — India's premier Northeast military regiment established in 1941." />
       </Helmet>
 
-      <HeroSection
+      <ARCHero
         compact={true}
         title={
           <>
