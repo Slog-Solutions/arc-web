@@ -1,9 +1,8 @@
-// src/pages/TerritorialArmyPage.tsx
+// src/pages/TerritorialArmyPage.tsx — Premium Museum Plaque Redesign (Adaptive Grid Layout)
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import HeroSection from '../components/sections/HeroSection';
-import SectionHeader from '../components/sections/SectionHeader';
 
 export const TERRITORIAL_ARMY_UNITS = [
   { id: '119-ta', name: '119 Infantry Battalion (TA)', shortName: '119 TA', established: '1948', location: 'Assam' },
@@ -13,13 +12,66 @@ export const TERRITORIAL_ARMY_UNITS = [
   { id: '166-ta', name: '166 Infantry Battalion (TA) H&H', shortName: '166 TA (H&H)', established: '2011', location: 'Assam' },
 ];
 
+// Ornate L-shaped corner notches matching visual language exactly
+const CardCorner = ({ position }: { position: 'tl' | 'tr' | 'bl' | 'br' }) => {
+  const isTop = position.startsWith('t');
+  const isLeft = position.endsWith('l');
+  return (
+    <svg 
+      width="14" 
+      height="14" 
+      viewBox="0 0 14 14" 
+      fill="none" 
+      className={`absolute pointer-events-none opacity-45 group-hover:opacity-90 transition-opacity duration-300 ${
+        isTop ? 'top-3' : 'bottom-3'
+      } ${
+        isLeft ? 'left-3' : 'right-3'
+      }`}
+      style={{
+        transform: `${isTop ? '' : 'scaleY(-1)'} ${isLeft ? '' : 'scaleX(-1)'}`
+      }}
+    >
+      <path d="M 0,14 L 0,0 L 14,0 M 4,4 L 0,0" stroke="#C69B53" strokeWidth="1.2" fill="none" />
+    </svg>
+  );
+};
+
 export default function TerritorialArmyPage() {
+  const cardCount = TERRITORIAL_ARMY_UNITS.length;
+  
+  // Dynamic Grid configurations based on card count
+  let cols = 5;
+  let rows = 1;
+
+  if (cardCount <= 5) {
+    cols = cardCount;
+    rows = 1;
+  } else if (cardCount <= 8) {
+    cols = 4;
+    rows = 2;
+  } else if (cardCount <= 12) {
+    cols = 4;
+    rows = 3;
+  } else if (cardCount <= 16) {
+    cols = 5;
+    rows = 3;
+  } else {
+    cols = 6;
+    rows = Math.ceil(cardCount / 6);
+  }
+
+  // Adjust height of directory grid based on rows
+  const gridHeight = rows === 1 ? '380px' : rows === 2 ? '480px' : '520px';
+
+  const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV'];
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
+      className="h-screen w-screen overflow-hidden flex flex-col bg-[#0C120D]"
     >
       <Helmet>
         <title>Territorial Army | Home</title>
@@ -27,6 +79,7 @@ export default function TerritorialArmyPage() {
       </Helmet>
 
       <HeroSection
+        compact={true}
         title="Territorial Army"
         subtitle="Citizen Soldiers' Force"
         established="1948"
@@ -40,64 +93,181 @@ export default function TerritorialArmyPage() {
         badge="Citizen Soldiers' Force · Est. 1948"
       />
 
-      {/* Battalion Showcase */}
-      <section className="relative py-28 museum-room-wall spotlight-glow border-t border-[#2d2212]/30">
-        <div className="museum-container">
-          <SectionHeader
-            tag="Regimental Directory"
-            title="Territorial Army Battalions"
-            subtitle={
-              <>
-                Select an active battalion to inspect its 
-                <br />
-                individual history, achievements, and archives.
-              </>
-            }
+      {/* Directory Section */}
+      <section className="relative flex-1 min-h-0 flex flex-col justify-between py-6 px-8 select-none w-full bg-[#0C120D]">
+        {/* Directory Title Section */}
+        <div className="flex flex-col items-center text-center mb-5 flex-shrink-0">
+          <span className="font-cinzel text-[#C69B53] text-[10px] tracking-[6px] uppercase font-bold mb-1">
+            REGIMENTAL DIRECTORY
+          </span>
+          <h2 className="font-cinzel text-[#F4F0E8] text-2xl font-bold tracking-wider mb-2.5">
+            Territorial Army Battalions
+          </h2>
+          {/* Decorative engraved divider */}
+          <img 
+            src="/assets/navbar/logo-divider.svg" 
+            className="w-[120px] h-[12px] opacity-75 mt-0.5 pointer-events-none" 
+            alt="" 
           />
-
-         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mt-16 w-full max-w-[1500px] mx-auto justify-items-center">
-  {TERRITORIAL_ARMY_UNITS.map((unit, i) => (
-    <motion.div
-      key={unit.id}
-      initial={{ opacity: 0, y: 25 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: i * 0.1, duration: 0.5 }}
-      className="w-full max-w-[280px]"
-    >
-      <Link
-        to={`/territorial-army/${unit.id}`}
-        className="group block h-full"
-      >
-        <div className="museum-wood-frame brass-corners rounded-xl overflow-hidden p-6 h-full flex flex-col items-center justify-between text-center hover:border-yellow-500/40 hover:shadow-[0_0_30px_rgba(212,160,23,0.2)] transition-all duration-300 transform hover:-translate-y-1.5">
-
-          {/* Badge Icon */}
-          <div className="w-14 h-14 flex items-center justify-center rounded-full bg-yellow-500/[0.08] border border-yellow-500/15 mb-5 group-hover:bg-yellow-500/10 group-hover:border-yellow-500/30 transition-all duration-300">
-            <span className="text-2xl filter drop-shadow-md">🛡️</span>
-          </div>
-
-          {/* Battalion Short Name */}
-          <div className="font-cinzel text-transparent bg-clip-text bg-gradient-to-r from-[#ffd97d] to-[#d4a017] text-xl font-bold tracking-wide mb-2">
-            {unit.shortName}
-          </div>
-
-          {/* Full Name */}
-          <div className="font-inter text-stone-300 text-sm font-semibold uppercase leading-tight mb-3">
-            {unit.name.replace(' (TA)', '')}
-          </div>
-
-          {/* Button */}
-          <div className="mt-auto border-t border-[#8a6820]/20 pt-3 pb-3 w-full">
-            <div className="text-[9px] font-inter tracking-widest text-[#d4a017]/70 uppercase group-hover:text-yellow-400 transition-colors duration-200 text-center">
-              Enter Exhibit
-            </div>
-          </div>
-
         </div>
-      </Link>
-    </motion.div>
-  ))}
-</div>
+
+      {/* Directory Adaptive Grid */}
+      <div className="flex-grow min-h-0 w-full max-w-[1400px] mx-auto flex items-center justify-center">
+        
+        {/* Desktop flex-wrap grid (fully adaptive, centers last row automatically, and height constrained to viewport) */}
+        <div 
+          className="hidden lg:flex flex-wrap justify-center content-center w-full"
+          style={{
+            gap: '24px',
+            height: gridHeight,
+          }}
+        >
+          {TERRITORIAL_ARMY_UNITS.map((unit, i) => (
+            <motion.div
+              key={unit.id}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.05, duration: 0.5, ease: 'easeOut' }}
+              className="min-h-0 overflow-hidden"
+              style={{
+                width: `calc((100% - ${(cols - 1) * 24}px) / ${cols})`,
+                height: rows === 1 ? '100%' : `calc((100% - ${(rows - 1) * 24}px) / ${rows})`
+              }}
+            >
+                <Link to={`/territorial-army/${unit.id}`} className="group block h-full w-full">
+                  <div 
+                    className="relative overflow-hidden flex flex-col justify-between items-center text-center transition-all duration-300 hover:border-[#C69B53]/60 hover:shadow-[0_16px_36px_rgba(0,0,0,0.85),0_0_24px_rgba(198,155,83,0.18)] hover:-translate-y-1 border border-[#C69B53]/25 h-full w-full rounded-xl"
+                    style={{
+                      padding: rows >= 3 ? '12px' : rows === 2 ? '16px' : '28px 24px',
+                      backgroundColor: '#111A12',
+                      backgroundImage: `radial-gradient(circle at center, rgba(22, 34, 24, 0.45) 0%, rgba(13, 20, 14, 0.85) 100%), url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='leather'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.05 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.15 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23leather)'/%3E%3C/svg%3E")`,
+                      boxShadow: 'inset 0 0 24px rgba(0, 0, 0, 0.8)',
+                    }}
+                  >
+                    {/* Ornamental Corners */}
+                    <CardCorner position="tl" />
+                    <CardCorner position="tr" />
+                    <CardCorner position="bl" />
+                    <CardCorner position="br" />
+
+                    {/* Large Premium Medallion Icon */}
+                    <div className="relative flex items-center justify-center mb-1">
+                      <div className="absolute w-16 h-16 rounded-full bg-[#C69B53]/5 filter blur-md pointer-events-none" />
+                      <span 
+                        className="text-5xl select-none filter drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)] group-hover:scale-105 transition-transform duration-500"
+                        style={{
+                          filter: 'drop-shadow(0 0 8px rgba(198, 155, 83, 0.3))',
+                        }}
+                      >
+                        🛡️
+                      </span>
+                    </div>
+
+                    {/* Engraved Bronze Capsule Label */}
+                    <div 
+                      className="border rounded-full px-3 py-1 bg-[#162218]/45 flex items-center justify-center mb-1 transition-colors duration-300 group-hover:border-[#C69B53]/50"
+                      style={{ borderColor: 'rgba(198, 155, 83, 0.25)' }}
+                    >
+                      <span className="font-cinzel text-[#C69B53] text-[9px] tracking-[0.25em] font-bold uppercase select-none leading-none">
+                        Battalion {romanNumerals[i] || (i + 1)}
+                      </span>
+                    </div>
+
+                    {/* Short title */}
+                    <h3 className={`font-cinzel text-[#F4F0E8] font-bold tracking-wide transition-colors duration-300 group-hover:text-yellow-400 leading-tight mb-2 ${
+                      rows >= 3 ? 'text-xs' : rows === 2 ? 'text-sm' : 'text-xl'
+                    }`}>
+                      {unit.shortName}
+                    </h3>
+
+                    {/* Description / Full name */}
+                    {rows < 3 && (
+                      <p className={`font-garamond text-[#C8C0B3] leading-relaxed text-center px-2 flex-grow flex items-center justify-center max-w-[78%] mb-4 ${
+                        rows === 2 ? 'text-xs max-h-[38px] line-clamp-2' : 'text-sm max-h-[80px]'
+                      }`}>
+                        {unit.name.replace(' (TA)', '')}
+                      </p>
+                    )}
+
+                    {/* Explore Button indicator */}
+                    <div className="flex items-center justify-center gap-2 text-[#C69B53] text-[9.5px] font-inter tracking-[0.25em] uppercase transition-colors duration-300 group-hover:text-yellow-400 mt-auto w-full border-t border-[#C69B53]/15 pt-3.5 flex-shrink-0 relative overflow-hidden">
+                      <span className="relative">
+                        Explore Exhibit
+                        <span className="absolute bottom-[-2px] left-0 w-0 h-[1px] bg-[#C69B53] transition-all duration-300 group-hover:w-full" />
+                      </span>
+                      <span className="transform transition-transform duration-300 group-hover:translate-x-1.5 font-bold">
+                        →
+                      </span>
+                    </div>
+
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Tablet view (2-column scrollable grid) */}
+          <div className="hidden md:grid lg:hidden grid-cols-2 gap-5 w-full h-fit max-h-[440px] overflow-y-auto px-4 scrollbar-none">
+            {TERRITORIAL_ARMY_UNITS.map((unit, i) => (
+              <Link to={`/territorial-army/${unit.id}`} key={unit.id} className="group block">
+                <div 
+                  className="relative rounded-xl p-5 border border-[#C69B53]/25 flex flex-col justify-between items-center text-center h-[190px] overflow-hidden"
+                  style={{
+                    backgroundColor: '#111A12',
+                    backgroundImage: `radial-gradient(circle at center, rgba(22, 34, 24, 0.45) 0%, rgba(13, 20, 14, 0.85) 100%)`,
+                  }}
+                >
+                  <CardCorner position="tl" />
+                  <CardCorner position="tr" />
+                  <CardCorner position="bl" />
+                  <CardCorner position="br" />
+                  <div className="flex flex-col items-center">
+                    <span className="text-2xl filter drop-shadow-md mb-2">🛡️</span>
+                    <div className="border border-[#C69B53]/25 rounded-full px-2 py-0.5 bg-[#162218]/45">
+                      <span className="font-cinzel text-[#C69B53] text-[8px] tracking-[0.2em] font-bold uppercase">Battalion {romanNumerals[i] || (i + 1)}</span>
+                    </div>
+                  </div>
+                  <h3 className="font-cinzel text-[#F4F0E8] text-sm font-bold tracking-wide mt-2">{unit.shortName}</h3>
+                  <div className="flex items-center justify-center gap-1.5 text-[#C69B53] text-[9px] font-inter tracking-widest uppercase mt-2 w-full border-t border-[#C69B53]/15 pt-2">
+                    <span>Explore Exhibit →</span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* Mobile View (Horizontally swipeable flex slider) */}
+          <div className="flex md:hidden overflow-x-auto snap-x snap-mandatory gap-4 w-full py-2 px-4 scrollbar-none">
+            {TERRITORIAL_ARMY_UNITS.map((unit, i) => (
+              <div key={unit.id} className="flex-shrink-0 w-[250px] snap-center">
+                <Link to={`/territorial-army/${unit.id}`} className="group block">
+                  <div 
+                    className="relative rounded-xl p-6 border border-[#C69B53]/25 flex flex-col justify-between items-center text-center h-[210px] overflow-hidden"
+                    style={{
+                      backgroundColor: '#111A12',
+                      backgroundImage: `radial-gradient(circle at center, rgba(22, 34, 24, 0.45) 0%, rgba(13, 20, 14, 0.85) 100%)`,
+                    }}
+                  >
+                    <CardCorner position="tl" />
+                    <CardCorner position="tr" />
+                    <CardCorner position="bl" />
+                    <CardCorner position="br" />
+                    <div className="flex flex-col items-center">
+                      <span className="text-4xl filter drop-shadow-md mb-2">🛡️</span>
+                      <div className="border border-[#C69B53]/25 rounded-full px-2.5 py-0.5 bg-[#162218]/45">
+                        <span className="font-cinzel text-[#C69B53] text-[8px] tracking-[0.2em] font-bold uppercase">Battalion {romanNumerals[i] || (i + 1)}</span>
+                      </div>
+                    </div>
+                    <h3 className="font-cinzel text-[#F4F0E8] text-sm font-bold tracking-wide mt-2">{unit.shortName}</h3>
+                    <div className="flex items-center justify-center gap-1.5 text-[#C69B53] text-[9px] font-inter tracking-widest uppercase mt-3 w-full border-t border-[#C69B53]/15 pt-2">
+                      <span>Explore Exhibit →</span>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </div>
+
         </div>
       </section>
     </motion.div>

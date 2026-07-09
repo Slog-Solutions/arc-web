@@ -12,6 +12,7 @@ interface Props {
   backgroundImage?: string;
   backgroundImages?: string[];
   badge?: string;
+  compact?: boolean;
 }
 
 export default function HeroSection({
@@ -24,6 +25,7 @@ export default function HeroSection({
   backgroundImage,
   backgroundImages,
   badge,
+  compact = false,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
@@ -53,11 +55,13 @@ export default function HeroSection({
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <div ref={ref} className="relative h-screen min-h-[650px] overflow-hidden bg-olive-950 flex items-center justify-center">
+    <div ref={ref} className={`relative overflow-hidden bg-olive-950 flex items-center justify-center ${
+      compact ? 'h-[38vh] min-h-[340px]' : 'h-screen min-h-[650px]'
+    }`}>
       {/* Background Image Container */}
       <motion.div
         className="absolute inset-0 w-full h-full"
-        style={{ y, scale }}
+        style={{ y: compact ? 0 : y, scale: compact ? 1 : scale }}
       >
         <AnimatePresence initial={false}>
           {images.map((img, idx) => (
@@ -76,14 +80,14 @@ export default function HeroSection({
         </AnimatePresence>
 
         {/* Darker premium gradient overlays to keep text perfectly readable */}
-        <div className="absolute inset-0 bg-gradient-to-t from-olive-950 via-olive-950/60 to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0C120D] via-olive-950/60 to-black/60" />
         <div className="absolute inset-0 bg-black/45" />
 
         {/* Vignette effect */}
         <div
           className="absolute inset-0"
           style={{
-            background: 'radial-gradient(ellipse at center, transparent 20%, rgba(10,12,8,0.85) 100%)'
+            background: 'radial-gradient(ellipse at center, transparent 20%, rgba(12,18,13,0.85) 100%)'
           }}
         />
 
@@ -98,7 +102,7 @@ export default function HeroSection({
       {/* Hero Content Container */}
       <motion.div
         className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col items-center text-center justify-center"
-        style={{ opacity, paddingTop: '180px' }}
+        style={{ opacity, paddingTop: compact ? '95px' : '180px' }}
       >
         {/* Badge */}
         {badge && (
@@ -106,10 +110,10 @@ export default function HeroSection({
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25, duration: 0.6 }}
-            className="mb-6"
+            className={compact ? 'mb-2' : 'mb-6'}
           >
             <span
-              className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full text-xs font-inter tracking-[0.25em] uppercase border text-yellow-500/90 shadow-lg"
+              className="inline-flex items-center gap-2.5 px-5 py-1.5 rounded-full text-[10px] font-inter tracking-[0.25em] uppercase border text-yellow-500/90 shadow-lg"
               style={{ background: 'rgba(212,160,23,0.06)', borderColor: 'rgba(212,160,23,0.3)', backdropFilter: 'blur(8px)' }}
             >
               <span className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse" />
@@ -119,7 +123,7 @@ export default function HeroSection({
         )}
 
         {/* Established Date */}
-        {established && (
+        {established && !compact && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -137,7 +141,9 @@ export default function HeroSection({
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.45, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="font-cinzel text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-wide text-stone-100 mb-6 font-bold leading-tight"
+          className={`font-cinzel tracking-wide text-stone-100 font-bold leading-tight ${
+            compact ? 'text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-2' : 'text-5xl sm:text-6xl md:text-7xl lg:text-8xl mb-6'
+          }`}
           style={{ textShadow: '0 4px 35px rgba(0,0,0,0.9)' }}
         >
           {title}
@@ -149,7 +155,9 @@ export default function HeroSection({
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.7 }}
-            className="font-garamond text-2xl md:text-3xl text-stone-200/90 max-w-3xl mb-8 leading-relaxed italic"
+            className={`font-garamond text-[#C8C0B3] max-w-3xl leading-relaxed italic ${
+              compact ? 'text-base md:text-lg mb-2' : 'text-2xl md:text-3xl mb-8'
+            }`}
             style={{ textShadow: '0 2px 15px rgba(0,0,0,0.8)' }}
           >
             {subtitle}
@@ -162,11 +170,15 @@ export default function HeroSection({
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.75, duration: 0.6 }}
-            className="flex flex-col items-center gap-1.5"
+            className="flex flex-col items-center gap-1"
           >
-            <div className="h-px bg-gradient-to-r from-transparent via-yellow-600/60 to-transparent w-48 mb-4" />
-            <div className="font-cinzel text-yellow-500 text-xl tracking-[0.3em] uppercase leading-none">{motto}</div>
-            {mottoMeaning && (
+            <div className={`h-px bg-gradient-to-r from-transparent via-yellow-600/60 to-transparent w-48 ${
+              compact ? 'mb-2' : 'mb-4'
+            }`} />
+            <div className={`font-cinzel text-yellow-500 tracking-[0.3em] uppercase leading-none ${
+              compact ? 'text-sm' : 'text-xl'
+            }`}>{motto}</div>
+            {mottoMeaning && !compact && (
               <div className="font-garamond text-stone-400 text-base italic mt-1">{mottoMeaning}</div>
             )}
           </motion.div>
@@ -177,7 +189,9 @@ export default function HeroSection({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.75, duration: 0.7 }}
-            className="font-garamond text-yellow-500/80 italic text-lg md:text-xl"
+            className={`font-garamond text-yellow-500/80 italic ${
+              compact ? 'text-sm' : 'text-lg md:text-xl'
+            }`}
           >
             {tagline}
           </motion.div>

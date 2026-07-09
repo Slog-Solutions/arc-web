@@ -1,4 +1,4 @@
-// src/pages/assam-rifles/AssamRiflesUnitPage.tsx
+// src/pages/assam-rifles/AssamRiflesUnitPage.tsx — Viewport Constrained Layout
 import { useParams, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
@@ -20,6 +20,7 @@ export default function AssamRiflesUnitPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
+      className="h-screen w-screen overflow-hidden flex flex-col bg-[#0C120D]"
     >
       <Helmet>
         <title>{unit.shortName} | Assam Units Digital Museum</title>
@@ -27,6 +28,7 @@ export default function AssamRiflesUnitPage() {
       </Helmet>
 
       <HeroSection
+        compact={true}
         title={unit.name}
         subtitle={`Established: ${unit.established} · Location: ${unit.location}`}
         motto="The Sentinel of the North-East"

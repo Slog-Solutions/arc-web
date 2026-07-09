@@ -1,3 +1,4 @@
+// src/pages/territorial-army/TerritorialArmyUnitPage.tsx — Viewport Constrained Layout
 import { useParams, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
@@ -19,18 +20,25 @@ export default function TerritorialArmyUnitPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
+      className="h-screen w-screen overflow-hidden flex flex-col bg-[#0C120D]"
     >
       <Helmet>
         <title>{unit.shortName} | Digital Museum</title>
       </Helmet>
 
       <HeroSection
+        compact={true}
         title={unit.name}
         subtitle={`Established: ${unit.established} · Location: ${unit.location}`}
         motto="Valour and Honor"
         established={unit.established}
         backgroundImage="/assami/Territorial Army/ta-parade-assam.jpg"
-        backgroundImages={["/assami/Territorial Army/ta-parade-assam.jpg","/assami/Territorial Army/ta-annual-camp.jpg","/assami/Territorial Army/ta-field-ops.jpg","/assami/Territorial Army/ta-medical-camp.jpg"]}
+        backgroundImages={[
+          "/assami/Territorial Army/ta-parade-assam.jpg",
+          "/assami/Territorial Army/ta-annual-camp.jpg",
+          "/assami/Territorial Army/ta-field-ops.jpg",
+          "/assami/Territorial Army/ta-medical-camp.jpg"
+        ]}
         badge={`${unit.shortName} Exhibition — Est. ${unit.established}`}
       />
 

@@ -1,4 +1,4 @@
-// src/pages/ARCPage.tsx
+// src/pages/ARCPage.tsx — Premium Museum Plaque Redesign (Adaptive Viewport Layout)
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import HeroSection from '../components/sections/HeroSection';
@@ -9,7 +9,9 @@ export default function ARCPage() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
+      className="h-screen w-screen overflow-hidden flex flex-col bg-[#0C120D]"
     >
       <Helmet>
         <title>Assam Regimental Centre | Home</title>
@@ -17,16 +19,15 @@ export default function ARCPage() {
       </Helmet>
 
       <HeroSection
+        compact={true}
         title={
           <>
             Assam Regimental Centre
             <br />
-            <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#d4a017] font-cinzel tracking-wider mt-4 block">BISHNU MUSEUM</span>
+            <span className="text-xl sm:text-2xl md:text-3xl text-[#C69B53] font-cinzel tracking-widest mt-1 block">BISHNU MUSEUM</span>
           </>
         }
         subtitle="Happy Valley, Shillong · Meghalaya"
-        motto="Asam Vikram"
-        mottoMeaning="Unique Valour"
         established="1941"
         badge="Est. 15 June 1941"
         backgroundImage="/assami/Assam Regimental Centre/arc-passing-out-parade.jpg"
@@ -41,8 +42,6 @@ export default function ARCPage() {
 
       {/* Main Exhibition Halls Directory (5 Buttons Panel) */}
       <RoomSelector basePath="/arc" unitName="Assam Regimental Centre" />
-
-     
     </motion.div>
   );
 }

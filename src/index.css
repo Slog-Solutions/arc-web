@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
 @import "tailwindcss";
 
 
@@ -54,7 +54,7 @@
   --font-cinzel: 'Cinzel', serif;
   --font-crimson: 'Crimson Text', serif;
   --font-inter: 'Inter', sans-serif;
-  --font-garamond: 'EB Garamond', serif;
+  --font-garamond: 'Cormorant Garamond', 'EB Garamond', serif;
 }
 
 :root {
