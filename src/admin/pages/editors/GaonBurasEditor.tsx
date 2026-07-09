@@ -39,17 +39,24 @@ export default function GaonBurasEditor({ data, onSave }: Props) {
 
   const saveForm = () => {
     if (!form.name.trim()) { showToast('Name is required', 'error'); return; }
+    let nextItems;
     if (editIdx === -1) {
-      setItems([...items, form]);
+      nextItems = [...items, form];
     } else if (editIdx !== null) {
-      const next = [...items]; next[editIdx] = form; setItems(next);
+      nextItems = [...items]; nextItems[editIdx] = form;
+    }
+    if (nextItems) {
+      setItems(nextItems);
+      onSave('gaonBuras', nextItems);
     }
     setEditIdx(null);
   };
 
   const confirmDelete = () => {
     if (deleteIdx !== null) {
-      setItems(items.filter((_, i) => i !== deleteIdx));
+      const nextItems = items.filter((_, i) => i !== deleteIdx);
+      setItems(nextItems);
+      onSave('gaonBuras', nextItems);
       setDeleteIdx(null);
     }
   };

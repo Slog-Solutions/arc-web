@@ -48,17 +48,24 @@ export default function GalleryEditor({ data, onSave }: Props) {
 
   const saveForm = () => {
     if (!form.src.trim()) { showToast('Image source is required', 'error'); return; }
+    let nextItems;
     if (editIdx === -1) {
-      setItems([...items, form]);
+      nextItems = [...items, form];
     } else if (editIdx !== null) {
-      const next = [...items]; next[editIdx] = form; setItems(next);
+      nextItems = [...items]; nextItems[editIdx] = form;
+    }
+    if (nextItems) {
+      setItems(nextItems);
+      onSave('gallery', nextItems);
     }
     setEditIdx(null);
   };
 
   const confirmDelete = () => {
     if (deleteIdx !== null) {
-      setItems(items.filter((_, i) => i !== deleteIdx));
+      const nextItems = items.filter((_, i) => i !== deleteIdx);
+      setItems(nextItems);
+      onSave('gallery', nextItems);
       setDeleteIdx(null);
     }
   };

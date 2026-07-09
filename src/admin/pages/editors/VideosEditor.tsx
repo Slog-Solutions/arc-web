@@ -59,17 +59,24 @@ export default function VideosEditor({ data, onSave }: Props) {
       showToast('Title and YouTube ID are required', 'error');
       return;
     }
+    let nextVideos;
     if (editIdx === -1) {
-      setVideos([...videos, form]);
+      nextVideos = [...videos, form];
     } else if (editIdx !== null) {
-      const next = [...videos]; next[editIdx] = form; setVideos(next);
+      nextVideos = [...videos]; nextVideos[editIdx] = form;
+    }
+    if (nextVideos) {
+      setVideos(nextVideos);
+      onSave('videos', nextVideos);
     }
     setEditIdx(null);
   };
 
   const confirmDelete = () => {
     if (deleteIdx !== null) {
-      setVideos(videos.filter((_, i) => i !== deleteIdx));
+      const nextVideos = videos.filter((_, i) => i !== deleteIdx);
+      setVideos(nextVideos);
+      onSave('videos', nextVideos);
       setDeleteIdx(null);
     }
   };

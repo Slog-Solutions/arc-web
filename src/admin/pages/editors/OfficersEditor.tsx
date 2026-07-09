@@ -48,12 +48,16 @@ export default function OfficersEditor({ data, onSave }: Props) {
 
   const saveForm = () => {
     if (!form.name.trim()) { showToast('Name is required', 'error'); return; }
+    let nextOfficers;
     if (editIdx === -1) {
-      setOfficers([...officers, form]);
+      nextOfficers = [...officers, form];
     } else if (editIdx !== null) {
-      const next = [...officers];
-      next[editIdx] = form;
-      setOfficers(next);
+      nextOfficers = [...officers];
+      nextOfficers[editIdx] = form;
+    }
+    if (nextOfficers) {
+      setOfficers(nextOfficers);
+      onSave('commandingOfficers', nextOfficers);
     }
     setEditIdx(null);
     setForm({ name: '', rank: '', tenure: '', bio: '', contribution: '', image: '' });
@@ -61,7 +65,9 @@ export default function OfficersEditor({ data, onSave }: Props) {
 
   const confirmDelete = () => {
     if (deleteIdx !== null) {
-      setOfficers(officers.filter((_, i) => i !== deleteIdx));
+      const nextOfficers = officers.filter((_, i) => i !== deleteIdx);
+      setOfficers(nextOfficers);
+      onSave('commandingOfficers', nextOfficers);
       setDeleteIdx(null);
     }
   };

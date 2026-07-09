@@ -117,7 +117,12 @@ export function getUnitData(key: UnitKey): any {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function saveUnitData(key: UnitKey, data: any): void {
-  localStorage.setItem(STORE_PREFIX + key, JSON.stringify(data));
+  try {
+    localStorage.setItem(STORE_PREFIX + key, JSON.stringify(data));
+  } catch (e) {
+    console.error('Storage error:', e);
+    alert('Failed to save data. The storage limit (approx 5MB) may have been exceeded. Please use image URLs instead of uploading large image files.');
+  }
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -155,7 +160,12 @@ export function getSubUnitData(parentKey: UnitKey, subUnitId: string): any {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function saveSubUnitData(parentKey: UnitKey, subUnitId: string, data: any): void {
   const storeKey = `${SUBUNIT_PREFIX}${parentKey}_${subUnitId}`;
-  localStorage.setItem(storeKey, JSON.stringify(data));
+  try {
+    localStorage.setItem(storeKey, JSON.stringify(data));
+  } catch (e) {
+    console.error('Storage error:', e);
+    alert('Failed to save data. The storage limit (approx 5MB) may have been exceeded. Please use image URLs instead of uploading large image files.');
+  }
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
