@@ -14,271 +14,211 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
+  // Color Palette Constants matching specifications
+  const BRONZE = '#a4783a';
+  const HIGHLIGHT = '#d4b270';
+  const MUTED_BORDER = 'rgba(164, 120, 58, 0.45)';
+  const BG_COLOR = '#0B120E';
+  const SECONDARY_COLOR = '#101712';
+
   return (
     <>
       <motion.nav
-        initial={{ opacity: 0, y: -20 }}
+        initial={{ opacity: 0, y: -12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed z-50"
+        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        className="fixed z-50 top-4"
         style={{
-          top: '10px',
-          left: '10px',
-          right: '10px',
+          width: '98%',
+          left: '1%',
+          right: '1%',
         }}
       >
-        {/* ── Three Stars Tab centered on top ── */}
-        <div
-          className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-2"
+        {/* Main Header Box */}
+        <div 
+          className="relative w-full grid items-center"
           style={{
-            top: '-13px',
-            zIndex: 10,
-            width: '80px',
-            height: '22px',
-            background: '#0e0c0a',
-            border: '1px solid #8a6820',
-            borderBottom: 'none',
-            borderTopLeftRadius: '8px',
-            borderTopRightRadius: '8px',
+            height: '104px',
+            gridTemplateColumns: '30% 52% 18%',
+            background: BG_COLOR,
+            border: `1.5px solid ${BRONZE}`,
+            borderRadius: '8px',
+            boxShadow: 'inset 0 0 50px rgba(0, 0, 0, 0.8), 0 12px 40px rgba(0, 0, 0, 0.55)',
+            paddingLeft: '16px',
+            paddingRight: '16px',
           }}
         >
-          <span style={{ color: '#b8922a', fontSize: '9px', opacity: 0.6 }}>★</span>
-          <span style={{ color: '#d4a830', fontSize: '12px' }}>★</span>
-          <span style={{ color: '#b8922a', fontSize: '9px', opacity: 0.6 }}>★</span>
-        </div>
-
-        {/* ── Main Bar ── */}
-        <div
-          className="relative w-full flex items-center"
-          style={{
-            height: '96px',
-            background: 'linear-gradient(180deg, #1a1510 0%, #0e0c09 40%, #0b0906 100%)',
-            border: '1px solid #8a6820',
-            borderRadius: '12px',
-            boxShadow: '0 8px 32px rgba(0,0,0,0.7), inset 0 1px 0 rgba(200,163,93,0.12), inset 0 0 40px rgba(0,0,0,0.3)',
-          }}
-        >
-          {/* Inner top highlight */}
-          <div
-            className="absolute top-0 left-[60px] right-[60px] h-[1px] pointer-events-none"
-            style={{ background: 'linear-gradient(90deg, transparent, rgba(200,163,93,0.25), transparent)' }}
-          />
-
-          {/* ── LEFT: Large Logo Circle ── */}
-          <div className="flex-shrink-0 flex items-center" style={{ paddingLeft: '0px' }}>
-            {/* The circle extends outside the bar — position it absolutely on the left */}
-            <Link to="/" className="group" style={{ marginLeft: '-4px', flexShrink: 0, position: 'relative', top: '24px' }}>
-              <div
-                className="relative flex items-center justify-center rounded-full transition-transform duration-500 group-hover:scale-105"
-                style={{
-                  width: '160px',
-                  height: '160px',
-                  background: 'radial-gradient(circle at 38% 32%, #211a0e 0%, #100d07 55%, #070503 100%)',
-                  border: '2px solid #9a7828',
-                  boxShadow: '0 0 0 1px rgba(154,120,40,0.2), 0 0 20px rgba(0,0,0,0.8), inset 0 0 25px rgba(0,0,0,0.5), 0 0 12px rgba(154,120,40,0.12)',
-                }}
-              >
-                {/* Inner ring */}
-                <div
-                  className="absolute rounded-full pointer-events-none"
-                  style={{
-                    inset: '5px',
-                    border: '1px solid rgba(154,120,40,0.25)',
-                    borderRadius: '50%',
-                  }}
-                />
-                <img
-                  src="/assami/navbar%20logo.png"
-                  alt="Assam Regiment"
-                  style={{
-                    width: "88%",
-                    height: "88%",
-                    objectFit: "contain",
-                    display: "block",
-                    filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.6))",
-                  }}
-                />
-              </div>
-            </Link>
-          </div>
-
-          {/* ── LEFT TEXT: Assam Regiment / Digital Museum ── */}
-          <div className="hidden md:flex flex-col justify-center flex-shrink-0" style={{ marginLeft: '20px', marginRight: '4px' }}>
-            <span
-              className="font-cinzel uppercase leading-tight"
-              style={{
-                fontSize: '20px',
-                letterSpacing: '3px',
-                color: '#c8a040',
-                fontWeight: 600,
-                textShadow: '0 1px 3px rgba(0,0,0,0.8)',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              Assam Regiment
-            </span>
-            <span
-              className="font-cinzel uppercase leading-tight"
-              style={{
-                fontSize: '11px',
-                letterSpacing: '3.5px',
-                color: '#9a7830',
-                marginTop: '5px',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              Digital Museum
-            </span>
-          </div>
-
-          {/* ── LEFT SEPARATOR ── */}
-          <div
-            className="hidden md:block flex-shrink-0"
-            style={{
-              width: '1px',
-              height: '44px',
-              margin: '0 18px',
-              background: 'linear-gradient(180deg, transparent, #8a6820, transparent)',
+          {/* Subtle vignette/texture overlay */}
+          <div 
+            className="absolute inset-0 pointer-events-none opacity-[0.03]"
+            style={{ 
+              backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")',
+              borderRadius: '8px'
             }}
           />
 
-          {/* ── CENTER: Nav Links ── */}
-          <div 
-            className="hidden lg:flex flex-1 items-center overflow-x-auto [&::-webkit-scrollbar]:hidden"
-            style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}
-          >
-            <div className="flex items-center min-w-max mx-auto px-2">
+          {/* Precise Engraved Corner Ornaments - Top-Left */}
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute top-2 left-2 pointer-events-none">
+            <path d="M 2 12 L 2 2 L 12 2" stroke={BRONZE} stroke-width="1.5" />
+            <path d="M 5 9 L 5 5 L 9 5" stroke={BRONZE} stroke-width="0.75" opacity="0.6" />
+            <line x1="2" y1="2" x2="7" y2="7" stroke={BRONZE} stroke-width="1" />
+            <circle cx="4.5" cy="4.5" r="1" fill={BRONZE} />
+          </svg>
+
+          {/* Precise Engraved Corner Ornaments - Top-Right */}
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute top-2 right-2 pointer-events-none" style={{ transform: 'scaleX(-1)' }}>
+            <path d="M 2 12 L 2 2 L 12 2" stroke={BRONZE} stroke-width="1.5" />
+            <path d="M 5 9 L 5 5 L 9 5" stroke={BRONZE} stroke-width="0.75" opacity="0.6" />
+            <line x1="2" y1="2" x2="7" y2="7" stroke={BRONZE} stroke-width="1" />
+            <circle cx="4.5" cy="4.5" r="1" fill={BRONZE} />
+          </svg>
+
+          {/* Precise Engraved Corner Ornaments - Bottom-Left */}
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute bottom-2 left-2 pointer-events-none" style={{ transform: 'scaleY(-1)' }}>
+            <path d="M 2 12 L 2 2 L 12 2" stroke={BRONZE} stroke-width="1.5" />
+            <path d="M 5 9 L 5 5 L 9 5" stroke={BRONZE} stroke-width="0.75" opacity="0.6" />
+            <line x1="2" y1="2" x2="7" y2="7" stroke={BRONZE} stroke-width="1" />
+            <circle cx="4.5" cy="4.5" r="1" fill={BRONZE} />
+          </svg>
+
+          {/* Precise Engraved Corner Ornaments - Bottom-Right */}
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute bottom-2 right-2 pointer-events-none" style={{ transform: 'scale(-1)' }}>
+            <path d="M 2 12 L 2 2 L 12 2" stroke={BRONZE} stroke-width="1.5" />
+            <path d="M 5 9 L 5 5 L 9 5" stroke={BRONZE} stroke-width="0.75" opacity="0.6" />
+            <line x1="2" y1="2" x2="7" y2="7" stroke={BRONZE} stroke-width="1" />
+            <circle cx="4.5" cy="4.5" r="1" fill={BRONZE} />
+          </svg>
+
+          {/* ── SECTION 1: Logo & Title (30% - Fixed Width Grid) ── */}
+          <div className="flex items-center h-full pl-8 relative" style={{ gap: '30px' }}>
+            {/* Logo: Dominant visual anchor, exactly 82px circle */}
+            <Link to="/" className="relative group flex-shrink-0">
+              <div 
+                className="rounded-full flex items-center justify-center transition-transform duration-500 group-hover:scale-105"
+                style={{
+                  width: '82px',
+                  height: '82px',
+                  border: `1.5px solid ${BRONZE}`,
+                  background: `radial-gradient(circle, ${SECONDARY_COLOR}, ${BG_COLOR})`,
+                  boxShadow: 'inset 0 0 15px rgba(0,0,0,0.8)',
+                }}
+              >
+                <img src="/assami/navbar%20logo.png" alt="Assam Regiment" className="w-[85%] h-[85%] object-contain" />
+              </div>
+            </Link>
+
+            {/* Title & Subtitle Group */}
+            <div className="flex flex-col justify-center flex-shrink-0">
+              <span className="font-cinzel text-[#E1BC78] text-[24px] font-semibold tracking-[2px] leading-none mb-1 text-shadow-sm">
+                ASSAM REGIMENT
+              </span>
+              <span className="font-cinzel text-[#B88945] text-[10px] tracking-[8px] uppercase leading-none mt-1">
+                DIGITAL MUSEUM
+              </span>
+              {/* Ornament below subtitle - Moved lower & centered */}
+              <div className="mt-3.5 w-full flex items-center justify-center opacity-85">
+                <div className="h-[0.75px] flex-1 bg-gradient-to-r from-transparent to-[#B88945]" />
+                <span className="text-[#E1BC78] text-[10px] px-2 leading-none" style={{ transform: 'translateY(-1px)' }}>❦</span>
+                <div className="h-[0.75px] flex-1 bg-gradient-to-l from-transparent to-[#B88945]" />
+              </div>
+            </div>
+
+            {/* Vertical Separator - Centered, full height relative to content area */}
+            <div 
+              className="absolute right-0 top-[12px] bottom-[12px] w-[1px]"
+              style={{ background: `linear-gradient(180deg, transparent, ${MUTED_BORDER} 20%, ${MUTED_BORDER} 80%, transparent)` }}
+            />
+          </div>
+
+          {/* ── SECTION 2: Navigation Section (52%) ── */}
+          <div className="hidden lg:flex items-center justify-center h-full relative" style={{ paddingLeft: '24px' }}>
+            {/* Fixed-width nav container (760px) */}
+            <div className="flex items-center justify-center" style={{ width: '760px' }}>
               {navItems.map((item, i) => {
                 const isActive = location.pathname === item.path;
+                
+                // Split label into exactly three lines for baseline consistency
+                const words = item.label.split(' ');
+                let line1 = words[0] || '';
+                let line2 = words[1] || '';
+                let line3 = words[2] || '';
+
                 return (
-                  <div key={item.id} className="flex items-center">
+                  <div key={item.id} className="flex items-center justify-center h-full">
                     <Link
                       to={item.path}
-                      className="relative group flex flex-col items-center"
-                      style={{ padding: '6px 14px' }}
+                      className="flex items-start justify-center text-center transition-all duration-300"
+                      style={{ width: '140px', height: '80px', paddingTop: '18px' }}
                     >
-                      {/* Active glow spotlight */}
-                      {isActive && (
-                        <div
-                          className="absolute inset-0 pointer-events-none"
-                          style={{
-                            background: 'radial-gradient(ellipse at center, rgba(200,163,93,0.07) 0%, transparent 70%)',
-                          }}
-                        />
-                      )}
-                      <motion.span
-                        className="font-cinzel uppercase relative z-10"
+                      <span 
+                        className={`font-cinzel text-[12px] tracking-[2px] font-semibold uppercase leading-[1.4] transition-colors duration-300 ${isActive ? 'text-[#E1BC78]' : 'text-[#B88945]'}`}
                         style={{
-                          fontSize: '11px',
-                          letterSpacing: '1.5px',
-                          fontWeight: 500,
-                          color: isActive ? '#f0c84a' : '#c8a040',
-                          whiteSpace: 'nowrap',
-                          textShadow: isActive ? '0 0 10px rgba(240,200,74,0.35)' : 'none',
-                          lineHeight: 1,
+                          textShadow: isActive ? '0 0 8px rgba(225, 188, 120, 0.4)' : 'none',
+                          transform: item.id === 'arc' ? 'translateY(-5px)' : 'none',
                         }}
-                        whileHover={{ color: '#f0c84a', textShadow: '0 0 10px rgba(240,200,74,0.35)' }}
-                        transition={{ duration: 0.2 }}
                       >
-                        {item.label}
-                      </motion.span>
-
-                      {/* Active underline */}
-                      <motion.span
-                        className="absolute"
-                        style={{
-                          bottom: '3px',
-                          left: '14px',
-                          right: '14px',
-                          height: '1.5px',
-                          background: 'linear-gradient(90deg, transparent, #f0c84a, transparent)',
-                          boxShadow: '0 0 8px rgba(240,200,74,0.5)',
-                          originX: '0.5',
-                          scaleX: isActive ? 1 : 0,
-                        }}
-                        animate={{ scaleX: isActive ? 1 : 0 }}
-                        transition={{ duration: 0.35 }}
-                      />
-                      {/* Hover underline */}
-                      {!isActive && (
-                        <span
-                          className="absolute scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"
-                          style={{
-                            bottom: '3px',
-                            left: '14px',
-                            right: '14px',
-                            height: '1px',
-                            background: 'linear-gradient(90deg, transparent, #a87e35, transparent)',
-                          }}
-                        />
-                      )}
+                        {line1}<br />
+                        {line2 || <span className="opacity-0">-</span>}<br />
+                        {line3 || <span className="opacity-0">-</span>}
+                      </span>
                     </Link>
 
-                    {/* Bullet separator */}
+                    {/* Divider between items with exact vertically centered diamond */}
                     {i < navItems.length - 1 && (
-                      <span
-                        style={{ color: '#6a5020', fontSize: '8px', lineHeight: 1, flexShrink: 0 }}
-                      >
-                        ◆
-                      </span>
+                      <div className="flex flex-col items-center justify-center h-[52px] w-[1px] relative mx-2">
+                        <div className="w-[1px] h-full bg-[#B88945] opacity-[0.35]" />
+                        <span className="text-[#B88945] text-[7px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[45%] select-none opacity-80">♦</span>
+                      </div>
                     )}
                   </div>
                 );
               })}
             </div>
-          </div>
 
-          {/* ── RIGHT SEPARATOR ── */}
-          <div
-            className="hidden lg:block flex-shrink-0"
-            style={{
-              width: '1px',
-              height: '44px',
-              margin: '0 18px',
-              background: 'linear-gradient(180deg, transparent, #8a6820, transparent)',
-            }}
-          />
-
-          {/* ── RIGHT: Mini Badge + Motto ── */}
-          <div className="hidden lg:flex items-center flex-shrink-0" style={{ paddingRight: '20px', gap: '10px' }}>
-            {/* Small bordered square with miniature logo */}
-            <div
-              className="flex items-center justify-center rounded"
-              style={{
-                width: '52px',
-                height: '52px',
-                border: '1px solid #8a6820',
-                background: 'radial-gradient(circle, #1a1408, #0a0806)',
-                boxShadow: 'inset 0 0 8px rgba(0,0,0,0.5)',
-                flexShrink: 0,
-              }}
-            >
-              <img
-                src="/assami/navbar%20logo.png"
-                alt="Crest"
-                style={{ width: '78%', height: '78%', objectFit: 'contain', opacity: 0.9 }}
-              />
+            {/* Bottom decorative flourish under nav - Centered mathematically */}
+            <div className="absolute bottom-[6px] left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-none opacity-50" style={{ width: '280px' }}>
+              <div className="h-[0.75px] flex-1 bg-gradient-to-r from-transparent to-[#B88945]" />
+              <span className="text-[#E1BC78] text-[10px] px-3 leading-none">❧ ⚜ ☙</span>
+              <div className="h-[0.75px] flex-1 bg-gradient-to-l from-transparent to-[#B88945]" />
             </div>
-            {/* Motto text */}
-
           </div>
 
-          {/* ── Mobile Hamburger ── */}
-          <div className="lg:hidden ml-auto" style={{ paddingRight: '16px' }}>
+          {/* ── SECTION 3: Motto Badge (18%) ── */}
+          <div className="hidden lg:flex items-center justify-end pr-8 h-full">
+            {/* Badge container: 240px wide, 72px high */}
+            <div className="relative flex items-center justify-center" style={{ width: '240px', height: '72px' }}>
+              <svg width="240" height="72" viewBox="0 0 240 72" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0">
+                {/* Outer Border (8-sided) - Stroke matching outer border thickness */}
+                <path d="M 12,1 L 228,1 L 239,12 L 239,60 L 228,71 L 12,71 L 1,60 L 1,12 Z" stroke={BRONZE} stroke-width="1.5" fill={SECONDARY_COLOR}/>
+                {/* Inner Border (8-sided) */}
+                <path d="M 14,4 L 226,4 L 236,14 L 236,58 L 226,68 L 14,68 L 4,58 L 4,14 Z" stroke={MUTED_BORDER} stroke-width="1"/>
+                {/* Decorative diamonds on sides */}
+                <path d="M 12,36 L 15,33 L 18,36 L 15,39 Z" fill={BRONZE} />
+                <path d="M 222,36 L 225,33 L 228,36 L 225,39 Z" fill={BRONZE} />
+              </svg>
+              
+              <div className="flex flex-col items-center justify-center text-center relative z-10 pt-[2px] h-full">
+                <span className="font-cinzel text-[#F4E8D3] text-[11px] font-semibold tracking-[3px] uppercase leading-none mb-1.5">ASAM VIKRAM</span>
+                <span className="font-cinzel text-[#C88B47] text-[10px] font-semibold tracking-[3px] uppercase leading-none">TAGRA RAHO</span>
+              </div>
+            </div>
+          </div>
+
+          {/* ── Mobile Hamburger (Fallback for viewport scaling) ── */}
+          <div className="lg:hidden ml-auto pr-6 z-10">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="flex flex-col items-center justify-center gap-[5px] w-10 h-10 rounded"
-              style={{ border: '1px solid rgba(138,104,32,0.4)', background: 'rgba(12,10,8,0.6)' }}
+              className="flex flex-col items-center justify-center gap-[5px] w-10 h-10 rounded-sm transition-colors"
+              style={{ border: `1px solid ${MUTED_BORDER}`, background: SECONDARY_COLOR }}
               aria-label="Toggle menu"
             >
               {[0, 1, 2].map(i => (
                 <span
                   key={i}
-                  className="block transition-all duration-300"
+                  className="block transition-all duration-300 bg-[#B88945]"
                   style={{
                     width: '20px',
                     height: '1.5px',
-                    background: '#c8a040',
                     opacity: i === 1 && menuOpen ? 0 : 1,
                     transform: menuOpen
                       ? i === 0 ? 'rotate(45deg) translate(4px,4px)' : i === 2 ? 'rotate(-45deg) translate(4px,-4px)' : 'none'
@@ -288,26 +228,6 @@ export default function Navbar() {
               ))}
             </button>
           </div>
-
-          {/* ── Left & Right decorative endcaps ── */}
-          <div
-            className="absolute left-0 top-1/2 -translate-y-1/2 pointer-events-none"
-            style={{
-              width: '3px',
-              height: '28px',
-              background: 'linear-gradient(180deg, transparent, #9a7828, transparent)',
-              borderRadius: '2px',
-            }}
-          />
-          <div
-            className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none"
-            style={{
-              width: '3px',
-              height: '28px',
-              background: 'linear-gradient(180deg, transparent, #9a7828, transparent)',
-              borderRadius: '2px',
-            }}
-          />
         </div>
       </motion.nav>
 
@@ -320,7 +240,7 @@ export default function Navbar() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-40 flex flex-col items-center justify-center"
-            style={{ background: 'rgba(10,8,6,0.97)', backdropFilter: 'blur(16px)' }}
+            style={{ background: 'rgba(11,18,14,0.98)', backdropFilter: 'blur(16px)' }}
           >
             <div className="flex flex-col items-center gap-8">
               {navItems.map((item, i) => (
@@ -332,8 +252,8 @@ export default function Navbar() {
                 >
                   <Link
                     to={item.path}
-                    className="font-cinzel uppercase tracking-[4px] text-xl transition-colors duration-300 hover:text-[#f0c84a]"
-                    style={{ color: location.pathname === item.path ? '#f0c84a' : '#a87e35' }}
+                    className="font-cinzel uppercase tracking-[4px] text-xl transition-colors duration-300 hover:text-[#F4E8D3]"
+                    style={{ color: location.pathname === item.path ? '#F4E8D3' : '#B88945' }}
                     onClick={() => setMenuOpen(false)}
                   >
                     {item.label}
