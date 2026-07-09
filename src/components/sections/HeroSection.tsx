@@ -110,29 +110,31 @@ export default function HeroSection({
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25, duration: 0.6 }}
-            className={compact ? 'mb-2' : 'mb-6'}
+            className={compact ? 'mb-3' : 'mb-6'}
           >
-            <span
-              className="inline-flex items-center gap-2.5 px-5 py-1.5 rounded-full text-[10px] font-inter tracking-[0.25em] uppercase border text-yellow-500/90 shadow-lg"
-              style={{ background: 'rgba(212,160,23,0.06)', borderColor: 'rgba(212,160,23,0.3)', backdropFilter: 'blur(8px)' }}
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse" />
-              {badge}
-            </span>
+            <div className="flex items-center justify-center">
+              <span className="inline-flex items-center gap-3 px-6 py-2 border border-[#C69B53]/30 rounded-full bg-[#162218]/40 backdrop-blur-sm shadow-lg">
+                <span className="text-[#C69B53] text-[9px]">✦</span>
+                <span className="font-cinzel text-[#C69B53] text-[9px] sm:text-[10px] tracking-[0.25em] uppercase font-bold">
+                  {badge}
+                </span>
+                <span className="text-[#C69B53] text-[9px]">✦</span>
+              </span>
+            </div>
           </motion.div>
         )}
 
         {/* Established Date */}
-        {established && !compact && (
+        {established && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.35, duration: 0.7 }}
-            className="flex items-center gap-4 mb-6"
+            className={`flex items-center gap-4 ${compact ? 'mb-4' : 'mb-6'}`}
           >
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-yellow-600/60" />
-            <span className="font-inter text-xs text-yellow-600/80 tracking-[0.35em] uppercase">Est. {established}</span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-yellow-600/60" />
+            <div className="h-px w-24 bg-gradient-to-r from-transparent to-[#C69B53]/60" />
+            <span className="font-cinzel text-xs text-[#C69B53] font-bold tracking-[0.4em] uppercase">Est. {established}</span>
+            <div className="h-px w-24 bg-gradient-to-l from-transparent to-[#C69B53]/60" />
           </motion.div>
         )}
 
@@ -141,8 +143,8 @@ export default function HeroSection({
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.45, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className={`font-cinzel tracking-wide text-stone-100 font-bold leading-tight ${
-            compact ? 'text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-2' : 'text-5xl sm:text-6xl md:text-7xl lg:text-8xl mb-6'
+          className={`font-cinzel tracking-wide text-[#F4F0E8] font-bold leading-tight ${
+            compact ? 'text-5xl sm:text-6xl md:text-7xl mb-3' : 'text-5xl sm:text-6xl md:text-7xl lg:text-8xl mb-6'
           }`}
           style={{ textShadow: '0 4px 35px rgba(0,0,0,0.9)' }}
         >
@@ -156,7 +158,7 @@ export default function HeroSection({
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.7 }}
             className={`font-garamond text-[#C8C0B3] max-w-3xl leading-relaxed italic ${
-              compact ? 'text-base md:text-lg mb-2' : 'text-2xl md:text-3xl mb-8'
+              compact ? 'text-xl md:text-2xl mb-5' : 'text-2xl md:text-3xl mb-8'
             }`}
             style={{ textShadow: '0 2px 15px rgba(0,0,0,0.8)' }}
           >
@@ -170,16 +172,13 @@ export default function HeroSection({
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.75, duration: 0.6 }}
-            className="flex flex-col items-center gap-1"
+            className="flex flex-col items-center gap-1.5"
           >
-            <div className={`h-px bg-gradient-to-r from-transparent via-yellow-600/60 to-transparent w-48 ${
-              compact ? 'mb-2' : 'mb-4'
-            }`} />
-            <div className={`font-cinzel text-yellow-500 tracking-[0.3em] uppercase leading-none ${
-              compact ? 'text-sm' : 'text-xl'
+            <div className={`font-cinzel text-[#C69B53] tracking-[0.3em] uppercase leading-none ${
+              compact ? 'text-sm md:text-base' : 'text-xl'
             }`}>{motto}</div>
-            {mottoMeaning && !compact && (
-              <div className="font-garamond text-stone-400 text-base italic mt-1">{mottoMeaning}</div>
+            {mottoMeaning && (
+              <div className="font-garamond text-[#A8A093] text-base md:text-lg italic mt-1">{mottoMeaning}</div>
             )}
           </motion.div>
         )}

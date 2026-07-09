@@ -49,29 +49,26 @@ const CardCorner = ({ position }: { position: 'tl' | 'tr' | 'bl' | 'br' }) => {
 export default function AssamRiflesPage() {
   const cardCount = ASSAM_RIFLES_UNITS.length;
   
-  // Dynamic Grid configurations based on card count
-  let cols = 5;
-  let rows = 1;
-
-  if (cardCount <= 5) {
-    cols = cardCount;
-    rows = 1;
-  } else if (cardCount <= 8) {
-    cols = 4;
-    rows = 2;
+  // Define fixed card dimensions based on density to avoid percentage rounding errors
+  let cardWidth = '270px';
+  let cardHeight = '380px';
+  
+  if (cardCount <= 2) {
+    cardWidth = '420px';
+    cardHeight = '480px';
+  } else if (cardCount <= 4) {
+    cardWidth = '320px';
+    cardHeight = '420px';
+  } else if (cardCount <= 5) {
+    cardWidth = '270px';
+    cardHeight = '380px';
   } else if (cardCount <= 12) {
-    cols = 4;
-    rows = 3;
-  } else if (cardCount <= 16) {
-    cols = 5;
-    rows = 3;
+    cardWidth = '240px';
+    cardHeight = '320px';
   } else {
-    cols = 6;
-    rows = Math.ceil(cardCount / 6);
+    cardWidth = '210px';
+    cardHeight = '250px';
   }
-
-  // Adjust height of directory grid based on rows
-  const gridHeight = rows === 1 ? '380px' : rows === 2 ? '480px' : '520px';
 
   const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV'];
 
@@ -92,6 +89,8 @@ export default function AssamRiflesPage() {
         compact={true}
         title="Assam Units"
         subtitle="Laitumkhrah, Shillong · Meghalaya"
+        motto="The Sentinel of the North-East"
+        mottoMeaning="Friends of the Hill People"
         established="1835"
         backgroundImage="/assami/17 Assam Rifles/ar-patrol-green.jpg"
         backgroundImages={[
@@ -105,9 +104,9 @@ export default function AssamRiflesPage() {
       />
 
       {/* Directory Section */}
-      <section className="relative flex-1 min-h-0 flex flex-col justify-between py-5 px-8 select-none w-full bg-[#0C120D]">
+      <section className="relative flex-1 min-h-0 flex flex-col justify-start gap-8 pt-4 pb-2 px-8 select-none w-full bg-[#0C120D]">
         {/* Directory Title Section */}
-        <div className="flex flex-col items-center text-center mb-3 flex-shrink-0">
+        <div className="flex flex-col items-center text-center flex-shrink-0">
           <span className="font-cinzel text-[#C69B53] text-[10px] tracking-[6px] uppercase font-bold mb-1">
             REGIMENTAL DIRECTORY
           </span>
@@ -122,15 +121,16 @@ export default function AssamRiflesPage() {
           />
         </div>
 
-      {/* Directory Adaptive Grid */}
-      <div className="flex-grow min-h-0 w-full max-w-[1400px] mx-auto flex items-center justify-center">
+      {/* Directory Adaptive Flex Wrapper */}
+      <div className="flex-grow min-h-0 w-full flex items-center justify-center overflow-y-auto overflow-x-hidden pb-4">
         
-        {/* Desktop flex-wrap grid (fully adaptive, centers last row automatically, and height constrained to viewport) */}
+        {/* Desktop flex-wrap gallery (fully adaptive, perfectly centered with no empty strips) */}
         <div 
-          className="hidden lg:flex flex-wrap justify-center content-center w-full"
+          className="hidden lg:flex flex-wrap justify-center items-center mx-auto"
           style={{
-            gap: '16px',
-            height: gridHeight,
+            gap: cardCount > 8 ? '16px' : '24px',
+            width: 'fit-content',
+            maxWidth: '100%',
           }}
         >
           {ASSAM_RIFLES_UNITS.map((unit, i) => (
@@ -138,18 +138,18 @@ export default function AssamRiflesPage() {
               key={unit.id}
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: (i % cols) * 0.04, duration: 0.4, ease: 'easeOut' }}
-              className="min-h-0 overflow-hidden"
+              transition={{ delay: (i % 6) * 0.04, duration: 0.4, ease: 'easeOut' }}
+              className="overflow-hidden flex-shrink-0"
               style={{
-                width: `calc((100% - ${(cols - 1) * 16}px) / ${cols})`,
-                height: rows === 1 ? '100%' : `calc((100% - ${(rows - 1) * 16}px) / ${rows})`
+                width: cardWidth,
+                height: cardHeight,
               }}
             >
                 <Link to={`/assam-rifles/${unit.id}`} className="group block h-full w-full">
                   <div 
                     className="relative overflow-hidden flex flex-col justify-between items-center text-center transition-all duration-300 hover:border-[#C69B53]/60 hover:shadow-[0_16px_36px_rgba(0,0,0,0.85),0_0_24px_rgba(198,155,83,0.18)] hover:-translate-y-1 border border-[#C69B53]/25 h-full w-full rounded-xl"
                     style={{
-                      padding: rows >= 3 ? '8px 12px' : rows === 2 ? '14px' : '20px',
+                      padding: cardCount > 8 ? '8px 10px' : (cardCount > 5 && cardCount <= 8) ? '14px' : '20px',
                       backgroundColor: '#111A12',
                       backgroundImage: `radial-gradient(circle at center, rgba(22, 34, 24, 0.45) 0%, rgba(13, 20, 14, 0.85) 100%), url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='leather'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.05 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.15 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23leather)'/%3E%3C/svg%3E")`,
                       boxShadow: 'inset 0 0 24px rgba(0, 0, 0, 0.8)',
@@ -163,11 +163,11 @@ export default function AssamRiflesPage() {
 
                     {/* Large Premium Medallion Icon */}
                     <div className="relative flex items-center justify-center mb-1">
-                      <div className="absolute w-12 h-12 rounded-full bg-[#C69B53]/5 filter blur-md pointer-events-none" />
+                      <div className="absolute w-10 h-10 rounded-full bg-[#C69B53]/5 filter blur-md pointer-events-none" />
                       <span 
                         className="select-none filter drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)] group-hover:scale-105 transition-transform duration-500"
                         style={{
-                          fontSize: rows >= 3 ? '1.8rem' : '2.5rem',
+                          fontSize: cardCount > 8 ? '1.5rem' : '2.5rem',
                           filter: 'drop-shadow(0 0 8px rgba(198, 155, 83, 0.3))',
                         }}
                       >
@@ -177,34 +177,34 @@ export default function AssamRiflesPage() {
 
                     {/* Engraved Bronze Capsule Label */}
                     <div 
-                      className="border rounded-full px-2.5 py-0.5 bg-[#162218]/45 flex items-center justify-center mb-1 transition-colors duration-300 group-hover:border-[#C69B53]/50"
+                      className="border rounded-full px-2.5 py-0 bg-[#162218]/45 flex items-center justify-center mb-1 transition-colors duration-300 group-hover:border-[#C69B53]/50"
                       style={{ borderColor: 'rgba(198, 155, 83, 0.25)' }}
                     >
-                      <span className="font-cinzel text-[#C69B53] text-[8px] tracking-[0.2em] font-bold uppercase select-none leading-none">
+                      <span className="font-cinzel text-[#C69B53] text-[7.5px] tracking-[0.2em] font-bold uppercase select-none leading-none mt-[1px]">
                         Unit {romanNumerals[i] || (i + 1)}
                       </span>
                     </div>
 
                     {/* Short title */}
-                    <h3 className={`font-cinzel text-[#F4F0E8] font-bold tracking-wide transition-colors duration-300 group-hover:text-yellow-400 leading-tight mb-1.5 ${
-                      rows >= 3 ? 'text-xs' : rows === 2 ? 'text-sm' : 'text-base'
+                    <h3 className={`font-cinzel text-[#F4F0E8] font-bold tracking-wide transition-colors duration-300 group-hover:text-yellow-400 leading-tight mb-1 ${
+                      cardCount > 8 ? 'text-[11px]' : (cardCount > 5 && cardCount <= 8) ? 'text-sm' : 'text-base'
                     }`}>
                       {unit.shortName}
                     </h3>
 
                     {/* Description / Full name */}
-                    {rows < 3 && (
+                    {cardCount <= 8 && (
                       <p className={`font-garamond text-[#C8C0B3] leading-relaxed text-center px-2 flex-grow flex items-center justify-center max-w-[78%] mb-4 ${
-                        rows === 2 ? 'text-xs max-h-[38px] line-clamp-2' : 'text-sm max-h-[80px]'
+                        (cardCount > 5 && cardCount <= 8) ? 'text-xs max-h-[38px] line-clamp-2' : 'text-sm max-h-[80px]'
                       }`}>
                         {unit.name.replace(', Assam Units', '')}
                       </p>
                     )}
 
                     {/* Explore Button indicator */}
-                    <div className="flex items-center justify-center gap-1.5 text-[#C69B53] text-[9px] font-inter tracking-[0.2em] uppercase transition-colors duration-300 group-hover:text-yellow-400 mt-auto w-full border-t border-[#C69B53]/15 pt-2 flex-shrink-0 relative overflow-hidden">
+                    <div className="flex items-center justify-center gap-1.5 text-[#C69B53] text-[8px] font-inter tracking-[0.2em] uppercase transition-colors duration-300 group-hover:text-yellow-400 mt-auto w-full border-t border-[#C69B53]/15 pt-1.5 flex-shrink-0 relative overflow-hidden">
                       <span className="relative">
-                        Explore Exhibit
+                        Explore
                         <span className="absolute bottom-[-2px] left-0 w-0 h-[1px] bg-[#C69B53] transition-all duration-300 group-hover:w-full" />
                       </span>
                       <span className="transform transition-transform duration-300 group-hover:translate-x-1 font-bold">
