@@ -2,6 +2,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import SubPageLayout from '../../components/layout/SubPageLayout';
 import VideosSection from '../../components/sections/VideosSection';
 import { RASHTRIYA_RIFLES_UNITS } from '../RashtriyaRiflesPage';
+import { getMergedSubUnitData } from '../../admin/store/adminStore';
 
 export default function RashtriyaRiflesUnitVideosPage() {
   const { unitId } = useParams<{ unitId: string }>();
@@ -20,7 +21,7 @@ export default function RashtriyaRiflesUnitVideosPage() {
       breadcrumbs={breadcrumbs}
       backPath={`/rashtriya-rifles/${unit.id}`}
     >
-      <VideosSection videos={[]} />
+      <VideosSection videos={(getMergedSubUnitData('rashtriya-rifles', unitId || '')).videos || []} />
     </SubPageLayout>
   );
 }

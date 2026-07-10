@@ -2,6 +2,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import SubPageLayout from '../../components/layout/SubPageLayout';
 import VideosSection from '../../components/sections/VideosSection';
 import { ARUNACHAL_SCOUTS_UNITS } from '../ArunachalScoutsPage';
+import { getMergedSubUnitData } from '../../admin/store/adminStore';
 
 export default function ArunachalScoutsUnitVideosPage() {
   const { unitId } = useParams<{ unitId: string }>();
@@ -20,7 +21,7 @@ export default function ArunachalScoutsUnitVideosPage() {
       breadcrumbs={breadcrumbs}
       backPath={`/arunachal-scouts/${unit.id}`}
     >
-      <VideosSection videos={[]} />
+      <VideosSection videos={(getMergedSubUnitData('arunachal-scouts', unitId || '')).videos || []} />
     </SubPageLayout>
   );
 }

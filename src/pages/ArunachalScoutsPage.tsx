@@ -14,16 +14,14 @@ const CardCorner = ({ position }: { position: 'tl' | 'tr' | 'bl' | 'br' }) => {
   const isTop = position.startsWith('t');
   const isLeft = position.endsWith('l');
   return (
-    <svg 
-      width="14" 
-      height="14" 
-      viewBox="0 0 14 14" 
-      fill="none" 
-      className={`absolute pointer-events-none opacity-45 group-hover:opacity-90 transition-opacity duration-300 ${
-        isTop ? 'top-3' : 'bottom-3'
-      } ${
-        isLeft ? 'left-3' : 'right-3'
-      }`}
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 14 14"
+      fill="none"
+      className={`absolute pointer-events-none opacity-45 group-hover:opacity-90 transition-opacity duration-300 ${isTop ? 'top-3' : 'bottom-3'
+        } ${isLeft ? 'left-3' : 'right-3'
+        }`}
       style={{
         transform: `${isTop ? '' : 'scaleY(-1)'} ${isLeft ? '' : 'scaleX(-1)'}`
       }}
@@ -74,38 +72,38 @@ export default function ArunachalScoutsPage() {
           <h2 className="font-cinzel text-[#F4F0E8] text-[26px] font-bold tracking-widest uppercase mb-4">
             Arunachal Scouts Battalions
           </h2>
-          <img 
-            src="/assets/navbar/logo-divider.svg" 
-            className="w-[140px] h-[14px] opacity-80 pointer-events-none" 
-            alt="" 
+          <img
+            src="/assets/navbar/logo-divider.svg"
+            className="w-[140px] h-[14px] opacity-80 pointer-events-none"
+            alt=""
           />
         </div>
 
-      {/* Directory Adaptive Flex Wrapper */}
-      <div className="flex-grow min-h-0 w-full flex items-center justify-center overflow-y-auto overflow-x-hidden pb-4">
-        
-        {/* Desktop flex-wrap gallery (fully adaptive, perfectly centered with no empty strips) */}
-        <div 
-          className="hidden lg:flex justify-center items-center mx-auto w-full"
-          style={{
-            gap: '80px',
-            maxWidth: '1200px',
-          }}
-        >
-          {ARUNACHAL_SCOUTS_UNITS.map((unit, i) => (
-            <motion.div
-              key={unit.id}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.05, duration: 0.5, ease: 'easeOut' }}
-              className="overflow-hidden flex-shrink-0"
-              style={{
-                width: '380px', // Roughly 28-30% of viewport
-                height: '460px', // As requested
-              }}
-            >
+        {/* Directory Adaptive Flex Wrapper */}
+        <div className="flex-grow min-h-0 w-full flex items-center justify-center overflow-y-auto overflow-x-hidden pb-4">
+
+          {/* Desktop flex-wrap gallery (fully adaptive, perfectly centered with no empty strips) */}
+          <div
+            className="hidden lg:flex justify-center items-center mx-auto w-full"
+            style={{
+              gap: '80px',
+              maxWidth: '1200px',
+            }}
+          >
+            {ARUNACHAL_SCOUTS_UNITS.map((unit, i) => (
+              <motion.div
+                key={unit.id}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.05, duration: 0.5, ease: 'easeOut' }}
+                className="overflow-hidden flex-shrink-0"
+                style={{
+                  width: '380px', // Roughly 28-30% of viewport
+                  height: '460px', // As requested
+                }}
+              >
                 <Link to={`/arunachal-scouts/${unit.id}`} className="group block h-full w-full">
-                  <div 
+                  <div
                     className="relative overflow-hidden flex flex-col items-center text-center transition-all duration-500 hover:border-[#C69B53]/80 hover:shadow-[0_0_30px_rgba(198,155,83,0.25),0_20px_40px_rgba(0,0,0,0.9)] hover:-translate-y-1.5 border border-[#C69B53]/40 h-full w-full rounded-sm"
                     style={{
                       padding: '40px 24px 32px',
@@ -126,7 +124,7 @@ export default function ArunachalScoutsPage() {
                     {/* Large Premium Medallion Icon */}
                     <div className="relative flex items-center justify-center mb-7">
                       <div className="absolute w-24 h-24 rounded-full bg-[#C69B53]/15 filter blur-xl pointer-events-none" />
-                      <span 
+                      <span
                         className="select-none filter drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)] group-hover:scale-105 transition-transform duration-500"
                         style={{
                           fontSize: '4.5rem',
@@ -152,7 +150,7 @@ export default function ArunachalScoutsPage() {
                     <h3 className="font-cinzel text-[#F4F0E8] font-bold tracking-widest text-[42px] leading-none mb-3 group-hover:text-yellow-400 transition-colors duration-300" style={{ textShadow: '0 4px 12px rgba(0,0,0,0.8)' }}>
                       {unit.shortName}
                     </h3>
-                    
+
                     {/* Star Separator */}
                     <div className="text-[#C69B53] text-[11px] mb-3 filter drop-shadow-[0_0_5px_rgba(198,155,83,0.5)]">★</div>
 
@@ -160,7 +158,7 @@ export default function ArunachalScoutsPage() {
                     <p className="font-garamond text-[#C8C0B3] italic text-lg mb-6 max-w-[85%] text-center">
                       {unit.name.replace(', Arunachal Scouts', '')}
                     </p>
-                    
+
                     {/* Crest Icon (Swords/Shield) */}
                     <div className="text-[#C69B53]/60 text-3xl mb-auto flex-grow flex flex-col justify-center">
                       <span className="filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] opacity-80">⚔️</span>
@@ -185,7 +183,7 @@ export default function ArunachalScoutsPage() {
           <div className="hidden md:grid lg:hidden grid-cols-2 gap-5 w-full h-fit max-h-[440px] overflow-y-auto px-4 scrollbar-none">
             {ARUNACHAL_SCOUTS_UNITS.map((unit, i) => (
               <Link to={`/arunachal-scouts/${unit.id}`} key={unit.id} className="group block">
-                <div 
+                <div
                   className="relative rounded-xl p-5 border border-[#C69B53]/25 flex flex-col justify-between items-center text-center h-[190px] overflow-hidden"
                   style={{
                     backgroundColor: '#111A12',
@@ -216,7 +214,7 @@ export default function ArunachalScoutsPage() {
             {ARUNACHAL_SCOUTS_UNITS.map((unit, i) => (
               <div key={unit.id} className="flex-shrink-0 w-[250px] snap-center">
                 <Link to={`/arunachal-scouts/${unit.id}`} className="group block">
-                  <div 
+                  <div
                     className="relative rounded-xl p-6 border border-[#C69B53]/25 flex flex-col justify-between items-center text-center h-[210px] overflow-hidden"
                     style={{
                       backgroundColor: '#111A12',
