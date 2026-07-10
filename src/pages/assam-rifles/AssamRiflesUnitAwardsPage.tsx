@@ -28,8 +28,10 @@ export default function AssamRiflesUnitAwardsPage() {
       breadcrumbs={breadcrumbs}
       backPath={`/assam-rifles/${unit.id}`}
     >
-      <div className="mb-10 text-center max-w-2xl mx-auto font-garamond text-stone-400 text-lg leading-relaxed italic">
-        "Throughout their service in the Northeast border sectors, the personnel of the {unit.name} have maintained the highest standards of operational efficiency and combat readiness, contributing directly to the achievements listed below."
+      <div className="mb-32 w-full flex justify-center px-4">
+        <div className="text-center w-full max-w-4xl font-garamond text-stone-400 text-lg md:text-xl leading-relaxed italic">
+          &ldquo;Throughout their service in the Northeast border sectors, the personnel of the {unit.name} have maintained the highest standards of operational efficiency and combat readiness, contributing directly to the achievements listed below.&rdquo;
+        </div>
       </div>
       <AchievementsSection achievements={(getMergedSubUnitData('assam-rifles', unitId || '')).achievements} />
     </SubPageLayout>

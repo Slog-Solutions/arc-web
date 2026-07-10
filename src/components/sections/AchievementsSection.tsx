@@ -1,4 +1,3 @@
-// src/components/sections/AchievementsSection.tsx
 import { motion } from 'framer-motion';
 import type { Achievement } from '../../types';
 
@@ -7,54 +6,79 @@ interface Props {
 }
 
 export default function AchievementsSection({ achievements }: Props) {
+  if (!achievements?.length) return null;
+
+  // Decide grid columns based on count
+  const count = achievements.length;
+  const gridCols =
+    count === 1
+      ? 'lg:grid-cols-1 max-w-2xl'
+      : count === 2
+      ? 'lg:grid-cols-2 max-w-5xl'
+      : 'lg:grid-cols-3 max-w-7xl';
+
   return (
-    <section className="relative" style={{ paddingTop: '160px', paddingBottom: '160px' }}>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" style={{ gap: '80px', marginBottom: '60px' }}>
-        {achievements.map((achievement, idx) => (
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: idx * 0.08, duration: 0.6 }}
-            className="museum-wood-frame brass-corners rounded-xl overflow-hidden p-7 flex flex-col hover:border-yellow-500/40 hover:shadow-[0_0_30px_rgba(212,160,23,0.15)] transition-all duration-300 transform hover:-translate-y-1.5"
-          >
-            {/* Case Background Spotlight Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-yellow-500/[0.02] to-transparent pointer-events-none" />
+    <section className="pt-16 pb-24 md:pt-24 md:pb-32 mt-16 md:mt-24 relative flex flex-col items-center justify-center">
+      <div className={`container mx-auto px-6 relative z-10 w-full ${gridCols} flex flex-col items-center`}>
+        
+        {/* The Grid */}
+        <div className={`grid grid-cols-1 md:grid-cols-2 ${gridCols} gap-10 md:gap-14 w-full mx-auto`}>
+          {achievements.map((achievement, idx) => (
+            <motion.article
+              key={idx}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.15, duration: 0.7, ease: 'easeOut' }}
+              className="relative flex flex-col items-center text-center group"
+              style={{
+                background: 'linear-gradient(180deg, rgba(20,24,18,0.95) 0%, rgba(10,12,8,0.98) 100%)',
+                border: '1px solid rgba(198,155,83,0.3)',
+                borderRadius: '4px',
+                padding: '3rem 2.5rem',
+                boxShadow: '0 15px 50px rgba(0,0,0,0.5)',
+              }}
+            >
+              {/* Outer decorative border (double border effect) */}
+              <div className="absolute inset-2 border border-[#C69B53]/15 pointer-events-none rounded-sm transition-colors duration-500 group-hover:border-[#C69B53]/40" />
 
-            {/* Medal Icon Showcase */}
-            <div className="flex items-center justify-between mb-5">
-              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-yellow-500/10 border border-yellow-500/20 shadow-[0_0_15px_rgba(212,160,23,0.1)] text-2xl filter drop-shadow-md">
-                {achievement.icon || '🎖️'}
-              </div>
-              <span className="font-inter text-[10px] text-yellow-500/80 tracking-widest uppercase px-2.5 py-1 bg-yellow-500/[0.08] border border-yellow-500/20 rounded">
+              {/* Decorative top bracket */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-[3px] bg-gradient-to-r from-transparent via-[#C69B53] to-transparent opacity-80" />
+
+              {/* Year badge */}
+              <div className="mb-6 px-5 py-1.5 border border-[#C69B53]/40 bg-[#C69B53]/10 text-[#C69B53] text-xs font-bold tracking-[0.3em] uppercase shadow-inner">
                 {achievement.year}
-              </span>
-            </div>
+              </div>
 
-            {/* Badge Category */}
-            <div className="font-inter text-[9px] text-[#d4a017]/70 tracking-widest uppercase mb-3">
-              {achievement.category}
-            </div>
+              {/* Title */}
+              <h3 className="font-cinzel font-bold text-xl md:text-2xl leading-snug mb-6 text-[#F4F0E8] group-hover:text-[#C69B53] transition-colors duration-300">
+                {achievement.title}
+              </h3>
 
-            {/* Title */}
-            <h3 className="font-cinzel text-stone-100 text-lg md:text-xl mb-4 font-semibold group-hover:text-yellow-400 transition-colors duration-300">
-              {achievement.title}
-            </h3>
+              {/* Decorative diamond divider line */}
+              <div className="flex items-center justify-center w-full mb-6 gap-3">
+                <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#C69B53]/60" />
+                <div className="w-1.5 h-1.5 rotate-45 bg-[#C69B53]" />
+                <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#C69B53]/60" />
+              </div>
 
-            {/* Description */}
-            <p className="font-garamond text-stone-400 text-sm md:text-base leading-relaxed flex-grow">
-              {achievement.description}
-            </p>
+              {/* Description */}
+              <p className="text-base md:text-lg leading-relaxed flex-grow text-[#C8C0B3] font-garamond italic px-2">
+                &ldquo;{achievement.description}&rdquo;
+              </p>
 
-            {/* Small subtle exhibit identifier at bottom right */}
-            <div className="mt-5 text-right">
-              <span className="font-inter text-[8px] text-stone-600 tracking-wider uppercase">
-                Record #{idx + 1}
-              </span>
-            </div>
-          </motion.div>
-        ))}
+              {/* Category chip */}
+              {achievement.category && (
+                <div className="mt-8 text-[11px] font-bold uppercase tracking-[0.4em] text-[#C69B53]/70">
+                  {achievement.category}
+                </div>
+              )}
+              
+              {/* Bottom Bracket */}
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-[2px] bg-gradient-to-r from-transparent via-[#C69B53]/50 to-transparent" />
+            </motion.article>
+          ))}
+        </div>
       </div>
     </section>
   );
