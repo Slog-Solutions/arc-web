@@ -64,7 +64,7 @@ export default function TerritorialArmyPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="h-screen w-screen overflow-hidden flex flex-col bg-[#0C120D]"
+      className="min-h-screen w-full flex flex-col bg-[#0C120D]"
     >
       <Helmet>
         <title>Territorial Army | Home</title>
@@ -86,7 +86,7 @@ export default function TerritorialArmyPage() {
       />
 
       {/* Directory Section */}
-      <section className="relative flex-1 min-h-0 flex flex-col justify-start py-4 px-8 select-none w-full bg-[#0C120D]">
+      <section className="relative w-full flex flex-col justify-start py-4 pb-12 px-8 select-none bg-[#0C120D]">
         {/* Directory Title Section */}
         <div className="flex flex-col items-center text-center mb-5 flex-shrink-0">
           <h2 className="font-cinzel text-[#F4F0E8] text-2xl font-bold tracking-wider mb-2.5 mt-2">
@@ -94,30 +94,30 @@ export default function TerritorialArmyPage() {
           </h2>
         </div>
 
-      {/* Directory Adaptive Flex Wrapper */}
-      <div className="flex-grow min-h-0 w-full flex items-start justify-center overflow-y-auto overflow-x-hidden pb-4">
-        
-        {/* Desktop flex-wrap gallery (fully adaptive, perfectly centered with no empty strips) */}
-        <div 
-          className="hidden lg:flex flex-wrap justify-center items-start mx-auto"
-          style={{
-            gap: '20px',
-            width: 'fit-content',
-            maxWidth: '100%',
-          }}
-        >
-          {TERRITORIAL_ARMY_UNITS.map((unit, i) => (
-            <motion.div
-              key={unit.id}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.05, duration: 0.5, ease: 'easeOut' }}
-              className="overflow-hidden flex-shrink-0"
-              style={{
-                width: cardWidth,
-                height: cardHeight,
-              }}
-            >
+        {/* Directory Adaptive Flex Wrapper */}
+        <div className="w-full flex items-start justify-center pb-4">
+
+          {/* Desktop flex-wrap gallery (fully adaptive, perfectly centered with no empty strips) */}
+          <div
+            className="hidden lg:flex flex-wrap justify-center items-start mx-auto"
+            style={{
+              gap: '20px',
+              width: 'fit-content',
+              maxWidth: '100%',
+            }}
+          >
+            {TERRITORIAL_ARMY_UNITS.map((unit, i) => (
+              <motion.div
+                key={unit.id}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.05, duration: 0.5, ease: 'easeOut' }}
+                className="overflow-hidden flex-shrink-0"
+                style={{
+                  width: cardWidth,
+                  height: cardHeight,
+                }}
+              >
                 <Link to={`/territorial-army/${unit.id}`} className="group block h-full w-full">
                   <div
                     className="relative overflow-hidden flex flex-col justify-between items-center text-center transition-all duration-300 hover:border-[#C69B53]/60 hover:shadow-[0_16px_36px_rgba(0,0,0,0.85),0_0_24px_rgba(198,155,83,0.18)] hover:-translate-y-1 border border-[#C69B53]/25 h-full w-full rounded-xl"
