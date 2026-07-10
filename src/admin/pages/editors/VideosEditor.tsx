@@ -68,7 +68,7 @@ export default function VideosEditor({ data, onSave }: Props) {
     const file = e.target.files?.[0];
     if (file) {
       if (file.size > 15 * 1024 * 1024) {
-        showToast('Warning: Local video file exceeds 15MB. It may fail to save due to localStorage limits.', 'error');
+        showToast('Large file loaded. It will sync to MongoDB online, but may exceed browser offline cache limits.', 'error');
       }
       try {
         const base64 = await fileToBase64(file);

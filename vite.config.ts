@@ -13,4 +13,13 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://arc-web-ruby.vercel.app',
+        changeOrigin: true,
+        secure: false,
+      }
+    }
+  }
 })
