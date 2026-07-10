@@ -1,6 +1,5 @@
 // src/components/sections/VideosSection.tsx — REFINED (Museum Cinema Room)
-import { useState, useEffect } from 'react';
-import { createPortal } from 'react-dom';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SectionHeader from './SectionHeader';
 import type { VideoItem } from '../../types';
@@ -31,18 +30,12 @@ function PlayIcon({ size = 'lg' }: { size?: 'sm' | 'lg' }) {
 
 export default function VideosSection({ videos }: Props) {
   const [activeVideo, setActiveVideo] = useState<VideoItem | null>(null);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   const featured = videos.find(v => v.featured);
   const regular = videos.filter(v => !v.featured);
 
   return (
-    <section id="videos" className="relative py-32 museum-room-wall spotlight-glow overflow-hidden">
-
+    <section id="videos" className="relative museum-room-wall spotlight-glow overflow-hidden" style={{ paddingTop: '200px', paddingBottom: '200px' }}>
+      
       {/* Film Strip Top Border Ornament */}
       <div className="absolute top-0 left-0 right-0 h-4 bg-[#0a0c08] flex items-center justify-around pointer-events-none opacity-20">
         {Array.from({ length: 30 }).map((_, idx) => (
@@ -64,7 +57,7 @@ export default function VideosSection({ videos }: Props) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            style={{ marginBottom: '96px' }}
+            style={{ marginBottom: '220px' }}
           >
             <div className="flex items-center gap-3.5 mb-6">
               <span className="w-2 h-2 rounded-full bg-yellow-500 animate-pulse" />
@@ -88,7 +81,7 @@ export default function VideosSection({ videos }: Props) {
                   alt={featured.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-[0.75]"
                 />
-
+                
                 {/* Cinematic Spotlight overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
 
@@ -110,7 +103,7 @@ export default function VideosSection({ videos }: Props) {
                           <div className="font-inter text-stone-400 text-xs mt-0.5">{featured.duration} &nbsp;·&nbsp; Reel Year: {featured.year}</div>
                         </div>
                       </div>
-
+                      
                       <h3 className="font-cinzel text-stone-100 text-2xl md:text-3.5xl mb-3 font-bold leading-snug">
                         {featured.title}
                       </h3>
@@ -156,7 +149,7 @@ export default function VideosSection({ videos }: Props) {
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 filter brightness-[0.8]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0a0c08] via-transparent to-transparent" />
-
+                  
                   {/* Play icon overlay */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <PlayIcon size="lg" />
@@ -186,7 +179,7 @@ export default function VideosSection({ videos }: Props) {
                     {video.title}
                   </h4>
                   <p className="font-garamond text-stone-400 text-sm leading-relaxed flex-1 italic">{video.description}</p>
-
+                  
                   <div className="mt-5 pt-4 flex items-center justify-between border-t border-[#443118]/30">
                     <div className="flex items-center gap-2 text-yellow-500/70 text-xs font-inter group-hover:text-yellow-400 transition-colors duration-300">
                       <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
@@ -203,73 +196,68 @@ export default function VideosSection({ videos }: Props) {
       </div>
 
       {/* ── Projector Screening Modal ──────────────────── */}
-      {mounted && createPortal(
-        <AnimatePresence>
-          {activeVideo && (
+      <AnimatePresence>
+        {activeVideo && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-8"
+            style={{ background: 'rgba(6,8,4,0.98)', backdropFilter: 'blur(30px)' }}
+            onClick={() => setActiveVideo(null)}
+          >
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-8"
-              style={{ background: 'rgba(6,8,4,0.98)', backdropFilter: 'blur(30px)' }}
-              onClick={() => setActiveVideo(null)}
+              initial={{ scale: 0.9, y: 30, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.9, y: 30, opacity: 0 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="w-full max-w-5xl"
+              onClick={e => e.stopPropagation()}
             >
-              <motion.div
-                initial={{ scale: 0.9, y: 30, opacity: 0 }}
-                animate={{ scale: 1, y: 0, opacity: 1 }}
-                exit={{ scale: 0.9, y: 30, opacity: 0 }}
-                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                className="w-full max-w-5xl max-h-full flex flex-col"
-                onClick={e => e.stopPropagation()}
-              >
-                {/* Header */}
-                <div className="flex flex-shrink-0 items-start justify-between mb-4 md:mb-6">
-                  <div>
-                    <div className="font-inter text-xs text-yellow-600/70 tracking-widest uppercase mb-1">Archive Playback</div>
-                    <h3 className="font-cinzel text-stone-100 text-lg md:text-xl font-bold leading-snug">{activeVideo.title}</h3>
-                    <p className="font-inter text-stone-500 text-xs mt-1">Reel Date: {activeVideo.year} &nbsp;·&nbsp; Duration: {activeVideo.duration}</p>
-                  </div>
-                  
-                  <button
-                    onClick={() => setActiveVideo(null)}
-                    className="w-10 h-10 rounded-full border flex items-center justify-center text-stone-400 hover:text-stone-100 hover:border-stone-500 transition-all duration-200 ml-4 flex-shrink-0"
-                    style={{ borderColor: 'rgba(212,160,23,0.3)' }}
-                    aria-label="Close screening"
-                  >
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
+              {/* Header */}
+              <div className="flex items-start justify-between mb-6">
+                <div>
+                  <div className="font-inter text-xs text-yellow-600/70 tracking-widest uppercase mb-1">Archive Playback</div>
+                  <h3 className="font-cinzel text-stone-100 text-lg md:text-xl font-bold leading-snug">{activeVideo.title}</h3>
+                  <p className="font-inter text-stone-500 text-xs mt-1">Reel Date: {activeVideo.year} &nbsp;·&nbsp; Duration: {activeVideo.duration}</p>
                 </div>
-
-                {/* Projection Box */}
-                <div
-                  className="relative w-full rounded-2xl overflow-hidden flex-shrink min-h-0"
-                  style={{
-                    aspectRatio: '16 / 9',
-                    maxHeight: '65vh',
-                    border: '10px solid #2b1d0c',
-                    boxShadow: '0 25px 80px rgba(0,0,0,0.9), 0 0 0 1px rgba(212,160,23,0.2)',
-                    margin: '0 auto'
-                  }}
+                
+                <button
+                  onClick={() => setActiveVideo(null)}
+                  className="w-10 h-10 rounded-full border flex items-center justify-center text-stone-400 hover:text-stone-100 hover:border-stone-500 transition-all duration-200 ml-4 flex-shrink-0"
+                  style={{ borderColor: 'rgba(212,160,23,0.3)' }}
+                  aria-label="Close screening"
                 >
-                  <iframe
-                    className="absolute inset-0 w-full h-full"
-                    src={`https://www.youtube.com/embed/${activeVideo.youtubeId}?autoplay=1&rel=0&modestbranding=1`}
-                    title={activeVideo.title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  />
-                </div>
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
 
-                <p className="font-garamond text-stone-400 text-sm md:text-base mt-4 md:mt-6 leading-relaxed italic flex-shrink-0 overflow-y-auto max-h-[15vh]">{activeVideo.description}</p>
-              </motion.div>
+              {/* Projection Box */}
+              <div
+                className="relative w-full rounded-2xl overflow-hidden"
+                style={{
+                  paddingBottom: '56.25%',
+                  border: '10px solid #2b1d0c',
+                  boxShadow: '0 25px 80px rgba(0,0,0,0.9), 0 0 0 1px rgba(212,160,23,0.2)',
+                }}
+              >
+                <iframe
+                  className="absolute inset-0 w-full h-full"
+                  src={`https://www.youtube.com/embed/${activeVideo.youtubeId}?autoplay=1&rel=0&modestbranding=1`}
+                  title={activeVideo.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
+
+              <p className="font-garamond text-stone-400 text-base mt-6 leading-relaxed italic">{activeVideo.description}</p>
             </motion.div>
-          )}
-        </AnimatePresence>,
-        document.body
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

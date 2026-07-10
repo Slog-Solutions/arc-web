@@ -46,7 +46,7 @@ export default function SubPageLayout({
 
       <div className="museum-container relative z-10">
         {/* Navigation & Breadcrumbs Row */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#2d2212]/50 pb-6 mb-12">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#2d2212]/50 pb-8 mb-20">
           {/* Breadcrumbs */}
           <div className="flex items-center flex-wrap gap-2 text-stone-500 font-inter text-xs tracking-wider uppercase">
             <Link to="/" className="hover:text-yellow-500 transition-colors duration-200">Home</Link>
@@ -82,13 +82,13 @@ export default function SubPageLayout({
         </div>
 
         {/* Section Title Ornament */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-20">
           {subtitle && (
-            <span className="font-cinzel text-[10px] text-yellow-600/80 tracking-[0.4em] uppercase block mb-3">
+            <span className="font-cinzel text-[10px] text-yellow-600/80 tracking-[0.4em] uppercase block mb-6">
               {subtitle}
             </span>
           )}
-          <h1 className="font-cinzel text-stone-100 text-3xl md:text-5xl font-bold tracking-wider mb-6">
+          <h1 className="font-cinzel text-stone-100 text-3xl md:text-5xl font-bold tracking-wider mb-8">
             {title}
           </h1>
           <div className="flex items-center justify-center gap-3">
@@ -101,7 +101,7 @@ export default function SubPageLayout({
         </div>
 
         {/* Main Content Area */}
-        <div className="relative">
+        <div className="relative mt-16">
           {children}
         </div>
       </div>

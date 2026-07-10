@@ -59,7 +59,7 @@ export default function HeroSection({
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <div ref={ref} className={`relative overflow-hidden bg-olive-950 flex items-center justify-center ${compact ? 'h-[38vh] min-h-[340px]' : 'h-screen min-h-[650px]'
+    <div ref={ref} className={`relative overflow-hidden bg-olive-950 flex items-center justify-center ${compact ? 'h-[38vh] min-h-[340px]' : 'h-screen min-h-[800px]'
       }`}>
       {/* Background Image Container */}
       <motion.div
@@ -105,7 +105,7 @@ export default function HeroSection({
       {/* Hero Content Container */}
       <motion.div
         className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col items-center text-center justify-center"
-        style={{ opacity, paddingTop: contentPaddingTop || (compact ? '95px' : '180px') }}
+        style={{ opacity, paddingTop: contentPaddingTop || (compact ? '110px' : '220px') }}
       >
         {/* Badge */}
         {badge && (
@@ -113,7 +113,7 @@ export default function HeroSection({
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25, duration: 0.6 }}
-            className={compact ? 'mb-3' : 'mb-6'}
+            className={compact ? 'mb-4' : 'mb-7'}
           >
             <div className="flex items-center justify-center">
               <span className="inline-flex items-center gap-3 px-6 py-2 border border-[#C69B53]/30 rounded-full bg-[#162218]/40 backdrop-blur-sm shadow-lg">
@@ -133,7 +133,7 @@ export default function HeroSection({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.35, duration: 0.7 }}
-            className={`flex items-center gap-4 ${compact ? 'mb-4' : 'mb-6'}`}
+            className={`flex items-center gap-8 ${compact ? 'mb-5' : 'mb-8'}`}
           >
             <div className="h-px w-24 bg-gradient-to-r from-transparent to-[#C69B53]/60" />
             <span className="font-cinzel text-xs text-[#C69B53] font-bold tracking-[0.4em] uppercase">Est. {established}</span>
@@ -146,7 +146,7 @@ export default function HeroSection({
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.45, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className={`font-cinzel tracking-wide text-[#F4F0E8] font-bold leading-tight ${compact ? 'text-5xl sm:text-6xl md:text-7xl mb-3' : 'text-5xl sm:text-6xl md:text-7xl lg:text-8xl mb-6'
+          className={`font-cinzel tracking-wide text-[#F4F0E8] font-bold leading-tight ${compact ? 'text-5xl sm:text-6xl md:text-7xl mb-4' : 'text-5xl sm:text-6xl md:text-7xl lg:text-8xl mb-8'
             }`}
           style={{ textShadow: '0 4px 35px rgba(0,0,0,0.9)' }}
         >
@@ -159,7 +159,7 @@ export default function HeroSection({
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.7 }}
-            className={`flex flex-col items-center ${compact ? 'mb-5' : 'mb-8'}`}
+            className={`flex flex-col items-center ${compact ? 'mb-6' : 'mb-10'}`}
           >
             <p
               className={`font-garamond text-[#C8C0B3] max-w-3xl leading-relaxed italic ${compact ? 'text-xl md:text-2xl' : 'text-2xl md:text-3xl'
@@ -184,7 +184,7 @@ export default function HeroSection({
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.75, duration: 0.6 }}
-            className="flex flex-col items-center gap-1.5"
+            className="flex flex-col items-center gap-2.5"
           >
             <div className={`font-cinzel text-[#C69B53] tracking-[0.3em] uppercase leading-none ${compact ? 'text-sm md:text-base' : 'text-xl'
               }`}>{motto}</div>

@@ -68,7 +68,7 @@ export default function SectionNav() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: 40 }}
           transition={{ duration: 0.4 }}
-          className="fixed right-6 top-1/2 -translate-y-1/2 z-40 flex flex-col gap-2 hidden md:flex"
+          className="fixed right-6 top-1/2 -translate-y-1/2 z-40 flex flex-col gap-3 hidden md:flex"
         >
           {sections.map((s) => (
             <button
