@@ -24,7 +24,7 @@ const GAON_BURA_FALLBACKS = [
 
 export default function CommandingOfficersSection({ officers, gaonBuras }: Props) {
   return (
-    <section id="commanding-officers" className="relative py-32 museum-room-wall spotlight-glow">
+    <section id="commanding-officers" className="relative museum-room-wall spotlight-glow" style={{ paddingTop: '200px', paddingBottom: '200px' }}>
       <div className="museum-container">
 
         {/* Section Header */}
@@ -35,7 +35,7 @@ export default function CommandingOfficersSection({ officers, gaonBuras }: Props
         />
 
         {/* ── Large Portrait Grid (3D Flip Plaque Layout) ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-12 mb-28">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3" style={{ gap: '100px', marginBottom: '150px' }}>
           {officers.map((officer, i) => {
             const officerImg = officer.image || PORTRAIT_FALLBACKS[i % PORTRAIT_FALLBACKS.length];
             return (
@@ -149,7 +149,7 @@ export default function CommandingOfficersSection({ officers, gaonBuras }: Props
               subtitle="The village elders and community leaders who served as the vital bridge between the regiment and local tribes."
             />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16" style={{ marginTop: '5rem' }}>
               {gaonBuras.map((gb, i) => (
                 <motion.div
                   key={i}
@@ -173,9 +173,9 @@ export default function CommandingOfficersSection({ officers, gaonBuras }: Props
                         <div className="absolute top-4 right-4 px-2.5 py-1 bg-yellow-500/10 text-yellow-500 text-[8px] font-inter uppercase tracking-widest border border-yellow-500/35 rounded backdrop-blur-sm z-20">Hover to view</div>
                       </div>
 
-                      <div className="px-6 pb-6 pt-2 text-center relative z-10 flex-shrink-0">
-                        <div className="font-cinzel text-[#d4a017] text-xs tracking-[0.2em] uppercase mb-1">{gb.tribe}</div>
-                        <h3 className="font-cinzel text-stone-100 text-lg md:text-xl font-bold leading-tight mb-1 filter drop-shadow-md">{gb.name}</h3>
+                      <div className="px-6 pb-6 pt-4 text-center relative z-10 flex-shrink-0">
+                        <div className="font-cinzel text-[#d4a017] text-xs tracking-[0.2em] uppercase mb-2">{gb.tribe}</div>
+                        <h3 className="font-cinzel text-stone-100 text-lg md:text-xl font-bold leading-tight mb-2 filter drop-shadow-md">{gb.name}</h3>
                         <div className="font-inter text-stone-500 text-[10px] tracking-widest uppercase">{gb.era}</div>
                       </div>
                     </div>

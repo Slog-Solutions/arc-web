@@ -16,7 +16,7 @@ export default function GallerySection({ gallery }: Props) {
   const filtered = activeCategory === 'All' ? gallery : gallery.filter(g => g.category === activeCategory);
 
   return (
-    <section id="gallery" className="relative py-32 museum-room-wall spotlight-glow">
+    <section id="gallery" className="relative museum-room-wall spotlight-glow" style={{ paddingTop: '200px', paddingBottom: '200px' }}>
       <div className="museum-container">
         <SectionHeader
           tag="Visual Archive"
@@ -25,7 +25,7 @@ export default function GallerySection({ gallery }: Props) {
         />
 
         {/* Category filters */}
-        <div className="flex flex-wrap gap-4 justify-center mb-16">
+        <div className="flex flex-wrap gap-4 justify-center" style={{ marginBottom: '120px' }}>
           {categories.map((cat) => (
             <button
               key={cat}
@@ -49,7 +49,7 @@ export default function GallerySection({ gallery }: Props) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" style={{ gap: '80px' }}
           >
             {filtered.map((item, i) => {
               const isFeatured = i === 0; // Large centerpiece image
