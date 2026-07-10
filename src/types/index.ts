@@ -59,6 +59,7 @@ export interface VideoItem {
   duration: string;
   year: string;
   featured: boolean;
+  videoUrl?: string;
 }
 
 export interface UnitData {

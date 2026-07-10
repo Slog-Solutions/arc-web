@@ -237,20 +237,30 @@ export default function VideosSection({ videos }: Props) {
 
               {/* Projection Box */}
               <div
-                className="relative w-full rounded-2xl overflow-hidden"
+                className="relative w-full rounded-2xl overflow-hidden bg-black"
                 style={{
                   paddingBottom: '56.25%',
                   border: '10px solid #2b1d0c',
                   boxShadow: '0 25px 80px rgba(0,0,0,0.9), 0 0 0 1px rgba(212,160,23,0.2)',
                 }}
               >
-                <iframe
-                  className="absolute inset-0 w-full h-full"
-                  src={`https://www.youtube.com/embed/${activeVideo.youtubeId}?autoplay=1&rel=0&modestbranding=1`}
-                  title={activeVideo.title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                />
+                {activeVideo.videoUrl ? (
+                  <video
+                    className="absolute inset-0 w-full h-full object-contain"
+                    src={activeVideo.videoUrl}
+                    controls
+                    autoPlay
+                    playsInline
+                  />
+                ) : (
+                  <iframe
+                    className="absolute inset-0 w-full h-full"
+                    src={`https://www.youtube.com/embed/${activeVideo.youtubeId}?autoplay=1&rel=0&modestbranding=1`}
+                    title={activeVideo.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                )}
               </div>
 
               <p className="font-garamond text-stone-400 text-base mt-6 leading-relaxed italic">{activeVideo.description}</p>
