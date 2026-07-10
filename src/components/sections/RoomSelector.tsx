@@ -88,23 +88,20 @@ export default function RoomSelector({ basePath, unitName }: Props) {
     cardWidth = '320px';
     cardHeight = '420px';
   } else if (cardCount <= 5) {
-    cardWidth = '270px';
-    cardHeight = '380px';
+    cardWidth = '200px';
+    cardHeight = '290px';
   } else if (cardCount <= 12) {
-    cardWidth = '240px';
-    cardHeight = '320px';
-  } else {
     cardWidth = '220px';
     cardHeight = '280px';
+  } else {
+    cardWidth = '200px';
+    cardHeight = '260px';
   }
 
   return (
-    <section className="relative flex-1 min-h-0 flex flex-col justify-center py-8 px-8 select-none w-full bg-[#0C120D]">
+    <section className="relative flex-1 min-h-0 flex flex-col justify-start -mt-4 pt-0 pb-8 px-8 select-none w-full bg-[#0C120D] z-10">
       {/* Directory Title Section */}
       <div className="flex flex-col items-center text-center mb-8 flex-shrink-0">
-        <span className="font-cinzel text-[#C69B53] text-[10px] tracking-[6px] uppercase font-bold mb-1">
-          EXHIBITION DIRECTORY
-        </span>
         <h2 className="font-cinzel text-[#F4F0E8] text-2xl font-bold tracking-wider mb-2.5">
           {unitName} Exhibition Rooms
         </h2>
@@ -157,7 +154,7 @@ export default function RoomSelector({ basePath, unitName }: Props) {
                   <div 
                     className="relative overflow-hidden flex flex-col justify-between items-center text-center transition-all duration-300 hover:border-[#C69B53]/60 hover:shadow-[0_16px_36px_rgba(0,0,0,0.85),0_0_24px_rgba(198,155,83,0.18)] hover:-translate-y-2 border border-[#C69B53]/25 h-full w-full rounded-xl"
                     style={{
-                      padding: cardCount > 8 ? '12px' : (cardCount > 5 && cardCount <= 8) ? '16px' : '28px 24px',
+                      padding: cardCount > 8 ? '12px' : cardCount >= 5 ? '16px' : '28px 24px',
                       backgroundColor: '#111A12',
                       backgroundImage: `radial-gradient(circle at center, rgba(22, 34, 24, 0.45) 0%, rgba(13, 20, 14, 0.85) 100%), url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='leather'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.05 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.15 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23leather)'/%3E%3C/svg%3E")`,
                       boxShadow: 'inset 0 0 24px rgba(0, 0, 0, 0.8)',
@@ -194,15 +191,15 @@ export default function RoomSelector({ basePath, unitName }: Props) {
 
                     {/* Room title */}
                     <h3 className={`font-cinzel text-[#F4F0E8] font-bold tracking-wide transition-colors duration-300 group-hover:text-yellow-400 leading-tight mb-2 ${
-                      cardCount > 8 ? 'text-xs' : (cardCount > 5 && cardCount <= 8) ? 'text-sm' : 'text-xl'
+                      cardCount > 8 ? 'text-xs' : cardCount >= 5 ? 'text-sm' : 'text-xl'
                     }`}>
                       {titleElement}
                     </h3>
 
                     {/* Description - Hides completely for dense rows to prevent vertical layout leaks */}
                     {cardCount <= 8 && (
-                      <p className={`font-garamond text-[#C8C0B3] leading-relaxed text-center px-2 flex-grow flex items-center justify-center max-w-[78%] mb-4 ${
-                        (cardCount > 5 && cardCount <= 8) ? 'text-xs max-h-[38px] line-clamp-2' : 'text-sm max-h-[80px]'
+                      <p className={`font-garamond text-[#C8C0B3] leading-relaxed text-center px-2 flex-grow flex items-center justify-center max-w-[85%] mb-4 ${
+                        cardCount >= 5 ? 'text-xs max-h-[48px] line-clamp-3' : 'text-sm max-h-[80px]'
                       }`}>
                         {room.desc}
                       </p>

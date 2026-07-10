@@ -64,9 +64,9 @@ export default function AssamRiflesPage() {
     cardWidth = '240px';
     cardHeight = '320px';
   } else {
-    // Exactly like reference: compact, near-square cards for the 17-unit layout
-    cardWidth = '150px';
-    cardHeight = '150px';
+    // Adjusted for 8-top, 7-bottom layout on smaller screens
+    cardWidth = '125px';
+    cardHeight = '125px';
   }
 
   const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX'];
@@ -87,11 +87,8 @@ export default function AssamRiflesPage() {
 
       <AssamUnitsHero
         compact={true}
-        contentPaddingTop="200px"
         title="Assam Units"
         subtitle="Laitumkhrah, Shillong · Meghalaya"
-        motto="The Sentinel of the North-East"
-        mottoMeaning="Friends of the Hill People"
         established="1835"
         backgroundImage="/assami/17 Assam Rifles/ar-patrol-green.jpg"
         backgroundImages={[
@@ -101,29 +98,25 @@ export default function AssamRiflesPage() {
           "/assami/17 Assam Rifles/ar-joint-training.jpg",
           "/assami/17 Assam Rifles/ar-community-friends.jpg"
         ]}
-        badge="India's Oldest Paramilitary Force — Est. 1835"
       />
 
       {/* Directory Section */}
       <section className="relative flex-1 min-h-0 flex flex-col justify-start gap-8 pt-4 pb-2 px-8 select-none w-full bg-[#0C120D]">
         {/* Directory Title Section */}
         <div className="flex flex-col items-center text-center flex-shrink-0 mt-2 mb-2">
-          <span className="font-cinzel text-[#C69B53] text-[10px] tracking-[0.4em] uppercase font-bold mb-1.5">
-            REGIMENTAL DIRECTORY
-          </span>
           <h2 className="font-cinzel text-[#F4F0E8] text-[22px] font-bold tracking-widest uppercase">
             Assam Units Battalions
           </h2>
         </div>
 
         {/* Directory Adaptive Flex Wrapper */}
-        <div className="flex-grow min-h-0 w-full flex items-center justify-center overflow-y-auto overflow-x-hidden pb-4">
+        <div className="flex-grow min-h-0 w-full flex items-start justify-center overflow-y-auto overflow-x-hidden pb-4">
 
           {/* Desktop flex-wrap gallery (fully adaptive, perfectly centered with no empty strips) */}
           <div
             className="hidden lg:flex flex-wrap justify-center items-center mx-auto"
             style={{
-              gap: cardCount > 8 ? '16px' : '24px',
+              gap: cardCount > 8 ? '12px' : '24px',
               width: 'fit-content',
               maxWidth: cardCount > 8 ? '1600px' : '100%', // Allows up to 9 cards on the first row to eliminate the third row
             }}
@@ -144,7 +137,7 @@ export default function AssamRiflesPage() {
                   <div
                     className="relative overflow-hidden flex flex-col justify-between items-center text-center transition-all duration-300 hover:border-[#C69B53]/60 hover:shadow-[0_16px_36px_rgba(0,0,0,0.85),0_0_24px_rgba(198,155,83,0.18)] hover:-translate-y-1 border border-[#C69B53]/25 h-full w-full rounded-xl"
                     style={{
-                      padding: cardCount > 8 ? '8px 10px' : (cardCount > 5 && cardCount <= 8) ? '14px' : '20px',
+                      padding: cardCount > 8 ? '8px' : (cardCount > 5 && cardCount <= 8) ? '14px' : '20px',
                       backgroundColor: '#111A12',
                       backgroundImage: `radial-gradient(circle at center, rgba(22, 34, 24, 0.45) 0%, rgba(13, 20, 14, 0.85) 100%), url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='leather'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.05 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.15 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23leather)'/%3E%3C/svg%3E")`,
                       boxShadow: 'inset 0 0 24px rgba(0, 0, 0, 0.8)',
@@ -162,7 +155,7 @@ export default function AssamRiflesPage() {
                       <span
                         className="select-none filter drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)] group-hover:scale-105 transition-transform duration-500"
                         style={{
-                          fontSize: cardCount > 8 ? '1.75rem' : '2.5rem',
+                          fontSize: cardCount > 8 ? '1.5rem' : '2.5rem',
                           filter: 'drop-shadow(0 0 8px rgba(198, 155, 83, 0.3))',
                         }}
                       >
@@ -178,7 +171,7 @@ export default function AssamRiflesPage() {
                     </div>
 
                     {/* Short title */}
-                    <h3 className={`font-cinzel text-[#F4F0E8] font-bold tracking-wider transition-colors duration-300 group-hover:text-yellow-400 leading-tight mb-2 ${cardCount > 8 ? 'text-xl' : (cardCount > 5 && cardCount <= 8) ? 'text-sm' : 'text-base'
+                    <h3 className={`font-cinzel text-[#F4F0E8] font-bold tracking-wider transition-colors duration-300 group-hover:text-yellow-400 leading-tight mb-2 ${cardCount > 8 ? 'text-sm' : (cardCount > 5 && cardCount <= 8) ? 'text-sm' : 'text-base'
                       }`}>
                       {unit.shortName}
                     </h3>
