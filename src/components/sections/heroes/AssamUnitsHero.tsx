@@ -59,7 +59,7 @@ export default function AssamUnitsHero({
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <div ref={ref} className={`relative overflow-hidden bg-olive-950 flex items-center justify-center ${compact ? 'h-[38vh] min-h-[340px]' : 'h-screen min-h-[650px]'
+    <div ref={ref} className={`relative overflow-hidden bg-olive-950 flex items-center justify-center ${compact ? 'h-[38vh] min-h-[260px] md:min-h-[340px]' : 'h-screen min-h-[500px] md:min-h-[650px]'
       }`}>
       {/* Background Image Container */}
       <motion.div
