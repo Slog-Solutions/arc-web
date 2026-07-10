@@ -101,7 +101,7 @@ export default function SubPageLayout({
         </div>
 
         {/* Main Content Area */}
-        <div className="relative mt-16">
+        <div className="relative mt-24 md:mt-32">
           {children}
         </div>
       </div>

@@ -14,6 +14,8 @@ export default defineConfig({
     },
   },
   server: {
+    // Uncomment this proxy block when you want to run the backend server alongside Vite!
+    /*
     proxy: {
       '/api': {
         target: 'http://localhost:5000',
@@ -21,5 +23,6 @@ export default defineConfig({
         secure: false,
       }
     }
+    */
   }
 })

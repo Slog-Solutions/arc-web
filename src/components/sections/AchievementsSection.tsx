@@ -18,11 +18,11 @@ export default function AchievementsSection({ achievements }: Props) {
       : 'lg:grid-cols-3 max-w-7xl';
 
   return (
-    <section className="pt-16 pb-24 md:pt-24 md:pb-32 mt-16 md:mt-24 relative flex flex-col items-center justify-center">
-      <div className={`container mx-auto px-6 relative z-10 w-full ${gridCols} flex flex-col items-center`}>
+    <section className="pt-16 mt-16 md:mt-24 relative flex flex-col items-center justify-center w-full">
+      <div className="w-full px-4 md:px-8 relative z-10 flex flex-col items-center justify-center">
         
         {/* The Grid */}
-        <div className={`grid grid-cols-1 md:grid-cols-2 ${gridCols} gap-10 md:gap-14 w-full mx-auto`}>
+        <div className={`grid grid-cols-1 md:grid-cols-2 ${gridCols} gap-8 md:gap-12 w-full mx-auto justify-center`}>
           {achievements.map((achievement, idx) => (
             <motion.article
               key={idx}

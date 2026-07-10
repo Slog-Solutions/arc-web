@@ -18,7 +18,13 @@ export default function ARCAwardsPage() {
       breadcrumbs={breadcrumbs}
       backPath="/arc"
     >
+      <div className="w-full flex justify-center px-4" style={{ marginBottom: '40px' }}>
+        <div className="text-center w-full max-w-4xl font-garamond text-stone-400 text-lg md:text-xl leading-relaxed italic">
+          &ldquo;Throughout their service, the personnel of the Assam Regimental Centre have maintained the highest standards of operational efficiency and combat readiness, contributing directly to the achievements listed below.&rdquo;
+        </div>
+      </div>
       <AchievementsSection achievements={getUnitData('arc').achievements} />
+      <div style={{ height: '40px' }} />
     </SubPageLayout>
   );
 }
