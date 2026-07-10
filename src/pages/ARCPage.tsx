@@ -20,16 +20,9 @@ export default function ARCPage() {
 
       <ARCHero
         compact={true}
-        title={
-          <>
-            Assam Regimental Centre
-            <br />
-            <span className="text-xl sm:text-2xl md:text-3xl text-[#C69B53] font-cinzel tracking-widest mt-1 block">BISHNU MUSEUM</span>
-          </>
-        }
+        title="Assam Regimental Centre"
         subtitle="Happy Valley, Shillong · Meghalaya"
         established="1941"
-        badge="Est. 15 June 1941"
         backgroundImage="/assami/Assam Regimental Centre/arc-passing-out-parade.jpg"
         backgroundImages={[
           "/assami/Assam Regimental Centre/arc-passing-out-parade.jpg",

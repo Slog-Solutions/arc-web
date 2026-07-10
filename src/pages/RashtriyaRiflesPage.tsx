@@ -46,8 +46,8 @@ export default function RashtriyaRiflesPage() {
     cardWidth = '420px';
     cardHeight = '480px';
   } else if (cardCount <= 4) {
-    cardWidth = '320px';
-    cardHeight = '420px';
+    cardWidth = '250px';
+    cardHeight = '320px';
   } else if (cardCount <= 5) {
     cardWidth = '270px';
     cardHeight = '380px';
@@ -86,33 +86,23 @@ export default function RashtriyaRiflesPage() {
           "/assami/Rashtriya Rifles/rr-mountain-warriors.jpg",
           "/assami/Rashtriya Rifles/rr-urban-warfare.jpg"
         ]}
-        badge="Counter-Insurgency Force · Est. 1990"
       />
 
       {/* Directory Section */}
-      <section className="relative flex-1 min-h-0 flex flex-col justify-between py-6 px-8 select-none w-full bg-[#0C120D]">
+      <section className="relative flex-1 min-h-0 flex flex-col justify-start py-4 px-8 select-none w-full bg-[#0C120D]">
         {/* Directory Title Section */}
         <div className="flex flex-col items-center text-center mb-5 flex-shrink-0">
-          <span className="font-cinzel text-[#C69B53] text-[10px] tracking-[6px] uppercase font-bold mb-1">
-            REGIMENTAL DIRECTORY
-          </span>
-          <h2 className="font-cinzel text-[#F4F0E8] text-2xl font-bold tracking-wider mb-2.5">
+          <h2 className="font-cinzel text-[#F4F0E8] text-2xl font-bold tracking-wider mb-2.5 mt-2">
             Rashtriya Rifles Battalions
           </h2>
-          {/* Decorative engraved divider */}
-          <img 
-            src="/assets/navbar/logo-divider.svg" 
-            className="w-[120px] h-[12px] opacity-75 mt-0.5 pointer-events-none" 
-            alt="" 
-          />
         </div>
 
       {/* Directory Adaptive Flex Wrapper */}
-      <div className="flex-grow min-h-0 w-full flex items-center justify-center overflow-y-auto overflow-x-hidden pb-4">
+      <div className="flex-grow min-h-0 w-full flex items-start justify-center overflow-y-auto overflow-x-hidden pb-4">
         
         {/* Desktop flex-wrap gallery (fully adaptive, perfectly centered with no empty strips) */}
         <div 
-          className="hidden lg:flex flex-wrap justify-center items-center mx-auto"
+          className="hidden lg:flex flex-wrap justify-center items-start mx-auto"
           style={{
             gap: '32px',
             width: 'fit-content',

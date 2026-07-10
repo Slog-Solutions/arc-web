@@ -36,10 +36,9 @@ export default function Navbar() {
       >
         {/* Main Header Box */}
         <div 
-          className="relative w-full grid items-center"
+          className="relative w-full flex items-center justify-between"
           style={{
             height: '104px',
-            gridTemplateColumns: '30% 52% 18%',
             background: BG_COLOR,
             border: `1.5px solid ${BRONZE}`,
             borderRadius: '8px',
@@ -63,9 +62,9 @@ export default function Navbar() {
           <img src="/assets/navbar/corner-bottom-left.svg" className="absolute bottom-[6px] left-[6px] w-6 h-6 pointer-events-none" alt="" />
           <img src="/assets/navbar/corner-bottom-right.svg" className="absolute bottom-[6px] right-[6px] w-6 h-6 pointer-events-none" alt="" />
 
-          {/* ── SECTION 1: Logo & Title (30% - Fixed Width Grid) ── */}
-          <div className="flex items-center h-full pl-6 relative" style={{ gap: '30px' }}>
-            {/* Logo circle: Diameter ~70px, positioned slightly lower */}
+          {/* ── SECTION 1: Logo & Title ── */}
+          <div className="flex items-center h-full pl-2 lg:pl-6 relative flex-shrink-0" style={{ gap: '16px', minWidth: 'max-content' }}>
+            {/* Logo circle */}
             <Link to="/" className="relative group flex-shrink-0 outline-none focus:outline-none" style={{ zIndex: 20, transform: 'translateY(4px)' }}>
               <div 
                 className="rounded-full flex items-center justify-center transition-transform duration-500 group-hover:scale-105"
@@ -81,9 +80,9 @@ export default function Navbar() {
               </div>
             </Link>
 
-            {/* Title block: Shifted 18px right, centered vertically together */}
-            <div className="flex flex-col items-center justify-center flex-grow text-center" style={{ minWidth: '220px', marginLeft: '18px' }}>
-              <span className="font-cinzel text-[#E1BC78] text-[29px] font-semibold tracking-[2px] leading-none mb-2.5">
+            {/* Title block: Shifted right, centered vertically together */}
+            <div className="flex flex-col items-center justify-center text-center hidden md:flex" style={{ minWidth: '180px', marginLeft: '10px' }}>
+              <span className="font-cinzel text-[#E1BC78] text-[20px] xl:text-[26px] font-semibold tracking-[2px] leading-none mb-2">
                 ASSAM REGIMENT
               </span>
               <span className="font-cinzel text-[#85683c] text-[10px] tracking-[8px] uppercase leading-none mb-3">
@@ -99,10 +98,10 @@ export default function Navbar() {
             />
           </div>
 
-          {/* ── SECTION 2: Navigation Section (52%) ── */}
-          <div className="hidden lg:flex items-center justify-center h-full relative" style={{ paddingLeft: '44px' }}>
-            {/* Centered navigation container (760px) */}
-            <div className="flex items-center justify-center relative h-full" style={{ width: '760px' }}>
+          {/* ── SECTION 2: Navigation Section ── */}
+          <div className="hidden lg:flex items-center justify-center h-full relative flex-grow px-2 xl:px-4">
+            {/* Centered navigation container */}
+            <div className="flex items-center justify-center relative h-full w-full max-w-[760px]">
               {navItems.map((item, i) => {
                 const isActive = location.pathname === item.path;
                 
@@ -116,11 +115,11 @@ export default function Navbar() {
                   <div key={item.id} className="flex items-center justify-center h-full relative">
                     <Link
                       to={item.path}
-                      className="flex items-start justify-center text-center transition-all duration-300 outline-none focus:outline-none"
-                      style={{ width: '140px', height: '80px', paddingTop: '14px' }}
+                      className="flex-1 flex items-start justify-center text-center transition-all duration-300 outline-none focus:outline-none min-w-[90px] xl:min-w-[110px]"
+                      style={{ height: '80px', paddingTop: '14px' }}
                     >
                       <span 
-                        className={`font-cinzel text-[12px] tracking-[2.5px] uppercase leading-[1.4] transition-all duration-300 ${isActive ? 'text-[#E1BC78] font-bold' : 'text-[#85683c] font-semibold'}`}
+                        className={`font-cinzel text-[11px] tracking-[2px] uppercase leading-[1.4] transition-all duration-300 ${isActive ? 'text-[#E1BC78] font-bold' : 'text-[#85683c] font-semibold'}`}
                         style={{
                           textShadow: isActive ? '0 0 10px rgba(225, 188, 120, 0.5)' : 'none',
                           transform: item.id === 'arc' ? 'translateY(-5px)' : 'none',
@@ -140,10 +139,10 @@ export default function Navbar() {
                 );
               })}
 
-              {/* Navigation flourish placed inside the 760px block to guarantee mathematical and visual alignment centered directly beneath Arunachal Scouts */}
+              {/* Navigation flourish */}
               <img 
                 src="/assets/navbar/nav-divider.svg" 
-                className="absolute bottom-[12px] left-1/2 -translate-x-1/2 w-[700px] h-[20px] pointer-events-none opacity-95" 
+                className="absolute bottom-[12px] left-1/2 -translate-x-1/2 w-full max-w-[650px] h-[20px] pointer-events-none opacity-95" 
                 style={{ 
                   zIndex: 10,
                 }} 
@@ -152,9 +151,9 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* ── SECTION 3: Motto Badge (18%) ── */}
-          <div className="hidden lg:flex items-center justify-end pr-8 h-full">
-            {/* Elongated Badge container: 240px wide, exactly 60px high */}
+          {/* ── SECTION 3: Motto Badge ── */}
+          <div className="hidden lg:flex items-center justify-end pr-2 xl:pr-6 h-full flex-shrink-0">
+            {/* Elongated Badge container */}
             <div className="relative flex items-center justify-center" style={{ width: '240px', height: '60px' }}>
               <img src="/assets/navbar/badge-frame.svg" className="absolute inset-0 w-[240px] h-[64px] pointer-events-none" alt="" />
               <img src="/assets/navbar/badge-decoration.svg" className="absolute inset-0 w-[240px] h-[64px] pointer-events-none" alt="" />
