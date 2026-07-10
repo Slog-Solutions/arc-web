@@ -69,12 +69,16 @@ connectDB().then(() => {
 
       console.log(`Uploading video file to GridFS: ${req.file.originalname} (${req.file.size} bytes)`);
       
+      const { Readable } = require('stream');
+      const readableStream = new Readable();
+      readableStream.push(req.file.buffer);
+      readableStream.push(null);
+
       const uploadStream = bucket.openUploadStream(req.file.originalname, {
         contentType: req.file.mimetype,
       });
 
-      uploadStream.write(req.file.buffer);
-      uploadStream.end();
+      readableStream.pipe(uploadStream);
 
       uploadStream.on('finish', () => {
         const fileId = uploadStream.id;
