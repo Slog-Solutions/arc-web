@@ -33,7 +33,7 @@ export default function AssamRiflesUnitHistoryPage() {
     >
       <HistorySection
         overview={tailoredOverview}
-        paragraphs={unit.history || (getMergedSubUnitData('assam-rifles', unitId || '')).history.paragraphs}
+        paragraphs={(getMergedSubUnitData('assam-rifles', unitId || '')).history.paragraphs}
         timeline={(getMergedSubUnitData('assam-rifles', unitId || '')).history.timeline}
         quotes={(getMergedSubUnitData('assam-rifles', unitId || '')).history.quotes}
         highlights={(getMergedSubUnitData('assam-rifles', unitId || '')).history.highlights}

@@ -16,7 +16,6 @@ export default function Navbar() {
 
   // Color Palette Constants matching the reference exactly (10% less saturated bronze colors)
   const BRONZE = '#85683c'; 
-  const HIGHLIGHT = '#c0a06c';
   const MUTED_BORDER = 'rgba(133, 104, 60, 0.3)';
   const BG_COLOR = '#050806'; // Extremely dark green-black
   const SECONDARY_COLOR = '#0a0f0c';

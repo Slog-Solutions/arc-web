@@ -34,29 +34,6 @@ const CardCorner = ({ position }: { position: 'tl' | 'tr' | 'bl' | 'br' }) => {
 };
 
 export default function ArunachalScoutsPage() {
-  const cardCount = ARUNACHAL_SCOUTS_UNITS.length;
-  
-  // Define fixed card dimensions based on density to avoid percentage rounding errors
-  let cardWidth = '270px';
-  let cardHeight = '380px';
-  
-  if (cardCount <= 2) {
-    cardWidth = '350px';
-    cardHeight = '450px';
-  } else if (cardCount <= 4) {
-    cardWidth = '320px';
-    cardHeight = '420px';
-  } else if (cardCount <= 5) {
-    cardWidth = '270px';
-    cardHeight = '380px';
-  } else if (cardCount <= 12) {
-    cardWidth = '240px';
-    cardHeight = '320px';
-  } else {
-    cardWidth = '220px';
-    cardHeight = '280px';
-  }
-
   const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV'];
 
   return (
