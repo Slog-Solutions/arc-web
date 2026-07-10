@@ -15,7 +15,7 @@ export default function Navbar() {
   }, [menuOpen]);
 
   // Color Palette Constants matching the reference exactly (10% less saturated bronze colors)
-  const BRONZE = '#85683c'; 
+  const BRONZE = '#85683c';
   const MUTED_BORDER = 'rgba(133, 104, 60, 0.3)';
   const BG_COLOR = '#050806'; // Extremely dark green-black
   const SECONDARY_COLOR = '#0a0f0c';
@@ -34,7 +34,7 @@ export default function Navbar() {
         }}
       >
         {/* Main Header Box */}
-        <div 
+        <div
           className="relative w-full flex items-center justify-between"
           style={{
             height: '104px',
@@ -47,9 +47,9 @@ export default function Navbar() {
           }}
         >
           {/* Subtle noise vignette/texture overlay */}
-          <div 
+          <div
             className="absolute inset-0 pointer-events-none opacity-[0.02]"
-            style={{ 
+            style={{
               backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")',
               borderRadius: '8px'
             }}
@@ -65,7 +65,7 @@ export default function Navbar() {
           <div className="flex items-center h-full pl-2 lg:pl-6 relative flex-shrink-0" style={{ gap: '16px', minWidth: 'max-content' }}>
             {/* Logo circle */}
             <Link to="/" className="relative group flex-shrink-0 outline-none focus:outline-none" style={{ zIndex: 20, transform: 'translateY(4px)' }}>
-              <div 
+              <div
                 className="rounded-full flex items-center justify-center transition-transform duration-500 group-hover:scale-105"
                 style={{
                   width: '70px',
@@ -91,7 +91,7 @@ export default function Navbar() {
             </div>
 
             {/* Vertical Separator - Shifted 30px right and centered vertically */}
-            <div 
+            <div
               className="absolute right-[-30px] top-[14px] bottom-[14px] w-[1px]"
               style={{ background: `linear-gradient(180deg, transparent, rgba(133, 104, 60, 0.25) 20%, rgba(133, 104, 60, 0.25) 80%, transparent)` }}
             />
@@ -103,7 +103,7 @@ export default function Navbar() {
             <div className="flex items-center justify-center relative h-full w-full max-w-[760px]">
               {navItems.map((item, i) => {
                 const isActive = location.pathname === item.path;
-                
+
                 // Split label into exactly three lines for optical baseline consistency
                 const words = item.label.split(' ');
                 let line1 = words[0] || '';
@@ -114,10 +114,10 @@ export default function Navbar() {
                   <div key={item.id} className="flex items-center justify-center h-full relative">
                     <Link
                       to={item.path}
-                      className="flex-1 flex items-start justify-center text-center transition-all duration-300 outline-none focus:outline-none min-w-[90px] xl:min-w-[110px]"
+                      className="flex-1 flex items-start justify-center text-center transition-all duration-300 outline-none focus:outline-none min-w-[75px] xl:min-w-[110px]"
                       style={{ height: '80px', paddingTop: '14px' }}
                     >
-                      <span 
+                      <span
                         className={`font-cinzel text-[11px] tracking-[2px] uppercase leading-[1.4] transition-all duration-300 ${isActive ? 'text-[#E1BC78] font-bold' : 'text-[#85683c] font-semibold'}`}
                         style={{
                           textShadow: isActive ? '0 0 10px rgba(225, 188, 120, 0.5)' : 'none',
@@ -139,24 +139,24 @@ export default function Navbar() {
               })}
 
               {/* Navigation flourish */}
-              <img 
-                src="/assets/navbar/nav-divider.svg" 
-                className="absolute bottom-[12px] left-1/2 -translate-x-1/2 w-full max-w-[650px] h-[20px] pointer-events-none opacity-95" 
-                style={{ 
+              <img
+                src="/assets/navbar/nav-divider.svg"
+                className="absolute bottom-[12px] left-1/2 -translate-x-1/2 w-full max-w-[650px] h-[20px] pointer-events-none opacity-95"
+                style={{
                   zIndex: 10,
-                }} 
-                alt="Museum Navigation Divider Flourish" 
+                }}
+                alt="Museum Navigation Divider Flourish"
               />
             </div>
           </div>
 
           {/* ── SECTION 3: Motto Badge ── */}
-          <div className="hidden lg:flex items-center justify-end pr-2 xl:pr-6 h-full flex-shrink-0">
+          <div className="hidden xl:flex items-center justify-end pr-2 xl:pr-6 h-full flex-shrink-0">
             {/* Elongated Badge container */}
             <div className="relative flex items-center justify-center" style={{ width: '240px', height: '60px' }}>
               <img src="/assets/navbar/badge-frame.svg" className="absolute inset-0 w-[240px] h-[64px] pointer-events-none" alt="" />
               <img src="/assets/navbar/badge-decoration.svg" className="absolute inset-0 w-[240px] h-[64px] pointer-events-none" alt="" />
-              
+
               {/* Vertically and horizontally centered text */}
               <div className="flex flex-col items-center justify-center text-center relative z-10 pt-[2px] h-full">
                 <span className="font-cinzel text-[#F4E8D3] text-[11px] font-semibold tracking-[3px] uppercase leading-none mb-1.5">ASAM VIKRAM</span>

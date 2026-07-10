@@ -78,7 +78,7 @@ export default function AssamRiflesPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="h-screen w-screen overflow-hidden flex flex-col bg-[#0C120D]"
+      className="min-h-screen w-full flex flex-col bg-[#0C120D]"
     >
       <Helmet>
         <title>Assam Units | Home</title>
@@ -101,7 +101,7 @@ export default function AssamRiflesPage() {
       />
 
       {/* Directory Section */}
-      <section className="relative flex-1 min-h-0 flex flex-col justify-start gap-8 pt-4 pb-2 px-8 select-none w-full bg-[#0C120D]">
+      <section className="relative w-full flex flex-col justify-start gap-8 pt-4 pb-12 px-8 select-none bg-[#0C120D]">
         {/* Directory Title Section */}
         <div className="flex flex-col items-center text-center flex-shrink-0 mt-2 mb-2">
           <h2 className="font-cinzel text-[#F4F0E8] text-[22px] font-bold tracking-widest uppercase">
@@ -110,7 +110,7 @@ export default function AssamRiflesPage() {
         </div>
 
         {/* Directory Adaptive Flex Wrapper */}
-        <div className="flex-grow min-h-0 w-full flex items-start justify-center overflow-y-auto overflow-x-hidden pb-4">
+        <div className="w-full flex items-start justify-center pb-4">
 
           {/* Desktop flex-wrap gallery (fully adaptive, perfectly centered with no empty strips) */}
           <div

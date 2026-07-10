@@ -33,11 +33,11 @@ const CardCorner = ({ position }: { position: 'tl' | 'tr' | 'bl' | 'br' }) => {
 
 export default function ArunachalScoutsPage() {
   const cardCount = ARUNACHAL_SCOUTS_UNITS.length;
-  
+
   // Define fixed card dimensions based on density to avoid percentage rounding errors
   let cardWidth = '270px';
   let cardHeight = '380px';
-  
+
   if (cardCount <= 2) {
     cardWidth = '220px';
     cardHeight = '250px';
@@ -61,7 +61,7 @@ export default function ArunachalScoutsPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="h-screen w-screen overflow-hidden flex flex-col bg-[#0C120D]"
+      className="min-h-screen w-full flex flex-col bg-[#0C120D]"
     >
       <Helmet>
         <title>Arunachal Scouts | Home</title>
@@ -83,7 +83,7 @@ export default function ArunachalScoutsPage() {
       />
 
       {/* Directory Section */}
-      <section className="relative flex-1 min-h-0 flex flex-col justify-start gap-0 -mt-8 pt-0 pb-4 px-8 select-none w-full bg-[#0C120D] z-10">
+      <section className="relative w-full flex flex-col justify-start gap-0 -mt-8 pt-0 pb-12 px-8 select-none bg-[#0C120D] z-10">
         {/* Directory Title Section */}
         <div className="flex flex-col items-center text-center flex-shrink-0 -mt-16 mb-1 z-20">
           <h2 className="font-cinzel text-[#F4F0E8] text-[26px] font-bold tracking-widest uppercase mb-0 filter drop-shadow-lg">
@@ -91,29 +91,29 @@ export default function ArunachalScoutsPage() {
           </h2>
         </div>
 
-      {/* Directory Adaptive Flex Wrapper */}
-      <div className="flex-grow min-h-0 w-full flex items-start justify-center overflow-y-auto overflow-x-hidden pb-4 pt-0 mt-2 relative z-20">
-        
-        {/* Desktop flex-wrap gallery (fully adaptive, perfectly centered with no empty strips) */}
-        <div 
-          className="hidden lg:flex justify-center items-center mx-auto w-full"
-          style={{
-            gap: '80px',
-            maxWidth: '1200px',
-          }}
-        >
-          {ARUNACHAL_SCOUTS_UNITS.map((unit, i) => (
-            <motion.div
-              key={unit.id}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.05, duration: 0.5, ease: 'easeOut' }}
-              className="overflow-hidden flex-shrink-0"
-              style={{
-                width: cardWidth,
-                height: cardHeight,
-              }}
-            >
+        {/* Directory Adaptive Flex Wrapper */}
+        <div className="w-full flex items-start justify-center pb-4 pt-0 mt-2 relative z-20">
+
+          {/* Desktop flex-wrap gallery (fully adaptive, perfectly centered with no empty strips) */}
+          <div
+            className="hidden lg:flex justify-center items-center mx-auto w-full"
+            style={{
+              gap: '80px',
+              maxWidth: '1200px',
+            }}
+          >
+            {ARUNACHAL_SCOUTS_UNITS.map((unit, i) => (
+              <motion.div
+                key={unit.id}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.05, duration: 0.5, ease: 'easeOut' }}
+                className="overflow-hidden flex-shrink-0"
+                style={{
+                  width: cardWidth,
+                  height: cardHeight,
+                }}
+              >
                 <Link to={`/arunachal-scouts/${unit.id}`} className="group block h-full w-full">
                   <div
                     className="relative overflow-hidden flex flex-col items-center text-center transition-all duration-500 hover:border-[#C69B53]/80 hover:shadow-[0_0_30px_rgba(198,155,83,0.25),0_20px_40px_rgba(0,0,0,0.9)] hover:-translate-y-1.5 border border-[#C69B53]/40 h-full w-full rounded-sm"
@@ -136,8 +136,8 @@ export default function ArunachalScoutsPage() {
                     {/* Large Premium Medallion Icon */}
                     <div className="relative flex items-center justify-center mb-3">
                       <div className="absolute w-24 h-24 rounded-full bg-[#C69B53]/15 filter blur-xl pointer-events-none" />
-                      <img 
-                        src={`/assami/Arunachal Scouts/${unit.id}-logo.png`} 
+                      <img
+                        src={`/assami/Arunachal Scouts/${unit.id}-logo.png`}
                         alt={`${unit.shortName} Logo`}
                         className="w-[110px] h-[110px] object-contain group-hover:scale-110 transition-transform duration-500"
                         style={{ filter: 'drop-shadow(0 4px 16px rgba(0,0,0,0.85))' }}
@@ -194,8 +194,8 @@ export default function ArunachalScoutsPage() {
                   <CardCorner position="bl" />
                   <CardCorner position="br" />
                   <div className="flex flex-col items-center">
-                    <img 
-                      src={`/assami/Arunachal Scouts/${unit.id}-logo.png`} 
+                    <img
+                      src={`/assami/Arunachal Scouts/${unit.id}-logo.png`}
                       alt={`${unit.shortName} Logo`}
                       className="w-[60px] h-[60px] object-contain filter drop-shadow-md mb-2 group-hover:scale-105 transition-transform duration-300"
                     />
@@ -227,8 +227,8 @@ export default function ArunachalScoutsPage() {
                     <CardCorner position="bl" />
                     <CardCorner position="br" />
                     <div className="flex flex-col items-center">
-                      <img 
-                        src={`/assami/Arunachal Scouts/${unit.id}-logo.png`} 
+                      <img
+                        src={`/assami/Arunachal Scouts/${unit.id}-logo.png`}
                         alt={`${unit.shortName} Logo`}
                         className="w-[70px] h-[70px] object-contain filter drop-shadow-lg mb-2 group-hover:scale-105 transition-transform duration-300"
                       />
