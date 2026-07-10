@@ -68,7 +68,9 @@ export default function VideosEditor({ data, onSave }: Props) {
     const file = e.target.files?.[0];
     if (file) {
       if (file.size > 15 * 1024 * 1024) {
-        showToast('Large file loaded. It will sync to MongoDB online, but may exceed browser offline cache limits.', 'error');
+        showToast('Large video file loaded successfully! Click Save in the top right to upload to MongoDB.', 'success');
+      } else {
+        showToast('Video file loaded successfully! Click Save in the top right to upload to MongoDB.', 'success');
       }
       try {
         const base64 = await fileToBase64(file);
