@@ -1,5 +1,4 @@
-// src/admin/pages/AdminLogin.tsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login, isAuthenticated } from '../store/authStore';
 import '../admin.css';
@@ -10,9 +9,14 @@ export default function AdminLogin() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  // If already logged in, redirect
+  // If already logged in, redirect safely
+  useEffect(() => {
+    if (isAuthenticated()) {
+      navigate('/admin/dashboard', { replace: true });
+    }
+  }, [navigate]);
+
   if (isAuthenticated()) {
-    navigate('/admin/dashboard', { replace: true });
     return null;
   }
 
