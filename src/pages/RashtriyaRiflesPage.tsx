@@ -44,8 +44,8 @@ export default function RashtriyaRiflesPage() {
     cardWidth = '420px';
     cardHeight = '480px';
   } else if (cardCount <= 4) {
-    cardWidth = '250px';
-    cardHeight = '320px';
+    cardWidth = '220px';
+    cardHeight = '260px';
   } else if (cardCount <= 5) {
     cardWidth = '270px';
     cardHeight = '380px';
@@ -123,7 +123,7 @@ export default function RashtriyaRiflesPage() {
                   <div
                     className="relative overflow-hidden flex flex-col justify-between items-center text-center transition-all duration-300 hover:border-[#C69B53]/60 hover:shadow-[0_16px_36px_rgba(0,0,0,0.85),0_0_24px_rgba(198,155,83,0.18)] hover:-translate-y-1 border border-[#C69B53]/25 h-full w-full rounded-xl"
                     style={{
-                      padding: cardCount > 8 ? '12px' : (cardCount > 5 && cardCount <= 8) ? '16px' : '28px 24px',
+                      padding: cardCount > 8 ? '12px' : (cardCount > 5 && cardCount <= 8) ? '16px' : '20px',
                       backgroundColor: '#111A12',
                       backgroundImage: `radial-gradient(circle at center, rgba(22, 34, 24, 0.45) 0%, rgba(13, 20, 14, 0.85) 100%), url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='leather'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.05 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.15 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23leather)'/%3E%3C/svg%3E")`,
                       boxShadow: 'inset 0 0 24px rgba(0, 0, 0, 0.8)',
@@ -138,25 +138,15 @@ export default function RashtriyaRiflesPage() {
                     {/* Large Premium Medallion Icon */}
                     <div className="relative flex items-center justify-center mb-1">
                       <div className="absolute w-16 h-16 rounded-full bg-[#C69B53]/5 filter blur-md pointer-events-none" />
-                      <span
-                        className="text-5xl select-none filter drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)] group-hover:scale-105 transition-transform duration-500"
-                        style={{
-                          filter: 'drop-shadow(0 0 8px rgba(198, 155, 83, 0.3))',
-                        }}
-                      >
-                        ⚔️
-                      </span>
+                      <img
+                        src={`/assami/Rashtriya Rifles/${i + 1}-as-logo.png`}
+                        alt={`${unit.shortName} Logo`}
+                        className="w-[120px] h-[120px] object-contain group-hover:scale-110 transition-transform duration-500"
+                        style={{ filter: 'drop-shadow(0 4px 16px rgba(0,0,0,0.85))' }}
+                      />
                     </div>
 
-                    {/* Engraved Bronze Capsule Label */}
-                    <div
-                      className="border rounded-full px-3 py-1 bg-[#162218]/45 flex items-center justify-center mb-1 transition-colors duration-300 group-hover:border-[#C69B53]/50"
-                      style={{ borderColor: 'rgba(198, 155, 83, 0.25)' }}
-                    >
-                      <span className="font-cinzel text-[#C69B53] text-[9px] tracking-[0.25em] font-bold uppercase select-none leading-none">
-                        Battalion {romanNumerals[i] || (i + 1)}
-                      </span>
-                    </div>
+
 
                     {/* Short title */}
                     <h3 className={`font-cinzel text-[#F4F0E8] font-bold tracking-wide transition-colors duration-300 group-hover:text-yellow-400 leading-tight mb-2 ${cardCount > 8 ? 'text-xs' : (cardCount > 5 && cardCount <= 8) ? 'text-sm' : 'text-xl'
@@ -166,7 +156,7 @@ export default function RashtriyaRiflesPage() {
 
                     {/* Description / Full name */}
                     {cardCount <= 8 && (
-                      <p className={`font-garamond text-[#C8C0B3] leading-relaxed text-center px-2 flex-grow flex items-center justify-center max-w-[78%] mb-4 ${(cardCount > 5 && cardCount <= 8) ? 'text-xs max-h-[38px] line-clamp-2' : 'text-sm max-h-[80px]'
+                      <p className={`font-garamond text-[#C8C0B3] leading-tight text-center px-2 flex-grow flex items-center justify-center max-w-[78%] mb-3 ${(cardCount > 5 && cardCount <= 8) ? 'text-xs max-h-[38px] line-clamp-2' : 'text-[13px] max-h-[60px]'
                         }`}>
                         {unit.name.replace(', Rashtriya Rifles', '')}
                       </p>
@@ -205,10 +195,12 @@ export default function RashtriyaRiflesPage() {
                   <CardCorner position="bl" />
                   <CardCorner position="br" />
                   <div className="flex flex-col items-center">
-                    <span className="text-2xl filter drop-shadow-md mb-2">⚔️</span>
-                    <div className="border border-[#C69B53]/25 rounded-full px-2 py-0.5 bg-[#162218]/45">
-                      <span className="font-cinzel text-[#C69B53] text-[8px] tracking-[0.2em] font-bold uppercase">Battalion {romanNumerals[i] || (i + 1)}</span>
-                    </div>
+                    <img
+                      src={`/assami/Rashtriya Rifles/${i + 1}-as-logo.png`}
+                      alt={`${unit.shortName} Logo`}
+                      className="w-[60px] h-[60px] object-contain filter drop-shadow-md mb-2 group-hover:scale-105 transition-transform duration-300"
+                    />
+
                   </div>
                   <h3 className="font-cinzel text-[#F4F0E8] text-sm font-bold tracking-wide mt-2">{unit.shortName}</h3>
                   <div className="flex items-center justify-center gap-1.5 text-[#C69B53] text-[9px] font-inter tracking-widest uppercase mt-2 w-full border-t border-[#C69B53]/15 pt-2">
@@ -236,10 +228,12 @@ export default function RashtriyaRiflesPage() {
                     <CardCorner position="bl" />
                     <CardCorner position="br" />
                     <div className="flex flex-col items-center">
-                      <span className="text-4xl filter drop-shadow-md mb-2">⚔️</span>
-                      <div className="border border-[#C69B53]/25 rounded-full px-2.5 py-0.5 bg-[#162218]/45">
-                        <span className="font-cinzel text-[#C69B53] text-[8px] tracking-[0.2em] font-bold uppercase">Battalion {romanNumerals[i] || (i + 1)}</span>
-                      </div>
+                      <img
+                        src={`/assami/Rashtriya Rifles/${i + 1}-as-logo.png`}
+                        alt={`${unit.shortName} Logo`}
+                        className="w-[70px] h-[70px] object-contain filter drop-shadow-lg mb-2 group-hover:scale-105 transition-transform duration-300"
+                      />
+
                     </div>
                     <h3 className="font-cinzel text-[#F4F0E8] text-sm font-bold tracking-wide mt-2">{unit.shortName}</h3>
                     <div className="flex items-center justify-center gap-1.5 text-[#C69B53] text-[9px] font-inter tracking-widest uppercase mt-3 w-full border-t border-[#C69B53]/15 pt-2">
