@@ -159,7 +159,7 @@ export default function AssamUnitsHero({
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.7 }}
-            className={`flex flex-col items-center ${compact ? 'mb-5' : 'mb-8'}`}
+            className={`flex flex-col items-center ${compact ? 'mb-10' : 'mb-12'}`}
           >
             <p
               className={`font-garamond text-[#C8C0B3] max-w-3xl leading-relaxed italic ${compact ? 'text-xl md:text-2xl' : 'text-2xl md:text-3xl'
@@ -184,12 +184,12 @@ export default function AssamUnitsHero({
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.75, duration: 0.6 }}
-            className="flex flex-col items-center gap-1.5"
+            className="flex flex-col items-center gap-3"
           >
             <div className={`font-cinzel text-[#C69B53] tracking-[0.3em] uppercase leading-none ${compact ? 'text-sm md:text-base' : 'text-xl'
               }`}>{motto}</div>
             {mottoMeaning && (
-              <div className="font-garamond text-[#A8A093] text-base md:text-lg italic mt-1">{mottoMeaning}</div>
+              <div className="font-garamond text-[#A8A093] text-base md:text-lg italic mt-2">{mottoMeaning}</div>
             )}
           </motion.div>
         )}
