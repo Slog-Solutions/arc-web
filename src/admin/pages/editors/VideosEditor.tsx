@@ -1,5 +1,5 @@
 // src/admin/pages/editors/VideosEditor.tsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { showToast } from '../../components/Toast';
 import ConfirmModal from '../../components/ConfirmModal';
 import { fileToBase64 } from '../../store/adminStore';
@@ -36,6 +36,12 @@ export default function VideosEditor({ data, onSave }: Props) {
   const [deleteIdx, setDeleteIdx] = useState<number | null>(null);
   const [videoSourceType, setVideoSourceType] = useState<'youtube' | 'local'>('youtube');
   const [isUploading, setIsUploading] = useState(false);
+  
+  const videoInputRef = useRef<HTMLInputElement>(null);
+  const thumbnailInputRef = useRef<HTMLInputElement>(null);
+
+  const triggerVideoSelect = () => videoInputRef.current?.click();
+  const triggerThumbnailSelect = () => thumbnailInputRef.current?.click();
   const [form, setForm] = useState<VideoItem>({
     title: '',
     description: '',
@@ -252,24 +258,46 @@ export default function VideosEditor({ data, onSave }: Props) {
                 </div>
               </div>
 
-              <div style={{ border: '1px dashed rgba(212,160,23,0.2)', padding: '1rem', borderRadius: 8, backgroundColor: '#0e140f' }}>
-                <label className="admin-label" style={{ marginBottom: '0.5rem' }}>Upload Local Video File</label>
+              <div style={{ border: '1px dashed rgba(212,160,23,0.3)', padding: '1.25rem', borderRadius: 8, backgroundColor: '#0e140f', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
+                <label className="admin-label" style={{ marginBottom: '0rem', color: '#d4a017' }}>Upload Local Video File</label>
                 <input
+                  ref={videoInputRef}
                   type="file"
                   accept="video/*"
                   onChange={handleVideoUpload}
                   disabled={isUploading}
-                  style={{ fontSize: '0.8rem', color: '#e4dcc8', cursor: isUploading ? 'not-allowed' : 'pointer' }}
+                  style={{ display: 'none' }}
                 />
+                <button
+                  type="button"
+                  onClick={triggerVideoSelect}
+                  disabled={isUploading}
+                  style={{
+                    padding: '0.5rem 1.25rem',
+                    border: '1px solid #d4a017',
+                    borderRadius: '4px',
+                    background: 'transparent',
+                    color: '#d4a017',
+                    cursor: isUploading ? 'not-allowed' : 'pointer',
+                    fontSize: '0.8rem',
+                    fontWeight: 600,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    transition: 'all 0.2s'
+                  }}
+                >
+                  📁 Choose Video File
+                </button>
+                <div style={{ fontSize: '0.7rem', color: '#8a7a60', textAlign: 'center', wordBreak: 'break-all' }}>
+                  {form.videoUrl ? `File Loaded: ${form.videoUrl.startsWith('data:') ? 'Local file ready' : form.videoUrl}` : 'No file chosen'}
+                </div>
                 {isUploading && (
-                  <div style={{ color: '#C69B53', fontSize: '0.75rem', marginTop: '0.5rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <div style={{ color: '#C69B53', fontSize: '0.75rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <span className="spinner-border" style={{ width: '12px', height: '12px', border: '2px solid #C69B53', borderTopColor: 'transparent', borderRadius: '50%', display: 'inline-block', animation: 'spin 1s linear infinite' }}></span>
                     ⚡ Syncing high-capacity file to MongoDB Atlas...
                   </div>
                 )}
-                <div style={{ fontSize: '0.65rem', color: '#8a7a60', marginTop: '0.5rem', lineHeight: 1.4 }}>
-                  ⚠️ <strong>Note:</strong> Browsers limit total localStorage size to ~5MB. If you upload a larger video file, it may fail to save. For larger video archives, we recommend entering a hosted URL above (or placing them in your <code>public/videos/</code> project folder and using paths like <code>/videos/filename.mp4</code>).
-                </div>
               </div>
 
               {form.videoUrl && (
@@ -295,13 +323,18 @@ export default function VideosEditor({ data, onSave }: Props) {
               <label className="admin-label">Year</label>
               <input className="admin-input" value={form.year} onChange={e => setForm({ ...form, year: e.target.value })} placeholder="e.g., 2023" />
             </div>
-            <div className="admin-form-group">
-              <label className="admin-label">Featured</label>
-              <label className="admin-toggle" style={{ marginTop: '0.35rem' }}>
-                <input type="checkbox" checked={form.featured} onChange={e => setForm({ ...form, featured: e.target.checked })} />
-                <span className="admin-toggle-slider" />
-              </label>
-            </div>
+             <div className="admin-form-group" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+               <label className="admin-label">Featured</label>
+               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.5rem' }}>
+                 <label className="admin-toggle">
+                   <input type="checkbox" checked={form.featured} onChange={e => setForm({ ...form, featured: e.target.checked })} />
+                   <span className="admin-toggle-slider" />
+                 </label>
+                 <span style={{ fontSize: '0.75rem', color: form.featured ? '#d4a017' : '#8a7a60', fontWeight: 600 }}>
+                   {form.featured ? 'Yes' : 'No'}
+                 </span>
+               </div>
+             </div>
           </div>
 
           <div className="admin-form-group" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -315,14 +348,38 @@ export default function VideosEditor({ data, onSave }: Props) {
               )}
             </div>
 
-            <div style={{ border: '1px dashed rgba(212,160,23,0.2)', padding: '1rem', borderRadius: 8, backgroundColor: '#0e140f' }}>
-              <label className="admin-label" style={{ marginBottom: '0.5rem' }}>Upload Custom Thumbnail Image</label>
+            <div style={{ border: '1px dashed rgba(212,160,23,0.3)', padding: '1.25rem', borderRadius: 8, backgroundColor: '#0e140f', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
+              <label className="admin-label" style={{ marginBottom: '0rem', color: '#d4a017' }}>Upload Custom Thumbnail Image</label>
               <input
+                ref={thumbnailInputRef}
                 type="file"
                 accept="image/*"
                 onChange={handleThumbnailUpload}
-                style={{ fontSize: '0.8rem', color: '#e4dcc8' }}
+                style={{ display: 'none' }}
               />
+              <button
+                type="button"
+                onClick={triggerThumbnailSelect}
+                style={{
+                  padding: '0.5rem 1.25rem',
+                  border: '1px solid #d4a017',
+                  borderRadius: '4px',
+                  background: 'transparent',
+                  color: '#d4a017',
+                  cursor: 'pointer',
+                  fontSize: '0.8rem',
+                  fontWeight: 600,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  transition: 'all 0.2s'
+                }}
+              >
+                🖼️ Choose Thumbnail Image
+              </button>
+              <div style={{ fontSize: '0.7rem', color: '#8a7a60', textAlign: 'center', wordBreak: 'break-all' }}>
+                {form.thumbnail ? 'Thumbnail Image Loaded' : 'No image chosen'}
+              </div>
             </div>
           </div>
 
