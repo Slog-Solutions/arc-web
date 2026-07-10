@@ -35,6 +35,7 @@ export default function VideosEditor({ data, onSave }: Props) {
   const [editIdx, setEditIdx] = useState<number | null>(null);
   const [deleteIdx, setDeleteIdx] = useState<number | null>(null);
   const [videoSourceType, setVideoSourceType] = useState<'youtube' | 'local'>('youtube');
+  const [isUploading, setIsUploading] = useState(false);
   const [form, setForm] = useState<VideoItem>({
     title: '',
     description: '',
@@ -67,21 +68,33 @@ export default function VideosEditor({ data, onSave }: Props) {
   const handleVideoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      if (file.size > 15 * 1024 * 1024) {
-        showToast('Large video file loaded successfully! Click Save in the top right to upload to MongoDB.', 'success');
-      } else {
-        showToast('Video file loaded successfully! Click Save in the top right to upload to MongoDB.', 'success');
-      }
+      setIsUploading(true);
+      showToast('Uploading video to MongoDB GridFS, please wait...', 'success');
       try {
-        const base64 = await fileToBase64(file);
-        setForm(prev => ({
-          ...prev,
-          videoUrl: base64,
-          youtubeId: ''
-        }));
-        showToast('Video file loaded successfully', 'success');
-      } catch (err) {
-        showToast('Failed to read video file', 'error');
+        const formData = new FormData();
+        formData.append('video', file);
+
+        const res = await fetch('/api/upload-video', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const json = await res.json();
+        if (json.success && json.url) {
+          setForm(prev => ({
+            ...prev,
+            videoUrl: json.url,
+            youtubeId: ''
+          }));
+          showToast('Large video file loaded successfully! Click Save in the top right to upload to MongoDB.', 'success');
+        } else {
+          throw new Error(json.error || 'Upload failed');
+        }
+      } catch (err: any) {
+        console.error(err);
+        showToast(`Upload failed: ${err.message || 'Server error'}`, 'error');
+      } finally {
+        setIsUploading(false);
       }
     }
   };
@@ -245,8 +258,15 @@ export default function VideosEditor({ data, onSave }: Props) {
                   type="file"
                   accept="video/*"
                   onChange={handleVideoUpload}
-                  style={{ fontSize: '0.8rem', color: '#e4dcc8' }}
+                  disabled={isUploading}
+                  style={{ fontSize: '0.8rem', color: '#e4dcc8', cursor: isUploading ? 'not-allowed' : 'pointer' }}
                 />
+                {isUploading && (
+                  <div style={{ color: '#C69B53', fontSize: '0.75rem', marginTop: '0.5rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <span className="spinner-border" style={{ width: '12px', height: '12px', border: '2px solid #C69B53', borderTopColor: 'transparent', borderRadius: '50%', display: 'inline-block', animation: 'spin 1s linear infinite' }}></span>
+                    ⚡ Syncing high-capacity file to MongoDB Atlas...
+                  </div>
+                )}
                 <div style={{ fontSize: '0.65rem', color: '#8a7a60', marginTop: '0.5rem', lineHeight: 1.4 }}>
                   ⚠️ <strong>Note:</strong> Browsers limit total localStorage size to ~5MB. If you upload a larger video file, it may fail to save. For larger video archives, we recommend entering a hosted URL above (or placing them in your <code>public/videos/</code> project folder and using paths like <code>/videos/filename.mp4</code>).
                 </div>
