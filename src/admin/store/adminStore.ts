@@ -142,7 +142,9 @@ export function getUnitData(key: UnitKey): any {
       // Fall through
     }
   }
-  return structuredClone(DEFAULT_DATA[key]);
+  const defaultVal = structuredClone(DEFAULT_DATA[key]);
+  saveUnitData(key, defaultVal);
+  return defaultVal;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
