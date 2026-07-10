@@ -100,16 +100,46 @@ const DEFAULT_DATA: Record<UnitKey, unknown> = {
   'territorial-army': territorialArmyData,
 };
 
+// Memory cache for MongoDB documents
+let dbCache: Record<string, any> = {};
+let isInitialized = false;
+
+export async function initDb(): Promise<void> {
+  if (isInitialized) return;
+  try {
+    const res = await fetch('/api/get-all-data');
+    const json = await res.json();
+    if (json.success && json.data) {
+      dbCache = json.data;
+    }
+    isInitialized = true;
+  } catch (e) {
+    console.error('Failed to initialize MongoDB cache, using local storage fallback:', e);
+    isInitialized = true;
+  }
+}
+
+export function isDbInitialized(): boolean {
+  return isInitialized;
+}
+
 // ── Parent unit data ─────────────────────────────────
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function getUnitData(key: UnitKey): any {
-  const stored = localStorage.getItem(STORE_PREFIX + key);
+  const cacheKey = STORE_PREFIX + key;
+  if (dbCache[cacheKey]) {
+    return structuredClone(dbCache[cacheKey]);
+  }
+  const stored = localStorage.getItem(cacheKey);
   if (stored) {
     try {
-      return JSON.parse(stored);
+      const parsed = JSON.parse(stored);
+      // Migrate local storage to MongoDB asynchronously
+      saveUnitData(key, parsed);
+      return parsed;
     } catch {
-      // Fall through to default
+      // Fall through
     }
   }
   return structuredClone(DEFAULT_DATA[key]);
@@ -117,11 +147,21 @@ export function getUnitData(key: UnitKey): any {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function saveUnitData(key: UnitKey, data: any): void {
+  const cacheKey = STORE_PREFIX + key;
+  dbCache[cacheKey] = data;
+
+  // Sync to database
+  fetch('/api/save-data', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id: cacheKey, data })
+  }).catch(e => console.error('Failed to sync unit data to MongoDB:', e));
+
+  // Sync to local backup
   try {
-    localStorage.setItem(STORE_PREFIX + key, JSON.stringify(data));
+    localStorage.setItem(cacheKey, JSON.stringify(data));
   } catch (e) {
     console.error('Storage error:', e);
-    alert('Failed to save data. The storage limit (approx 5MB) may have been exceeded. Please use image URLs instead of uploading large image files.');
   }
 }
 
@@ -133,38 +173,55 @@ export function updateUnitSection(key: UnitKey, section: string, sectionData: an
 }
 
 export function resetUnitData(key: UnitKey): void {
-  localStorage.removeItem(STORE_PREFIX + key);
+  const cacheKey = STORE_PREFIX + key;
+  delete dbCache[cacheKey];
+
+  fetch('/api/reset-data', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id: cacheKey })
+  }).catch(e => console.error('Failed to reset unit data in MongoDB:', e));
+
+  localStorage.removeItem(cacheKey);
 }
 
 // ── Sub-unit data ─────────────────────────────────────
 
-// Sub-units store their OWN overrides. If a sub-unit has no custom data,
-// it falls back to the parent unit data (current frontend behavior).
-// The sub-unit data shape mirrors UnitData but all fields are optional overrides.
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function getSubUnitData(parentKey: UnitKey, subUnitId: string): any {
-  const storeKey = `${SUBUNIT_PREFIX}${parentKey}_${subUnitId}`;
-  const stored = localStorage.getItem(storeKey);
+  const cacheKey = `${SUBUNIT_PREFIX}${parentKey}_${subUnitId}`;
+  if (dbCache[cacheKey]) {
+    return structuredClone(dbCache[cacheKey]);
+  }
+  const stored = localStorage.getItem(cacheKey);
   if (stored) {
     try {
-      return JSON.parse(stored);
+      const parsed = JSON.parse(stored);
+      // Migrate to MongoDB
+      saveSubUnitData(parentKey, subUnitId, parsed);
+      return parsed;
     } catch {
       // Fall through
     }
   }
-  // Return empty object — means "use parent data for everything"
   return {};
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function saveSubUnitData(parentKey: UnitKey, subUnitId: string, data: any): void {
-  const storeKey = `${SUBUNIT_PREFIX}${parentKey}_${subUnitId}`;
+  const cacheKey = `${SUBUNIT_PREFIX}${parentKey}_${subUnitId}`;
+  dbCache[cacheKey] = data;
+
+  fetch('/api/save-data', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id: cacheKey, data })
+  }).catch(e => console.error('Failed to sync sub-unit data to MongoDB:', e));
+
   try {
-    localStorage.setItem(storeKey, JSON.stringify(data));
+    localStorage.setItem(cacheKey, JSON.stringify(data));
   } catch (e) {
     console.error('Storage error:', e);
-    alert('Failed to save data. The storage limit (approx 5MB) may have been exceeded. Please use image URLs instead of uploading large image files.');
   }
 }
 
@@ -176,8 +233,16 @@ export function updateSubUnitSection(parentKey: UnitKey, subUnitId: string, sect
 }
 
 export function resetSubUnitData(parentKey: UnitKey, subUnitId: string): void {
-  const storeKey = `${SUBUNIT_PREFIX}${parentKey}_${subUnitId}`;
-  localStorage.removeItem(storeKey);
+  const cacheKey = `${SUBUNIT_PREFIX}${parentKey}_${subUnitId}`;
+  delete dbCache[cacheKey];
+
+  fetch('/api/reset-data', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id: cacheKey })
+  }).catch(e => console.error('Failed to reset sub-unit data in MongoDB:', e));
+
+  localStorage.removeItem(cacheKey);
 }
 
 // Get merged data: sub-unit overrides on top of parent data
@@ -185,17 +250,23 @@ export function resetSubUnitData(parentKey: UnitKey, subUnitId: string): void {
 export function getMergedSubUnitData(parentKey: UnitKey, subUnitId: string): any {
   const parent = getUnitData(parentKey);
   const sub = getSubUnitData(parentKey, subUnitId);
-  // Shallow merge — each top-level key (history, gallery, etc.) is fully replaced if overridden
   return { ...parent, ...sub };
 }
 
 // ── Bulk operations ───────────────────────────────────
 
 export function resetAllData(): void {
+  dbCache = {};
+
+  fetch('/api/reset-data', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ all: true })
+  }).catch(e => console.error('Failed to reset all data in MongoDB:', e));
+
   const keys: UnitKey[] = ['arc', 'assam-rifles', 'arunachal-scouts', 'rashtriya-rifles', 'territorial-army'];
   keys.forEach(k => {
     localStorage.removeItem(STORE_PREFIX + k);
-    // Also clear all sub-unit data
     const subs = DEFAULT_SUBUNITS[k];
     subs.forEach(s => {
       localStorage.removeItem(`${SUBUNIT_PREFIX}${k}_${s.id}`);

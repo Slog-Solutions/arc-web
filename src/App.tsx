@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { initDb } from './admin/store/adminStore';
 import { AnimatePresence } from 'framer-motion';
 import { HelmetProvider } from 'react-helmet-async';
 import Navbar from './components/layout/Navbar';
@@ -70,6 +71,38 @@ function ScrollToTop() {
 export default function App() {
   const location = useLocation();
   const isAdmin = location.pathname.startsWith('/admin');
+  const [dbLoaded, setDbLoaded] = useState(false);
+
+  useEffect(() => {
+    initDb().then(() => {
+      setDbLoaded(true);
+    });
+  }, []);
+
+  if (!dbLoaded) {
+    return (
+      <div 
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '100vh',
+          width: '100vw',
+          backgroundColor: '#0a0c08',
+          color: '#F4F0E8',
+          fontFamily: "'Cinzel', serif"
+        }}
+      >
+        <div style={{ fontSize: '1.5rem', fontWeight: 'bold', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
+          Assam Regimental Centre
+        </div>
+        <div style={{ fontSize: '0.75rem', letterSpacing: '0.15em', color: '#C69B53' }}>
+          Entering Digital Museum Archives...
+        </div>
+      </div>
+    );
+  }
 
   return (
     <HelmetProvider>
