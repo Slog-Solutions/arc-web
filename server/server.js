@@ -19,7 +19,11 @@ app.use(express.urlencoded({ limit: '100mb', extended: true }));
 // Configure multer disk storage to save videos directly to public/videos/
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const uploadPath = path.join(__dirname, '../public/videos');
+    let folder = '../public/images';
+    if (file.mimetype.startsWith('video/')) {
+      folder = '../public/videos';
+    }
+    const uploadPath = path.join(__dirname, folder);
     // Ensure directory exists
     if (!fs.existsSync(uploadPath)) {
       fs.mkdirSync(uploadPath, { recursive: true });
@@ -91,6 +95,25 @@ connectDB().then(() => {
 
     } catch (err) {
       console.error("Local upload handler error:", err);
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  // 2. Endpoint to handle image uploads by writing directly to public/images/
+  app.post('/api/upload-image', upload.single('image'), async (req, res) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ error: 'No image file provided' });
+      }
+
+      console.log(`✅ Saved image file locally: ${req.file.filename} (${req.file.size} bytes)`);
+      
+      // Return the public URL path served by Vite
+      const publicUrl = `/images/${req.file.filename}`;
+      res.json({ success: true, url: publicUrl });
+
+    } catch (err) {
+      console.error("Local image upload handler error:", err);
       res.status(500).json({ error: err.message });
     }
   });

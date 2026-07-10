@@ -1,7 +1,6 @@
 // src/admin/pages/editors/GalleryEditor.tsx
 import { useState, useEffect } from 'react';
 import { showToast } from '../../components/Toast';
-import { fileToBase64 } from '../../store/adminStore';
 import ConfirmModal from '../../components/ConfirmModal';
 
 interface GalleryItem { id: number; src: string; caption: string; category: string; year: string; history?: string; }
@@ -31,8 +30,27 @@ export default function GalleryEditor({ data, onSave }: Props) {
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const base64 = await fileToBase64(file);
-      setForm(prev => ({ ...prev, src: base64 }));
+      showToast('Uploading gallery photo...', 'success');
+      try {
+        const formData = new FormData();
+        formData.append('image', file);
+
+        const res = await fetch('/api/upload-image', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const json = await res.json();
+        if (json.success && json.url) {
+          setForm(prev => ({ ...prev, src: json.url }));
+          showToast('Gallery photo uploaded successfully!', 'success');
+        } else {
+          throw new Error(json.error || 'Upload failed');
+        }
+      } catch (err: any) {
+        console.error(err);
+        showToast(`Failed to upload photo: ${err.message || 'Server error'}`, 'error');
+      }
     }
   };
 

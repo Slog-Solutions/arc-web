@@ -2,7 +2,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { showToast } from '../../components/Toast';
 import ConfirmModal from '../../components/ConfirmModal';
-import { fileToBase64 } from '../../store/adminStore';
 
 interface VideoItem {
   title: string;
@@ -108,15 +107,29 @@ export default function VideosEditor({ data, onSave }: Props) {
   const handleThumbnailUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      showToast('Uploading custom thumbnail...', 'success');
       try {
-        const base64 = await fileToBase64(file);
-        setForm(prev => ({
-          ...prev,
-          thumbnail: base64
-        }));
-        showToast('Thumbnail uploaded successfully', 'success');
-      } catch (err) {
-        showToast('Failed to read thumbnail image', 'error');
+        const formData = new FormData();
+        formData.append('image', file);
+
+        const res = await fetch('/api/upload-image', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const json = await res.json();
+        if (json.success && json.url) {
+          setForm(prev => ({
+            ...prev,
+            thumbnail: json.url
+          }));
+          showToast('Thumbnail uploaded successfully!', 'success');
+        } else {
+          throw new Error(json.error || 'Upload failed');
+        }
+      } catch (err: any) {
+        console.error(err);
+        showToast(`Failed to upload thumbnail: ${err.message || 'Server error'}`, 'error');
       }
     }
   };

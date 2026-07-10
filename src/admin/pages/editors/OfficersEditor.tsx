@@ -1,7 +1,6 @@
 // src/admin/pages/editors/OfficersEditor.tsx
 import { useState, useEffect } from 'react';
 import { showToast } from '../../components/Toast';
-import { fileToBase64 } from '../../store/adminStore';
 import ConfirmModal from '../../components/ConfirmModal';
 
 interface Officer { name: string; rank: string; tenure: string; bio: string; contribution: string; image: string; }
@@ -31,8 +30,27 @@ export default function OfficersEditor({ data, onSave }: Props) {
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const base64 = await fileToBase64(file);
-      setForm(prev => ({ ...prev, image: base64 }));
+      showToast('Uploading officer photo...', 'success');
+      try {
+        const formData = new FormData();
+        formData.append('image', file);
+
+        const res = await fetch('/api/upload-image', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const json = await res.json();
+        if (json.success && json.url) {
+          setForm(prev => ({ ...prev, image: json.url }));
+          showToast('Officer photo uploaded successfully!', 'success');
+        } else {
+          throw new Error(json.error || 'Upload failed');
+        }
+      } catch (err: any) {
+        console.error(err);
+        showToast(`Failed to upload photo: ${err.message || 'Server error'}`, 'error');
+      }
     }
   };
 
