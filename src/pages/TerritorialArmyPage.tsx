@@ -58,8 +58,6 @@ export default function TerritorialArmyPage() {
     cardHeight = '280px';
   }
 
-  const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV'];
-
   return (
     <motion.div
       initial={{ opacity: 0 }}

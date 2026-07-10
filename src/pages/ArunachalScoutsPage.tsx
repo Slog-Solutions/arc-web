@@ -55,8 +55,6 @@ export default function ArunachalScoutsPage() {
     cardHeight = '280px';
   }
 
-  const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV'];
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -182,7 +180,7 @@ export default function ArunachalScoutsPage() {
 
           {/* Tablet view (2-column scrollable grid) */}
           <div className="hidden md:grid lg:hidden grid-cols-2 gap-5 w-full h-fit max-h-[440px] overflow-y-auto px-4 scrollbar-none">
-            {ARUNACHAL_SCOUTS_UNITS.map((unit, i) => (
+            {ARUNACHAL_SCOUTS_UNITS.map((unit) => (
               <Link to={`/arunachal-scouts/${unit.id}`} key={unit.id} className="group block">
                 <div
                   className="relative rounded-xl p-5 border border-[#C69B53]/25 flex flex-col justify-between items-center text-center h-[190px] overflow-hidden"
@@ -214,7 +212,7 @@ export default function ArunachalScoutsPage() {
 
           {/* Mobile View (Horizontally swipeable flex slider) */}
           <div className="flex md:hidden overflow-x-auto snap-x snap-mandatory gap-4 w-full py-2 px-4 scrollbar-none">
-            {ARUNACHAL_SCOUTS_UNITS.map((unit, i) => (
+            {ARUNACHAL_SCOUTS_UNITS.map((unit) => (
               <div key={unit.id} className="flex-shrink-0 w-[250px] snap-center">
                 <Link to={`/arunachal-scouts/${unit.id}`} className="group block">
                   <div
