@@ -59,12 +59,12 @@ export default function HeroSection({
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <div ref={ref} className={`relative overflow-hidden bg-olive-950 flex items-center justify-center ${compact ? 'h-[38vh] min-h-[340px]' : 'h-screen min-h-[800px]'
+    <div ref={ref} className={`relative flex items-center justify-center ${compact ? 'h-[38vh] min-h-[340px]' : 'h-[45vh] min-h-[400px]'
       }`}>
       {/* Background Image Container */}
       <motion.div
-        className="absolute inset-0 w-full h-full"
-        style={{ y: compact ? 0 : y, scale: compact ? 1 : scale }}
+        className="fixed inset-0 w-full h-full z-0 bg-olive-950"
+        style={compact ? undefined : { y, scale }}
       >
         <AnimatePresence initial={false}>
           {images.map((img, idx) => (
