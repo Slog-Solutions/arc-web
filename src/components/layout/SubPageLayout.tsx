@@ -35,7 +35,7 @@ export default function SubPageLayout({
       transition={{ duration: 0.5 }}
       className="min-h-screen pb-32 relative overflow-hidden"
       style={{
-        background: '#0a0c08',
+        background: '#050806',
         paddingTop: '180px',
       }}
     >
