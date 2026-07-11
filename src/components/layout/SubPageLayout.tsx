@@ -35,7 +35,7 @@ export default function SubPageLayout({
       transition={{ duration: 0.5 }}
       className="min-h-screen pb-32 relative overflow-hidden"
       style={{
-        background: '#050806',
+        backgroundColor: '#0b0b09',
         paddingTop: '180px',
       }}
     >
@@ -51,7 +51,12 @@ export default function SubPageLayout({
       </Helmet>
 
       {/* Decorative Background */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(212,160,23,0.06)_0%,_transparent_75%)] pointer-events-none z-0" />
+      <div 
+        className="absolute inset-0 pointer-events-none z-0" 
+        style={{
+          background: 'radial-gradient(circle at 50% 28%, rgba(185,145,45,0.10) 0%, rgba(95,75,28,0.06) 24%, rgba(20,20,16,0.98) 55%, rgba(8,8,8,1) 100%)'
+        }}
+      />
 
       <div className="museum-container relative z-10">
 
