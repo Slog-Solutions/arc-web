@@ -86,7 +86,7 @@ export default function TerritorialArmyPage() {
       />
 
       {/* Directory Section */}
-      <section className="relative w-full flex flex-col justify-start py-4 pb-12 px-8 select-none bg-transparent">
+      <section className="relative z-10 w-full flex flex-col justify-start py-4 pb-12 px-8 select-none bg-transparent">
         {/* Directory Title Section */}
         <div className="flex flex-col items-center text-center mb-5 flex-shrink-0">
           <h2 className="font-cinzel text-[#F4F0E8] text-2xl font-bold tracking-wider mb-2.5 mt-2">

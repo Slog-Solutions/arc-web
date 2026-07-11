@@ -62,7 +62,7 @@ export default function TerritorialArmyHero({
       {/* Background Image Container */}
       <motion.div
         className="fixed inset-0 w-full h-full z-0 bg-olive-950"
-        style={{ y: compact ? 0 : y, scale: compact ? 1 : scale }}
+        style={compact ? undefined : { y, scale }}
       >
         {images.map((img, idx) => (
           <motion.div
