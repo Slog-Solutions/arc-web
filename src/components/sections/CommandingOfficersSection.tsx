@@ -24,7 +24,7 @@ const GAON_BURA_FALLBACKS = [
 
 export default function CommandingOfficersSection({ officers, gaonBuras }: Props) {
   return (
-    <section id="commanding-officers" className="relative museum-room-wall spotlight-glow" style={{ paddingTop: '200px', paddingBottom: '200px' }}>
+    <section id="commanding-officers" className="relative museum-room-wall spotlight-glow" style={{ paddingTop: '100px', paddingBottom: '100px' }}>
       <div className="museum-container">
 
         {/* Section Header */}
@@ -35,7 +35,7 @@ export default function CommandingOfficersSection({ officers, gaonBuras }: Props
         />
 
         {/* ── Large Portrait Grid (3D Flip Plaque Layout) ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3" style={{ gap: '100px', marginBottom: '150px' }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-12 md:gap-16 lg:gap-20 mb-32">
           {officers.map((officer, i) => {
             const officerImg = officer.image || PORTRAIT_FALLBACKS[i % PORTRAIT_FALLBACKS.length];
             return (
@@ -132,7 +132,7 @@ export default function CommandingOfficersSection({ officers, gaonBuras }: Props
 
         {/* ── Gaon Buras Heritage Section ────────────────── */}
         {gaonBuras && gaonBuras.length > 0 && (
-          <>
+          <div className="pt-8">
             <div className="room-divider">
               <div className="room-divider-line" />
               <div className="room-divider-flourish">
@@ -143,13 +143,16 @@ export default function CommandingOfficersSection({ officers, gaonBuras }: Props
               <div className="room-divider-line" />
             </div>
 
-            <SectionHeader
-              tag="Cultural Pillars"
-              title="Gaon Buras"
-              subtitle="The village elders and community leaders who served as the vital bridge between the regiment and local tribes."
-            />
+            <div className="mt-20">
+              <SectionHeader
+                tag="Cultural Pillars"
+                title="Gaon Buras"
+                subtitle="The village elders and community leaders who served as the vital bridge between the regiment and local tribes."
+              />
+            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16" style={{ marginTop: '5rem' }}>
+            {/* Changed from inline styles to standard Tailwind classes for consistent managed spacing */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-16 lg:gap-20 mt-12 mb-16">
               {gaonBuras.map((gb, i) => (
                 <motion.div
                   key={i}
@@ -238,7 +241,7 @@ export default function CommandingOfficersSection({ officers, gaonBuras }: Props
                 </motion.div>
               ))}
             </div>
-          </>
+          </div>
         )}
       </div>
     </section>

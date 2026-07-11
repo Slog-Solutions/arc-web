@@ -508,8 +508,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6rem 0;
-  background: #080a06;
+  padding: 3rem 0;
+  background: transparent;
 }
 
 .room-divider-line {
