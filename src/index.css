@@ -383,7 +383,7 @@ body {
 
 /* Premium Museum Ambient Rooms & Textures */
 .museum-room-wall {
-  background: radial-gradient(circle at 50% 30%, rgba(20, 26, 13, 0.95) 0%, #080a06 100%);
+  background: transparent;
   position: relative;
 }
 
