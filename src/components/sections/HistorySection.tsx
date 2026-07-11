@@ -12,6 +12,7 @@ interface Props {
   highlights: Highlight[];
   heroImage?: string;
   paragraphImages?: string[];
+  isSubPage?: boolean;
 }
 
 const HISTORY_IMAGES = [
@@ -36,6 +37,7 @@ export default function HistorySection({
   highlights,
   heroImage,
   paragraphImages,
+  isSubPage = false,
 }: Props) {
   const TIMELINE_BG_IMAGES = [
     '/assami/Assam%20Regimental%20Centre/arc-passing-out-parade.jpg',
@@ -60,7 +62,7 @@ export default function HistorySection({
   };
 
   return (
-    <section id="history" className="relative museum-room-wall spotlight-glow overflow-hidden" style={{ paddingTop: '160px', paddingBottom: '160px' }}>
+    <section id="history" className="relative museum-room-wall spotlight-glow overflow-hidden" style={{ paddingTop: isSubPage ? '20px' : '160px', paddingBottom: '160px' }}>
 
       {/* Subtle bottom fade only - no top shadow over heading */}
       <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
@@ -72,7 +74,7 @@ export default function HistorySection({
         <SectionHeader tag="Heritage Exhibition" title="Chronicles of Valour" subtitle={overview} />
 
         {/* ── Spotlight Stat Highlights ───────────────────── */}
-        <div className="grid grid-cols-2 md:grid-cols-4" style={{ gap: '60px 100px', marginBottom: '150px', marginTop: '30px' }}>
+        <div className="grid grid-cols-2 md:grid-cols-4" style={{ gap: '20px 32px', marginBottom: '60px', marginTop: '24px' }}>
           {highlights.map((h, i) => (
             <motion.div
               key={h.label}
@@ -80,7 +82,7 @@ export default function HistorySection({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.6 }}
-              className="relative p-14 text-center bg-gradient-to-b from-[#1a2210] to-[#0a0d07] border border-[#3a2910] rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.6),0_0_0_1px_rgba(212,160,23,0.08)]" style={{ minHeight: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '40px' }}
+              className="relative text-center bg-gradient-to-b from-[#1a2210] to-[#0a0d07] border border-[#3a2910] rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.5),0_0_0_1px_rgba(212,160,23,0.08)]" style={{ minHeight: '120px', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '18px 16px' }}
             >
               {/* Corner screws */}
               <span className="absolute top-2 left-2 text-[8px] text-[#2b1d0c]">✛</span>
@@ -88,9 +90,9 @@ export default function HistorySection({
               <span className="absolute bottom-2 left-2 text-[8px] text-[#2b1d0c]">✛</span>
               <span className="absolute bottom-2 right-2 text-[#2b1d0c] text-[8px]">✛</span>
 
-              <div className="font-cinzel text-4xl md:text-5xl text-gold-gradient font-bold leading-none mb-4">{h.value}</div>
-              <div className="h-px w-8 bg-yellow-700/40 mx-auto mb-4" />
-              <div className="font-inter text-[10px] text-stone-400 uppercase tracking-[0.25em]">{h.label}</div>
+              <div className="font-cinzel text-2xl md:text-3xl text-gold-gradient font-bold leading-none mb-2">{h.value}</div>
+              <div className="h-px w-6 bg-yellow-700/40 mx-auto mb-2" />
+              <div className="font-inter text-[9px] text-stone-400 uppercase tracking-[0.25em]">{h.label}</div>
             </motion.div>
           ))}
         </div>
@@ -103,7 +105,7 @@ export default function HistorySection({
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
             className="museum-wood-frame brass-corners rounded-2xl overflow-hidden"
-            style={{ height: '560px', marginBottom: '150px', marginTop: '40px' }}
+            style={{ height: '380px', marginBottom: '80px', marginTop: '24px' }}
           >
             <img src={heroImage} alt="Historical Centrepiece" className="w-full h-full object-cover filter brightness-[0.8] contrast-[1.05]" />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
@@ -121,7 +123,7 @@ export default function HistorySection({
         )}
 
         {/* ── Alternating Exhibit Rooms (Chapters) ────────── */}
-        <div style={{ marginBottom: '150px', marginTop: '40px' }}>
+        <div style={{ marginBottom: '60px', marginTop: '24px' }}>
           {paragraphs.map((para, i) => {
             const imgSrc = paragraphImages?.[i] ?? HISTORY_IMAGES[i % HISTORY_IMAGES.length];
             const caption = IMAGE_CAPTIONS[i % IMAGE_CAPTIONS.length];
@@ -130,7 +132,7 @@ export default function HistorySection({
               <div
                 key={i}
                 className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center`}
-                style={{ gap: '120px', marginBottom: i < paragraphs.length - 1 ? '140px' : '0' }}
+                style={{ gap: '48px', marginBottom: i < paragraphs.length - 1 ? '60px' : '0' }}
               >
                 {/* Large Framed Picture */}
                 <motion.div
@@ -182,7 +184,7 @@ export default function HistorySection({
         </div>
 
         {/* ── Quote plaques ─────────────────────────────── */}
-        <div style={{ marginBottom: '100px', marginTop: '40px' }}>
+        <div style={{ marginBottom: '48px', marginTop: '24px' }}>
           {quotes.map((q, i) => (
             <motion.blockquote
               key={i}
@@ -191,7 +193,7 @@ export default function HistorySection({
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
               className="relative p-10 bg-[#0f140a] border-l-4 border-yellow-500 rounded-r-2xl overflow-hidden"
-              style={{ boxShadow: '0 15px 35px rgba(0,0,0,0.6)', marginBottom: '80px' }}
+              style={{ boxShadow: '0 15px 35px rgba(0,0,0,0.6)', marginBottom: '32px' }}
             >
               <div className="absolute -right-6 -bottom-6 text-yellow-600/5 font-cinzel text-[120px] pointer-events-none select-none">
                 🦏
@@ -214,7 +216,7 @@ export default function HistorySection({
         </div>
 
         {/* Thin gold separator */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '75px', marginTop: '40px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '32px', marginTop: '24px' }}>
           <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to right, transparent, rgba(212,160,23,0.3), transparent)' }} />
           <span style={{ color: 'rgba(212,160,23,0.5)', fontSize: '10px', letterSpacing: '0.3em', fontFamily: 'Cinzel, serif', textTransform: 'uppercase' }}>Heritage Archive</span>
           <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to left, transparent, rgba(212,160,23,0.3), transparent)' }} />

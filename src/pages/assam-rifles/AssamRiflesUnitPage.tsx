@@ -31,9 +31,6 @@ export default function AssamRiflesUnitPage() {
         compact={true}
         title={unit.name}
         subtitle={`Established: ${unit.established} · Location: ${unit.location}`}
-        motto="The Sentinel of the North-East"
-        mottoMeaning="Friends of the Hill People"
-        established={unit.established}
         backgroundImage="/assami/17 Assam Rifles/ar-patrol-green.jpg"
         backgroundImages={[
           "/assami/17 Assam Rifles/ar-patrol-green.jpg",
@@ -42,7 +39,6 @@ export default function AssamRiflesUnitPage() {
           "/assami/17 Assam Rifles/ar-joint-training.jpg",
           "/assami/17 Assam Rifles/ar-community-friends.jpg"
         ]}
-        badge={`${unit.shortName} Exhibition — Est. ${unit.established}`}
       />
 
       <RoomSelector basePath={`/assam-rifles/${unit.id}`} unitName={unit.name} />

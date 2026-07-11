@@ -153,14 +153,14 @@ export default function Navbar() {
           {/* ── SECTION 3: Motto Badge ── */}
           <div className="hidden xl:flex items-center justify-end pr-2 xl:pr-6 h-full flex-shrink-0">
             {/* Elongated Badge container */}
-            <div className="relative flex items-center justify-center" style={{ width: '240px', height: '60px' }}>
-              <img src="/assets/navbar/badge-frame.svg" className="absolute inset-0 w-[240px] h-[64px] pointer-events-none" alt="" />
-              <img src="/assets/navbar/badge-decoration.svg" className="absolute inset-0 w-[240px] h-[64px] pointer-events-none" alt="" />
+            <div className="relative flex items-center justify-center -translate-y-1" style={{ width: '190px', height: '46px' }}>
+              <img src="/assets/navbar/badge-frame.svg" className="absolute inset-0 w-full h-full object-fill pointer-events-none" alt="" />
+              <img src="/assets/navbar/badge-decoration.svg" className="absolute inset-0 w-full h-full object-fill pointer-events-none" alt="" />
 
               {/* Vertically and horizontally centered text */}
-              <div className="flex flex-col items-center justify-center text-center relative z-10 pt-[2px] h-full">
-                <span className="font-cinzel text-[#F4E8D3] text-[11px] font-semibold tracking-[3px] uppercase leading-none mb-1.5">ASAM VIKRAM</span>
-                <span className="font-cinzel text-[#C88B47] text-[10px] font-semibold tracking-[3px] uppercase leading-none">TAGRA RAHO</span>
+              <div className="flex flex-col items-center justify-center text-center relative z-10 w-full h-full">
+                <span className="font-cinzel text-[#F4E8D3] text-[10px] font-semibold tracking-[3px] uppercase leading-none mb-1">ASAM VIKRAM</span>
+                <span className="font-cinzel text-[#C88B47] text-[9px] font-semibold tracking-[3px] uppercase leading-none">TAGRA RAHO</span>
               </div>
             </div>
           </div>
