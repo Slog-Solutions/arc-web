@@ -5,21 +5,23 @@ import { Helmet } from 'react-helmet-async';
 import AssamUnitsHero from '../components/sections/heroes/AssamUnitsHero';
 
 export const ASSAM_RIFLES_UNITS = [
-  { id: '1-ar', name: '1st Unit, Assam Units', shortName: '1 AR', established: '1835', location: 'Lushai Hills' },
-  { id: '2-ar', name: '2nd Unit, Assam Units', shortName: '2 AR', established: '1883', location: 'Shillong' },
-  { id: '3-ar', name: '3rd Unit, Assam Units', shortName: '3 AR', established: '1891', location: 'Kohima' },
-  { id: '4-ar', name: '4th Unit, Assam Units', shortName: '4 AR', established: '1913', location: 'Imphal' },
-  { id: '5-ar', name: '5th Unit, Assam Units', shortName: '5 AR', established: '1920', location: 'Lokra' },
-  { id: '6-ar', name: '6th Unit, Assam Units', shortName: '6 AR', established: '1924', location: 'Agartala' },
-  { id: '7-ar', name: '7th Unit, Assam Units', shortName: '7 AR', established: '1930', location: 'Silchar' },
-  { id: '8-ar', name: '8th Unit, Assam Units', shortName: '8 AR', established: '1938', location: 'Aizawl' },
-  { id: '9-ar', name: '9th Unit, Assam Units', shortName: '9 AR', established: '1941', location: 'Itanagar' },
-  { id: '10-ar', name: '10th Unit, Assam Units', shortName: '10 AR', established: '1943', location: 'Mokokchung' },
-  { id: '12-ar', name: '12th Unit, Assam Units', shortName: '12 AR', established: '1948', location: 'Tura' },
-  { id: '14-ar', name: '14th Unit, Assam Units', shortName: '14 AR', established: '1955', location: 'Dimapur' },
-  { id: '15-ar', name: '15th Unit, Assam Units', shortName: '15 AR', established: '1960', location: 'Lunglei' },
-  { id: '16-ar', name: '16th Unit, Assam Units', shortName: '16 AR', established: '1963', location: 'Ghaspani' },
-  { id: '17-ar', name: '17th Unit, Assam Units', shortName: '17 AR', established: '1965', location: 'Shillong' },
+  { id: '1-ar', name: '1st Unit, Assam Units', shortName: '1 AR', established: '1835', location: 'Lushai Hills', bgImage: '/assets/units/unit_1_bg.png' },
+  { id: '2-ar', name: '2nd Unit, Assam Units', shortName: '2 AR', established: '1883', location: 'Shillong', bgImage: '/assets/units/unit_2_bg.png' },
+  { id: '3-ar', name: '3rd Unit, Assam Units', shortName: '3 AR', established: '1891', location: 'Kohima', bgImage: '/assets/units/unit_3_bg.png' },
+  { id: '4-ar', name: '4th Unit, Assam Units', shortName: '4 AR', established: '1913', location: 'Imphal', bgImage: '/assets/units/unit_4_bg.png' },
+  { id: '5-ar', name: '5th Unit, Assam Units', shortName: '5 AR', established: '1920', location: 'Lokra', bgImage: '/assets/units/unit_5_bg.png' },
+  { id: '6-ar', name: '6th Unit, Assam Units', shortName: '6 AR', established: '1924', location: 'Agartala', bgImage: '/assets/units/unit_6_bg.png' },
+  { id: '7-ar', name: '7th Unit, Assam Units', shortName: '7 AR', established: '1930', location: 'Silchar', bgImage: '/assets/units/unit_7_bg.png' },
+  { id: '8-ar', name: '8th Unit, Assam Units', shortName: '8 AR', established: '1938', location: 'Aizawl', bgImage: '/assets/units/unit_8_bg.png' },
+  { id: '9-ar', name: '9th Unit, Assam Units', shortName: '9 AR', established: '1941', location: 'Itanagar', bgImage: '/assets/units/unit_9_bg.png' },
+  { id: '10-ar', name: '10th Unit, Assam Units', shortName: '10 AR', established: '1943', location: 'Mokokchung', bgImage: '/assets/units/unit_10_bg.png' },
+  { id: '11-ar', name: '11th Unit, Assam Units', shortName: '11 AR', established: '1945', location: 'Dibrugarh', bgImage: '/assets/units/unit_11_bg.png' },
+  { id: '12-ar', name: '12th Unit, Assam Units', shortName: '12 AR', established: '1948', location: 'Tura', bgImage: '/assets/units/unit_1_bg.png' }, // Placeholder
+  { id: '14-ar', name: '14th Unit, Assam Units', shortName: '14 AR', established: '1955', location: 'Dimapur', bgImage: '/assets/units/unit_2_bg.png' }, // Placeholder
+  { id: '15-ar', name: '15th Unit, Assam Units', shortName: '15 AR', established: '1960', location: 'Lunglei', bgImage: '/assets/units/unit_3_bg.png' }, // Placeholder
+  { id: '16-ar', name: '16th Unit, Assam Units', shortName: '16 AR', established: '1963', location: 'Ghaspani', bgImage: '/assets/units/unit_4_bg.png' }, // Placeholder
+  { id: '17-ar', name: '17th Unit, Assam Units', shortName: '17 AR', established: '1965', location: 'Shillong', bgImage: '/assets/units/unit_5_bg.png' }, // Placeholder
+  { id: '18-ar', name: '18th Unit, Assam Units', shortName: '18 AR', established: '1968', location: 'Agartala', bgImage: '/assets/units/unit_6_bg.png' }, // Placeholder
 ];
 
 // Ornate L-shaped corner notches matching visual language exactly
@@ -28,13 +30,11 @@ const CardCorner = ({ position }: { position: 'tl' | 'tr' | 'bl' | 'br' }) => {
   const isLeft = position.endsWith('l');
   return (
     <svg
-      width="14"
-      height="14"
+      width="10"
+      height="10"
       viewBox="0 0 14 14"
       fill="none"
-      className={`absolute pointer-events-none opacity-45 group-hover:opacity-90 transition-opacity duration-300 ${isTop ? 'top-3' : 'bottom-3'
-        } ${isLeft ? 'left-3' : 'right-3'
-        }`}
+      className={`absolute pointer-events-none opacity-45 group-hover:opacity-90 transition-opacity duration-300 z-20 ${isTop ? 'top-2' : 'bottom-2'} ${isLeft ? 'left-2' : 'right-2'}`}
       style={{
         transform: `${isTop ? '' : 'scaleY(-1)'} ${isLeft ? '' : 'scaleX(-1)'}`
       }}
@@ -44,33 +44,63 @@ const CardCorner = ({ position }: { position: 'tl' | 'tr' | 'bl' | 'br' }) => {
   );
 };
 
-export default function AssamRiflesPage() {
-  const cardCount = ASSAM_RIFLES_UNITS.length;
-
-  // Define fixed card dimensions based on density to avoid percentage rounding errors
-  let cardWidth = '270px';
-  let cardHeight = '380px';
-
-  if (cardCount <= 2) {
-    cardWidth = '420px';
-    cardHeight = '480px';
-  } else if (cardCount <= 4) {
-    cardWidth = '320px';
-    cardHeight = '420px';
-  } else if (cardCount <= 5) {
-    cardWidth = '270px';
-    cardHeight = '380px';
-  } else if (cardCount <= 12) {
-    cardWidth = '240px';
-    cardHeight = '320px';
-  } else {
-    // Adjusted for 8-top, 7-bottom layout on smaller screens
-    cardWidth = '125px';
-    cardHeight = '125px';
-  }
-
+const UnitCard = ({ unit, index }: { unit: typeof ASSAM_RIFLES_UNITS[0], index: number }) => {
   const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX'];
-  const unitIcons = ['📜', '🎖️', '⚔️', '🛡️', '🏔️', '🎺', '🦅', '🦅', '🌿', '⚔️', '🚩', '🪖', '🗡️', '📡', '⚔️', '⭐', '🎯'];
+  const romanNumber = romanNumerals[parseInt(unit.shortName.split(' ')[0]) - 1] || (index + 1);
+
+  return (
+    <Link to={`/assam-rifles/${unit.id}`} className="group block h-[205px] w-[130px]">
+      <div className="relative overflow-hidden flex flex-col items-center justify-end transition-all duration-700 hover:border-[#C69B53]/60 hover:-translate-y-1.5 border border-[#C69B53]/30 h-full w-full rounded-xl bg-[#0B0B09] ring-1 ring-inset ring-[#C69B53]/10 hover:shadow-[0_0_20px_rgba(212,160,23,0.15)] group-hover:shadow-[0_15px_30px_rgba(0,0,0,0.8)]"
+           style={{ padding: '8px 4px 10px' }}>
+        
+        {/* Background Artwork (100% of card) */}
+        <div className="absolute inset-0 overflow-hidden z-0 rounded-xl">
+          <div className="w-full h-full bg-cover bg-center transition-transform duration-[2000ms] group-hover:scale-110"
+               style={{ backgroundImage: `url("${unit.bgImage}")` }} />
+          {/* Exact overlay requested by user to allow artwork visibility while ensuring text readability */}
+          <div className="absolute inset-0 z-10"
+               style={{ background: 'linear-gradient(180deg, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0.35) 35%, rgba(0,0,0,0.55) 65%, rgba(0,0,0,0.70) 100%)' }} />
+        </div>
+        
+        {/* Subtle global glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(212,160,23,0.15)_0%,_transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-0 pointer-events-none mix-blend-screen" />
+
+        {/* Ornamental Corners */}
+        <CardCorner position="tl" />
+        <CardCorner position="tr" />
+        <CardCorner position="bl" />
+        <CardCorner position="br" />
+
+        <div className="relative z-20 w-full h-full flex flex-col items-center justify-between py-1">
+          {/* Top Label */}
+          <div className="flex flex-col items-center">
+            <span className="font-cinzel text-[#C69B53] text-[10px] tracking-[0.2em] font-bold uppercase select-none drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">
+              UNIT {romanNumber}
+            </span>
+          </div>
+
+          {/* Unit Name (Title) */}
+          <h3 className="font-cinzel text-white text-[18px] font-bold tracking-widest leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] text-center my-auto px-1">
+            {unit.shortName}
+          </h3>
+
+          {/* Explore Button */}
+          <div className="flex items-center justify-center gap-1.5 text-[#C69B53] text-[11px] font-cinzel font-semibold tracking-[0.1em] uppercase transition-all duration-500 group-hover:text-[#F4D068] group-hover:drop-shadow-[0_0_8px_rgba(212,160,23,0.5)] w-full pt-2 pb-1 relative overflow-hidden z-10">
+            {/* Divider line */}
+            <div className="absolute top-0 left-[15%] right-[15%] h-[1px] bg-gradient-to-r from-transparent via-[#C69B53]/60 to-transparent transition-all duration-500 group-hover:via-[#F4D068]/90" />
+            
+            <span className="relative">EXPLORE</span>
+            <span className="transform transition-transform duration-500 group-hover:translate-x-1 font-bold">→</span>
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+};
+
+export default function AssamRiflesPage() {
+  const row1Units = ASSAM_RIFLES_UNITS.slice(0, 9);
+  const row2Units = ASSAM_RIFLES_UNITS.slice(9, 17);
 
   return (
     <motion.div
@@ -101,165 +131,54 @@ export default function AssamRiflesPage() {
       />
 
       {/* Directory Section */}
-      <section className="relative w-full flex flex-col justify-start py-4 pb-12 px-8 select-none bg-transparent">
+      <section className="relative w-full flex-1 flex flex-col justify-start pb-[40px] px-8 select-none bg-transparent" style={{ marginTop: '-25px' }}>
         {/* Directory Title Section */}
-        <div className="flex flex-col items-center text-center flex-shrink-0 mt-2 mb-2">
-          <h2 className="font-cinzel text-[#F4F0E8] text-[22px] font-bold tracking-widest uppercase">
+        <div className="flex flex-col items-center text-center flex-shrink-0 mt-0 mb-4">
+          <div className="flex items-center justify-center mb-3 opacity-60">
+             <div className="w-10 h-px bg-gradient-to-r from-transparent to-[#C69B53]" />
+             <div className="mx-3 w-1 h-1 rotate-45 bg-[#C69B53]" />
+             <div className="w-10 h-px bg-gradient-to-l from-transparent to-[#C69B53]" />
+          </div>
+          <h2 className="font-cinzel text-[#C69B53] text-[13px] font-bold tracking-[0.3em] uppercase drop-shadow-md">
             Assam Units Battalions
           </h2>
+          <div className="flex items-center justify-center mt-3 opacity-60">
+             <div className="w-10 h-px bg-gradient-to-r from-transparent to-[#C69B53]" />
+             <div className="mx-3 w-1 h-1 rotate-45 bg-[#C69B53]" />
+             <div className="w-10 h-px bg-gradient-to-l from-transparent to-[#C69B53]" />
+          </div>
         </div>
 
-        {/* Directory Adaptive Flex Wrapper */}
-        <div className="w-full flex items-start justify-center pb-4" style={{ marginTop: '60px' }}>
-
-          {/* Desktop flex-wrap gallery (fully adaptive, perfectly centered with no empty strips) */}
-          <div
-            className="hidden lg:flex flex-wrap justify-center items-center mx-auto"
-            style={{
-              gap: cardCount > 8 ? '12px' : '24px',
-              width: 'fit-content',
-              maxWidth: cardCount > 8 ? '1600px' : '100%', // Allows up to 9 cards on the first row to eliminate the third row
-            }}
-          >
-            {ASSAM_RIFLES_UNITS.map((unit, i) => (
+        {/* Directory Flex Wrapper (Non-Scrollable Layout) */}
+        <div className="w-full flex flex-col items-center justify-center max-w-[1600px] mx-auto" style={{ gap: '18px' }}>
+          
+          {/* Row 1 (9 Cards) */}
+          <div className="flex flex-nowrap justify-center items-center w-full" style={{ gap: '16px' }}>
+            {row1Units.map((unit, i) => (
               <motion.div
                 key={unit.id}
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: (i % 6) * 0.04, duration: 0.4, ease: 'easeOut' }}
+                transition={{ delay: i * 0.04, duration: 0.5, ease: 'easeOut' }}
                 className="flex-shrink-0"
-                style={{
-                  width: cardWidth,
-                  height: cardHeight,
-                }}
               >
-                <Link to={`/assam-rifles/${unit.id}`} className="group block h-full w-full">
-                  <div
-                    className="relative overflow-hidden flex flex-col justify-between items-center text-center transition-all duration-300 hover:border-[#C69B53]/60 hover:shadow-[0_16px_36px_rgba(0,0,0,0.85),0_0_24px_rgba(198,155,83,0.18)] hover:-translate-y-1 border border-[#C69B53]/25 h-full w-full rounded-xl"
-                    style={{
-                      padding: cardCount > 8 ? '8px' : (cardCount > 5 && cardCount <= 8) ? '14px' : '20px',
-                      backgroundColor: '#111A12',
-                      backgroundImage: `radial-gradient(circle at center, rgba(22, 34, 24, 0.45) 0%, rgba(13, 20, 14, 0.85) 100%), url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='leather'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.05 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.15 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23leather)'/%3E%3C/svg%3E")`,
-                      boxShadow: 'inset 0 0 24px rgba(0, 0, 0, 0.8)',
-                    }}
-                  >
-                    <div className="absolute inset-0 pointer-events-none p-1">
-                      <CardCorner position="tl" />
-                      <CardCorner position="tr" />
-                      <CardCorner position="bl" />
-                      <CardCorner position="br" />
-                    </div>
-
-                    {/* Large Premium Medallion Icon */}
-                    <div className="relative flex items-center justify-center mb-1 flex-shrink-0">
-                      <span
-                        className="select-none filter drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)] group-hover:scale-105 transition-transform duration-500"
-                        style={{
-                          fontSize: cardCount > 8 ? '1.5rem' : '2.5rem',
-                          filter: 'drop-shadow(0 0 8px rgba(198, 155, 83, 0.3))',
-                        }}
-                      >
-                        {cardCount > 8 ? unitIcons[i] : '🦅'}
-                      </span>
-                    </div>
-
-                    {/* Engraved Bronze Capsule Label */}
-                    <div className="flex items-center justify-center mb-1 transition-colors duration-300">
-                      <span className="font-cinzel text-[#C69B53] text-[8px] tracking-[0.2em] font-bold uppercase select-none leading-none">
-                        UNIT {romanNumerals[i] || (i + 1)}
-                      </span>
-                    </div>
-
-                    {/* Short title */}
-                    <h3 className={`font-cinzel text-[#F4F0E8] font-bold tracking-wider transition-colors duration-300 group-hover:text-yellow-400 leading-tight mb-2 ${cardCount > 8 ? 'text-sm' : (cardCount > 5 && cardCount <= 8) ? 'text-sm' : 'text-base'
-                      }`}>
-                      {unit.shortName}
-                    </h3>
-
-                    {/* Description / Full name */}
-                    {cardCount <= 8 && (
-                      <p className={`font-garamond text-[#C8C0B3] leading-relaxed text-center px-2 flex-grow flex items-center justify-center max-w-[78%] mb-4 ${(cardCount > 5 && cardCount <= 8) ? 'text-xs max-h-[38px] line-clamp-2' : 'text-sm max-h-[80px]'
-                        }`}>
-                        {unit.name.replace(', Assam Units', '')}
-                      </p>
-                    )}
-
-                    {/* Explore Button indicator */}
-                    <div className="flex items-center justify-center gap-1.5 text-[#C69B53] text-[8px] font-inter tracking-[0.2em] uppercase transition-colors duration-300 group-hover:text-yellow-400 mt-auto w-full border-t border-[#C69B53]/15 pt-2 flex-shrink-0 relative overflow-hidden" style={{ minHeight: '20px' }}>
-                      <span className="relative">
-                        EXPLORE
-                        <span className="absolute bottom-[-2px] left-0 w-0 h-[1px] bg-[#C69B53] transition-all duration-300 group-hover:w-full" />
-                      </span>
-                      <span className="transform transition-transform duration-300 group-hover:translate-x-1 font-bold">
-                        →
-                      </span>
-                    </div>
-
-                  </div>
-                </Link>
+                <UnitCard unit={unit} index={i} />
               </motion.div>
             ))}
           </div>
 
-          {/* Tablet view (2-column scrollable grid) */}
-          <div className="hidden md:grid lg:hidden grid-cols-2 gap-5 w-full h-fit max-h-[440px] overflow-y-auto px-4 scrollbar-none">
-            {ASSAM_RIFLES_UNITS.map((unit, i) => (
-              <Link to={`/assam-rifles/${unit.id}`} key={unit.id} className="group block">
-                <div
-                  className="relative rounded-xl p-5 border border-[#C69B53]/25 flex flex-col justify-between items-center text-center h-[180px] overflow-hidden"
-                  style={{
-                    backgroundColor: '#111A12',
-                    backgroundImage: `radial-gradient(circle at center, rgba(22, 34, 24, 0.45) 0%, rgba(13, 20, 14, 0.85) 100%)`,
-                  }}
-                >
-                  <CardCorner position="tl" />
-                  <CardCorner position="tr" />
-                  <CardCorner position="bl" />
-                  <CardCorner position="br" />
-                  <div className="flex flex-col items-center">
-                    <span className="text-2xl filter drop-shadow-md mb-2">🦅</span>
-                    <div className="border border-[#C69B53]/25 rounded-full px-2 py-0.5 bg-[#162218]/45">
-                      <span className="font-cinzel text-[#C69B53] text-[8px] tracking-[0.2em] font-bold uppercase">Unit {romanNumerals[i] || (i + 1)}</span>
-                    </div>
-                  </div>
-                  <h3 className="font-cinzel text-[#F4F0E8] text-sm font-bold tracking-wide mt-2">{unit.shortName}</h3>
-                  <div className="flex items-center justify-center gap-1.5 text-[#C69B53] text-[9px] font-inter tracking-widest uppercase mt-2 w-full border-t border-[#C69B53]/15 pt-2">
-                    <span>Explore Exhibit →</span>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-
-          {/* Mobile View (Horizontally swipeable flex slider) */}
-          <div className="flex md:hidden overflow-x-auto snap-x snap-mandatory gap-4 w-full py-2 px-4 scrollbar-none">
-            {ASSAM_RIFLES_UNITS.map((unit, i) => (
-              <div key={unit.id} className="flex-shrink-0 w-[250px] snap-center">
-                <Link to={`/assam-rifles/${unit.id}`} className="group block">
-                  <div
-                    className="relative rounded-xl p-6 border border-[#C69B53]/25 flex flex-col justify-between items-center text-center h-[210px] overflow-hidden"
-                    style={{
-                      backgroundColor: '#111A12',
-                      backgroundImage: `radial-gradient(circle at center, rgba(22, 34, 24, 0.45) 0%, rgba(13, 20, 14, 0.85) 100%)`,
-                    }}
-                  >
-                    <CardCorner position="tl" />
-                    <CardCorner position="tr" />
-                    <CardCorner position="bl" />
-                    <CardCorner position="br" />
-                    <div className="flex flex-col items-center">
-                      <span className="text-4xl filter drop-shadow-md mb-2">🦅</span>
-                      <div className="border border-[#C69B53]/25 rounded-full px-2.5 py-0.5 bg-[#162218]/45">
-                        <span className="font-cinzel text-[#C69B53] text-[8px] tracking-[0.2em] font-bold uppercase">Unit {romanNumerals[i] || (i + 1)}</span>
-                      </div>
-                    </div>
-                    <h3 className="font-cinzel text-[#F4F0E8] text-sm font-bold tracking-wide mt-2">{unit.shortName}</h3>
-                    <div className="flex items-center justify-center gap-1.5 text-[#C69B53] text-[9px] font-inter tracking-widest uppercase mt-3 w-full border-t border-[#C69B53]/15 pt-2">
-                      <span>Explore Exhibit →</span>
-                    </div>
-                  </div>
-                </Link>
-              </div>
+          {/* Row 2 (8 Cards) */}
+          <div className="flex flex-nowrap justify-center items-center w-full" style={{ gap: '16px' }}>
+            {row2Units.map((unit, i) => (
+              <motion.div
+                key={unit.id}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: (i + 9) * 0.04, duration: 0.5, ease: 'easeOut' }}
+                className="flex-shrink-0"
+              >
+                <UnitCard unit={unit} index={i + 9} />
+              </motion.div>
             ))}
           </div>
 
