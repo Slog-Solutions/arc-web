@@ -24,7 +24,7 @@ const GAON_BURA_FALLBACKS = [
 
 export default function CommandingOfficersSection({ officers, gaonBuras }: Props) {
   return (
-    <section id="commanding-officers" className="relative museum-room-wall spotlight-glow" style={{ paddingTop: '100px', paddingBottom: '100px' }}>
+    <section id="commanding-officers" className="relative" style={{ paddingTop: '40px', paddingBottom: '100px' }}>
       <div className="museum-container">
 
         {/* Section Header */}
