@@ -2,6 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const { MongoClient } = require('mongodb');
+const dns = require('dns');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
@@ -52,8 +53,17 @@ if (!uri) {
 const client = new MongoClient(uri);
 let db;
 
+function configureDnsFallback() {
+  const currentServers = dns.getServers();
+  if (currentServers.length && currentServers[0] === '127.0.0.1') {
+    console.log('⚠️ Node DNS is using local resolver 127.0.0.1. Switching to public DNS for Atlas SRV lookups.');
+    dns.setServers(['8.8.8.8', '8.8.4.4']);
+  }
+}
+
 async function connectDB() {
   try {
+    configureDnsFallback();
     console.log("Connecting to MongoDB Atlas...");
     await client.connect();
     console.log("✅ Connected successfully to MongoDB Atlas!");
