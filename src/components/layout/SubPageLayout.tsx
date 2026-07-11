@@ -58,28 +58,20 @@ export default function SubPageLayout({
         {/* ================= Breadcrumb & Back Button ================= */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#2d2212]/50 pb-8">
 
-          {/* Breadcrumb */}
-          <div className="flex items-center flex-wrap gap-2 text-stone-500 font-inter text-xs tracking-wider uppercase">
-            <Link
-              to="/"
-              className="hover:text-yellow-500 transition-colors duration-200"
-            >
+          {/* Breadcrumbs */}
+          <div className="flex items-center flex-wrap gap-2 md:gap-3 font-cinzel text-[11px] md:text-[12px] font-semibold uppercase" style={{ letterSpacing: '0.12em' }}>
+            <Link to="/" className="text-[#d4a017]/70 hover:text-[#f3cd69] transition-colors duration-300">
               Home
             </Link>
-
             {breadcrumbs.map((bc, idx) => (
-              <span key={idx} className="flex items-center gap-2">
-                <span className="text-[#d4a017]/50">/</span>
-
+              <span key={idx} className="flex items-center gap-2 md:gap-3">
+                <span className="text-[#8a6820]/60">/</span>
                 {bc.path ? (
-                  <Link
-                    to={bc.path}
-                    className="hover:text-yellow-500 transition-colors duration-200"
-                  >
+                  <Link to={bc.path} className="text-[#d4a017]/70 hover:text-[#f3cd69] transition-colors duration-300">
                     {bc.label}
                   </Link>
                 ) : (
-                  <span className="text-stone-300 font-medium">
+                  <span className="text-[#d4a017]/90 drop-shadow-[0_0_4px_rgba(212,160,23,0.3)]">
                     {bc.label}
                   </span>
                 )}
@@ -87,28 +79,41 @@ export default function SubPageLayout({
             ))}
           </div>
 
-          {/* Exit Button */}
-          <Link
-            to={backPath}
-            className="group flex items-center gap-2.5 px-4 py-2 border border-[#8a6820]/40 rounded-lg bg-gradient-to-r from-[#141a0d] to-[#0a0c08] shadow-[0_4px_12px_rgba(0,0,0,0.5)] hover:border-yellow-500/80 transition-all duration-300"
+          {/* Premium Back Button */}
+          <Link 
+            to={backPath} 
+            className="group relative inline-flex items-center justify-center min-h-[44px] transition-colors duration-300"
           >
-            <svg
-              className="w-4 h-4 text-yellow-500 group-hover:-translate-x-1 transition-transform duration-200"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2.5}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M10 19l-7-7m0 0l7-7m-7 7h18"
-              />
-            </svg>
+            {/* Outer Border (1px) */}
+            <div 
+              className="absolute inset-0 bg-[#8a6820]/40 group-hover:bg-[#d4a017]/80 transition-colors duration-300"
+              style={{ clipPath: 'polygon(6px 0, calc(100% - 6px) 0, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px), 0 6px)' }}
+            />
+            
+            {/* Main Background */}
+            <div 
+              className="absolute inset-[1px] bg-[#0c0b08] group-hover:bg-[#110f0a] transition-colors duration-300"
+              style={{ clipPath: 'polygon(5.5px 0, calc(100% - 5.5px) 0, 100% 5.5px, 100% calc(100% - 5.5px), calc(100% - 5.5px) 100%, 5.5px 100%, 0 calc(100% - 5.5px), 0 5.5px)' }}
+            />
 
-            <span className="font-cinzel text-xs text-yellow-500 group-hover:text-yellow-400 tracking-widest uppercase">
-              Exit Exhibition
-            </span>
+            {/* Inner Border (1px) */}
+            <div 
+              className="absolute inset-[3px] bg-[#8a6820]/20 group-hover:bg-[#d4a017]/40 transition-colors duration-300"
+              style={{ clipPath: 'polygon(4px 0, calc(100% - 4px) 0, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px), 0 4px)' }}
+            />
+            
+            {/* Inner Background */}
+            <div 
+              className="absolute inset-[4px] bg-[#0c0b08] group-hover:bg-[#110f0a] transition-colors duration-300"
+              style={{ clipPath: 'polygon(3.5px 0, calc(100% - 3.5px) 0, 100% 3.5px, 100% calc(100% - 3.5px), calc(100% - 3.5px) 100%, 3.5px 100%, 0 calc(100% - 3.5px), 0 3.5px)' }}
+            />
+
+            {/* Content */}
+            <div className="relative z-10 flex items-center justify-center gap-2" style={{ paddingLeft: '24px', paddingRight: '24px' }}>
+              <span className="font-cinzel text-[13px] font-semibold text-[#d4a017]/90 group-hover:text-[#f3cd69] uppercase transition-colors duration-300 text-center whitespace-nowrap" style={{ letterSpacing: '0.12em', marginRight: '-0.12em' }}>
+                Exit Exhibition
+              </span>
+            </div>
           </Link>
         </div>
 
