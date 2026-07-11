@@ -92,7 +92,7 @@ export default function ArunachalScoutsPage() {
         </div>
 
         {/* Directory Adaptive Flex Wrapper */}
-        <div className="w-full flex items-start justify-center pb-4 pt-0 mt-2 relative z-20">
+        <div className="w-full flex items-start justify-center pb-4 pt-0 relative z-20" style={{ marginTop: '60px' }}>
 
           {/* Desktop flex-wrap gallery (fully adaptive, perfectly centered with no empty strips) */}
           <div
@@ -108,7 +108,7 @@ export default function ArunachalScoutsPage() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.05, duration: 0.5, ease: 'easeOut' }}
-                className="overflow-hidden flex-shrink-0"
+                className="flex-shrink-0"
                 style={{
                   width: cardWidth,
                   height: cardHeight,

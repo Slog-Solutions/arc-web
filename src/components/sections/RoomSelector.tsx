@@ -115,7 +115,7 @@ export default function RoomSelector({ basePath, unitName }: Props) {
       </div>
 
       {/* Directory Adaptive Flex Wrapper */}
-      <div className="w-full flex items-center justify-center pb-4">
+      <div className="w-full flex items-center justify-center pb-4" style={{ marginTop: '48px' }}>
 
         {/* Desktop flex-wrap gallery (fully adaptive, perfectly centered with no empty strips) */}
         <div
@@ -145,7 +145,7 @@ export default function RoomSelector({ basePath, unitName }: Props) {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.05, duration: 0.5, ease: 'easeOut' }}
-                className="overflow-hidden flex-shrink-0"
+                className="flex-shrink-0"
                 style={{
                   width: cardWidth,
                   height: cardHeight,
