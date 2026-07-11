@@ -24,7 +24,7 @@ const GAON_BURA_FALLBACKS = [
 
 export default function CommandingOfficersSection({ officers, gaonBuras }: Props) {
   return (
-    <section id="commanding-officers" className="relative museum-room-wall spotlight-glow" style={{ paddingTop: '200px', paddingBottom: '200px' }}>
+    <section id="commanding-officers" className="relative museum-room-wall spotlight-glow" style={{ paddingTop: '60px', paddingBottom: '80px' }}>
       <div className="museum-container">
 
         {/* Section Header */}
@@ -35,7 +35,7 @@ export default function CommandingOfficersSection({ officers, gaonBuras }: Props
         />
 
         {/* ── Large Portrait Grid (3D Flip Plaque Layout) ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3" style={{ gap: '100px', marginBottom: '150px' }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3" style={{ gap: '40px', marginBottom: '60px' }}>
           {officers.map((officer, i) => {
             const officerImg = officer.image || PORTRAIT_FALLBACKS[i % PORTRAIT_FALLBACKS.length];
             return (

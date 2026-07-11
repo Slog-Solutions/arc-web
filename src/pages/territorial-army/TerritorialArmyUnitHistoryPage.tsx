@@ -30,6 +30,7 @@ export default function TerritorialArmyUnitHistoryPage() {
         quotes={(getMergedSubUnitData('territorial-army', unitId || '')).history.quotes}
         highlights={(getMergedSubUnitData('territorial-army', unitId || '')).history.highlights}
         heroImage="/assami/Territorial Army/ta-parade-assam.jpg"
+        isSubPage={true}
       />
     </SubPageLayout>
   );

@@ -16,7 +16,7 @@ export default function GallerySection({ gallery }: Props) {
   const filtered = activeCategory === 'All' ? gallery : gallery.filter(g => g.category === activeCategory);
 
   return (
-    <section id="gallery" className="relative museum-room-wall spotlight-glow" style={{ paddingTop: '200px', paddingBottom: '200px' }}>
+    <section id="gallery" className="relative museum-room-wall spotlight-glow" style={{ paddingTop: '60px', paddingBottom: '80px' }}>
       <div className="museum-container">
         <SectionHeader
           tag="Visual Archive"
@@ -25,7 +25,7 @@ export default function GallerySection({ gallery }: Props) {
         />
 
         {/* Category filters */}
-        <div className="flex flex-wrap gap-4 justify-center" style={{ marginBottom: '120px' }}>
+        <div className="flex flex-wrap gap-4 justify-center" style={{ marginBottom: '40px' }}>
           {categories.map((cat) => (
             <button
               key={cat}

@@ -20,7 +20,7 @@ export default function SectionHeader({ tag, title, subtitle: _subtitle, centere
       style={{ textAlign: centered ? 'center' : 'left', marginBottom: '4.5rem' }}
     >
       {tag && (
-        <div className={`flex items-center gap-3 mb-7 ${centered ? 'justify-center' : ''}`}>
+        <div className={`flex items-center gap-3 mb-3 ${centered ? 'justify-center' : ''}`}>
           <div className="h-px w-12 bg-gradient-to-r from-transparent to-yellow-600/60" />
           <span className="font-inter text-xs text-yellow-600/80 tracking-[0.35em] uppercase">{tag}</span>
           <div className="h-px w-12 bg-gradient-to-l from-transparent to-yellow-600/60" />

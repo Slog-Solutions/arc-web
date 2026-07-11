@@ -30,6 +30,7 @@ export default function RashtriyaRiflesUnitHistoryPage() {
         quotes={(getMergedSubUnitData('rashtriya-rifles', unitId || '')).history.quotes}
         highlights={(getMergedSubUnitData('rashtriya-rifles', unitId || '')).history.highlights}
         heroImage="/assami/Rashtriya Rifles/rr-ops-kashmir.jpg"
+        isSubPage={true}
       />
     </SubPageLayout>
   );

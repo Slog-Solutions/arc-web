@@ -25,6 +25,7 @@ export default function ARCHistoryPage() {
         quotes={getUnitData('arc').history.quotes}
         highlights={getUnitData('arc').history.highlights}
         heroImage="/assami/Assam Regimental Centre/arc-raising-day.jpg"
+        isSubPage={true}
       />
     </SubPageLayout>
   );

@@ -107,7 +107,7 @@ export default function SubPageLayout({
         </div>
 
         {/* Section Title Ornament */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-10">
           {subtitle && (
             <span className="font-cinzel text-[10px] text-yellow-600/80 tracking-[0.4em] uppercase block mb-6">
               {subtitle}
@@ -126,7 +126,7 @@ export default function SubPageLayout({
         </div>
 
         {/* Main Content Area */}
-        <div className="relative mt-24 md:mt-32">
+        <div className="relative mt-6">
           {children}
         </div>
       </div>

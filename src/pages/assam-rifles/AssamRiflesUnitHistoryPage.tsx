@@ -38,6 +38,7 @@ export default function AssamRiflesUnitHistoryPage() {
         quotes={(getMergedSubUnitData('assam-rifles', unitId || '')).history.quotes}
         highlights={(getMergedSubUnitData('assam-rifles', unitId || '')).history.highlights}
         heroImage="/assami/17 Assam Rifles/ar-parade-shillong.jpg"
+        isSubPage={true}
       />
     </SubPageLayout>
   );
