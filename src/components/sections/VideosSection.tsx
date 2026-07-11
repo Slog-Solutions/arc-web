@@ -36,12 +36,7 @@ export default function VideosSection({ videos }: Props) {
   return (
     <section id="videos" className="relative museum-room-wall spotlight-glow overflow-hidden" style={{ paddingTop: '60px', paddingBottom: '80px' }}>
       
-      {/* Film Strip Top Border Ornament */}
-      <div className="absolute top-0 left-0 right-0 h-4 bg-[#0a0c08] flex items-center justify-around pointer-events-none opacity-20">
-        {Array.from({ length: 30 }).map((_, idx) => (
-          <div key={idx} className="w-3 h-2.5 bg-[#d4a017]/40 rounded-sm" />
-        ))}
-      </div>
+
 
       <div className="museum-container">
         <SectionHeader
