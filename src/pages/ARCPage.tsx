@@ -11,7 +11,7 @@ export default function ARCPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen w-full flex flex-col bg-[#0C120D]"
+      className="min-h-screen w-full flex flex-col bg-transparent"
     >
       <Helmet>
         <title>Assam Regimental Centre | Home</title>

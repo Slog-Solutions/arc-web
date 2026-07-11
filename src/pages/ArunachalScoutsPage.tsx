@@ -61,7 +61,7 @@ export default function ArunachalScoutsPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen w-full flex flex-col bg-[#0C120D]"
+      className="min-h-screen w-full flex flex-col bg-transparent"
     >
       <Helmet>
         <title>Arunachal Scouts | Home</title>
@@ -83,7 +83,7 @@ export default function ArunachalScoutsPage() {
       />
 
       {/* Directory Section */}
-      <section className="relative w-full flex flex-col justify-start gap-0 -mt-8 pt-0 pb-12 px-8 select-none bg-[#0C120D] z-10">
+      <section className="relative w-full flex flex-col justify-start gap-0 -mt-8 pt-0 pb-12 px-8 select-none bg-transparent z-10">
         {/* Directory Title Section */}
         <div className="flex flex-col items-center text-center flex-shrink-0 -mt-16 mb-1 z-20">
           <h2 className="font-cinzel text-[#F4F0E8] text-[26px] font-bold tracking-widest uppercase mb-0 filter drop-shadow-lg">

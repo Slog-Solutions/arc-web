@@ -30,6 +30,7 @@ export default function ArunachalScoutsUnitHistoryPage() {
         quotes={(getMergedSubUnitData('arunachal-scouts', unitId || '')).history.quotes}
         highlights={(getMergedSubUnitData('arunachal-scouts', unitId || '')).history.highlights}
         heroImage="/assami/Arunachal Scouts/scouts-border-patrol.jpg"
+        isSubPage={true}
       />
     </SubPageLayout>
   );

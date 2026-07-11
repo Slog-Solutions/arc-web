@@ -87,7 +87,7 @@ export default function RoomSelector({ basePath, unitName }: Props) {
     cardHeight = '420px';
   } else if (cardCount <= 5) {
     cardWidth = '270px';
-    cardHeight = '380px';
+    cardHeight = '310px';
   } else if (cardCount <= 12) {
     cardWidth = '240px';
     cardHeight = '320px';
@@ -97,9 +97,9 @@ export default function RoomSelector({ basePath, unitName }: Props) {
   }
 
   return (
-    <section className="relative w-full flex flex-col justify-center py-12 px-8 select-none bg-[#0C120D]">
+    <section className="relative flex-1 min-h-0 flex flex-col justify-center py-4 px-8 select-none w-full bg-transparent z-10">
       {/* Directory Title Section */}
-      <div className="flex flex-col items-center text-center mb-16 flex-shrink-0">
+      <div className="flex flex-col items-center text-center mb-6 flex-shrink-0">
         <span className="font-cinzel text-[#C69B53] text-[10px] tracking-[6px] uppercase font-bold mb-4">
           EXHIBITION DIRECTORY
         </span>
