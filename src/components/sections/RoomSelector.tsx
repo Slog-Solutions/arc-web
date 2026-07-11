@@ -97,7 +97,7 @@ export default function RoomSelector({ basePath, unitName }: Props) {
   }
 
   return (
-    <section className="relative flex-1 min-h-0 flex flex-col justify-center py-4 px-8 select-none w-full bg-[#0C120D]">
+    <section className="relative flex-1 min-h-0 flex flex-col justify-center py-4 px-8 select-none w-full bg-transparent z-10">
       {/* Directory Title Section */}
       <div className="flex flex-col items-center text-center mb-6 flex-shrink-0">
         <span className="font-cinzel text-[#C69B53] text-[10px] tracking-[6px] uppercase font-bold mb-4">

@@ -1,6 +1,6 @@
 // src/components/sections/HeroSection.tsx - REFINED
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 interface Props {
   title: string | React.ReactNode;
@@ -56,31 +56,25 @@ export default function RashtriyaRiflesHero({
   // Parallax / Zoom effect
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <div ref={ref} className={`relative overflow-hidden bg-olive-950 flex items-center justify-center ${compact ? 'h-[38vh] min-h-[340px]' : 'h-screen min-h-[650px]'
-      }`}>
+    <>
+      {/* Force Vite recompile Hero */}
       {/* Background Image Container */}
       <motion.div
-        className="absolute inset-0 w-full h-full"
+        className="fixed inset-0 w-full h-full z-0 bg-olive-950"
         style={{ y: compact ? 0 : y, scale: compact ? 1 : scale }}
       >
-        <AnimatePresence initial={false}>
-          {images.map((img, idx) => (
-            idx === currentImageIndex && (
-              <motion.div
-                key={img}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.5 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1.5, ease: 'easeInOut' }}
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: `url(${img})` }}
-              />
-            )
-          ))}
-        </AnimatePresence>
+        {images.map((img, idx) => (
+          <motion.div
+            key={img}
+            initial={false}
+            animate={{ opacity: idx === currentImageIndex ? 0.5 : 0 }}
+            transition={{ duration: 1.5, ease: 'easeInOut' }}
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url("${img}")` }}
+          />
+        ))}
 
         {/* Darker premium gradient overlays to keep text perfectly readable */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0C120D] via-olive-950/60 to-black/60" />
@@ -103,10 +97,11 @@ export default function RashtriyaRiflesHero({
       </motion.div>
 
       {/* Hero Content Container */}
-      <motion.div
-        className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col items-center text-center justify-center"
-        style={{ opacity, paddingTop: contentPaddingTop || (compact ? '95px' : '180px') }}
-      >
+      <div ref={ref} className={`relative flex w-full items-center justify-center ${compact ? 'h-[38vh] min-h-[340px]' : 'h-screen min-h-[650px]'}`}>
+        <motion.div
+          className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col items-center text-center justify-center"
+          style={{ paddingTop: contentPaddingTop || (compact ? '95px' : '180px') }}
+        >
         {/* Badge */}
         {badge && (
           <motion.div
@@ -206,6 +201,7 @@ export default function RashtriyaRiflesHero({
           </motion.div>
         )}
       </motion.div>
-    </div>
+      </div>
+    </>
   );
 }

@@ -64,7 +64,7 @@ export default function TerritorialArmyPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen w-full flex flex-col bg-[#0C120D]"
+      className="min-h-screen w-full flex flex-col bg-transparent"
     >
       <Helmet>
         <title>Territorial Army | Home</title>
@@ -86,7 +86,7 @@ export default function TerritorialArmyPage() {
       />
 
       {/* Directory Section */}
-      <section className="relative w-full flex flex-col justify-start py-4 pb-12 px-8 select-none bg-[#0C120D]">
+      <section className="relative w-full flex flex-col justify-start py-4 pb-12 px-8 select-none bg-transparent">
         {/* Directory Title Section */}
         <div className="flex flex-col items-center text-center mb-5 flex-shrink-0">
           <h2 className="font-cinzel text-[#F4F0E8] text-2xl font-bold tracking-wider mb-2.5 mt-2">
