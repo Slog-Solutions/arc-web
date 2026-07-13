@@ -12,12 +12,12 @@ export default function TerritorialArmyUnitGaonBurasPage() {
 
   const breadcrumbs = [
     { label: unit.shortName, path: `/territorial-army/${unit.id}` },
-    { label: 'Gaon Buras' },
+    { label: 'Gaon Buras Commanding Officer' },
   ];
 
   return (
     <SubPageLayout
-      title="Gaon Buras (Commanders)"
+      title="Gaon Buras Commanding Officer (Commanders)"
       breadcrumbs={breadcrumbs}
       backPath={`/territorial-army/${unit.id}`}
     >

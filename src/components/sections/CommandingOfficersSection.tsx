@@ -130,10 +130,10 @@ export default function CommandingOfficersSection({ officers, gaonBuras }: Props
           })}
         </div>
 
-        {/* ── Gaon Buras Heritage Section ────────────────── */}
+        {/* ── Gaon Buras Commanding Officer Heritage Section ────────────────── */}
         {gaonBuras && gaonBuras.length > 0 && (
           <div className="pt-8">
-            <div className="room-divider">
+            {/* <div className="room-divider">
               <div className="room-divider-line" />
               <div className="room-divider-flourish">
                 <span>✦</span>
@@ -141,14 +141,17 @@ export default function CommandingOfficersSection({ officers, gaonBuras }: Props
                 <span>✦</span>
               </div>
               <div className="room-divider-line" />
-            </div>
+            </div> */}
 
             <div className="mt-20">
-              <SectionHeader
+              {/* <SectionHeader
                 tag="Cultural Pillars"
-                title="Gaon Buras"
+                title="Gaon Buras Commanding Officer"
                 subtitle="The village elders and community leaders who served as the vital bridge between the regiment and local tribes."
-              />
+              /> */}
+              <br />
+              <br />
+
             </div>
 
             {/* Changed from inline styles to standard Tailwind classes for consistent managed spacing */}

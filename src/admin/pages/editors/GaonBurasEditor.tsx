@@ -24,7 +24,7 @@ export default function GaonBurasEditor({ data, onSave }: Props) {
 
   const handleSave = () => {
     onSave('gaonBuras', items);
-    showToast('Gaon Buras saved', 'success');
+    showToast('Gaon Buras Commanding Officer saved', 'success');
   };
 
   const startAdd = () => {
@@ -65,7 +65,7 @@ export default function GaonBurasEditor({ data, onSave }: Props) {
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
         <h3 style={{ fontFamily: "'Cinzel', serif", fontSize: '1rem', fontWeight: 700, color: '#d4a017' }}>
-          Gaon Buras ({items.length})
+          Gaon Buras Commanding Officer ({items.length})
         </h3>
         <div style={{ display: 'flex', gap: '0.5rem' }}>
           <button className="admin-btn admin-btn-ghost admin-btn-sm" onClick={startAdd}>+ Add</button>
@@ -114,7 +114,7 @@ export default function GaonBurasEditor({ data, onSave }: Props) {
       {items.length === 0 ? (
         <div className="admin-empty">
           <div className="admin-empty-icon">👳</div>
-          <div className="admin-empty-text">No Gaon Buras added yet.</div>
+          <div className="admin-empty-text">No Gaon Buras Commanding Officer added yet.</div>
         </div>
       ) : (
         items.map((gb, i) => (

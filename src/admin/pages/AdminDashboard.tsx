@@ -66,7 +66,7 @@ export default function AdminDashboard() {
                 </div>
                 <div className="admin-stat-card">
                   <div className="admin-stat-value">{stats.gaonBuras}</div>
-                  <div className="admin-stat-label">Gaon Buras</div>
+                  <div className="admin-stat-label">Gaon Buras Commanding Officer</div>
                 </div>
               </div>
 

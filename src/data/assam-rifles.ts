@@ -131,7 +131,7 @@ export const assamRiflesData = {
       name: "Various Village Headmen",
       tribe: "Multiple NE Tribes",
       era: "1835–Present",
-      role: "Traditional Gaon Buras and village chieftains serving as community liaisons",
+      role: "Traditional Gaon Buras Commanding Officer and village chieftains serving as community liaisons",
       contribution: "Bridge between the Assam Units and tribal communities, facilitating peacekeeping through community trust.",
     },
   ],

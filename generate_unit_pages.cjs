@@ -171,12 +171,12 @@ export default function ${u.prefix}UnitGaonBurasPage() {
 
   const breadcrumbs = [
     { label: unit.shortName, path: \`/${u.dir}/\${unit.id}\` },
-    { label: 'Gaon Buras' },
+    { label: 'Gaon Buras Commanding Officer' },
   ];
 
   return (
     <SubPageLayout
-      title="Gaon Buras (Commanders)"
+      title="Gaon Buras Commanding Officer (Commanders)"
       breadcrumbs={breadcrumbs}
       backPath={\`/${u.dir}/\${unit.id}\`}
     >

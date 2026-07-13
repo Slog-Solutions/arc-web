@@ -27,7 +27,7 @@ const EXHIBIT_ROOMS = [
   {
     id: 'gaon-buras',
     room: 'Exhibition Room III',
-    title: 'Gaon Buras & Officers',
+    title: 'Gaon Buras Commanding Officer & Officers',
     bgImage: '/assets/rooms/gaon_buras_bg.png',
     path: '/gaon-buras',
     desc: 'Meet the commanding officers who led the unit and the village chieftains who bound them to the land.',

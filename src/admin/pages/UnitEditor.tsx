@@ -18,7 +18,7 @@ const TABS = [
   { id: 'gallery', label: 'Gallery', icon: '🖼️' },
   { id: 'videos', label: 'Videos', icon: '🎬' },
   { id: 'achievements', label: 'Awards', icon: '🏆' },
-  { id: 'gaonburas', label: 'Gaon Buras', icon: '👳' },
+  { id: 'gaonburas', label: 'Gaon Buras Commanding Officer', icon: '👳' },
 ];
 
 export default function UnitEditor() {

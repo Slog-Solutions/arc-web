@@ -16,12 +16,12 @@ export default function AssamRiflesUnitGaonBurasPage() {
   const breadcrumbs = [
     { label: 'Assam Units', path: '/assam-rifles' },
     { label: unit.shortName, path: `/assam-rifles/${unit.id}` },
-    { label: 'Gaon Buras & Officers' },
+    { label: 'Gaon Buras Commanding Officer & Officers' },
   ];
 
   return (
     <SubPageLayout
-      title={`${unit.shortName} Gaon Buras & Officers`}
+      title={`${unit.shortName} Gaon Buras Commanding Officer & Officers`}
       subtitle="Exhibition Room III"
       metaTitle={`${unit.shortName} Commanders & Elders | Assam Units`}
       metaDesc={`Read profiles of commanding officers and community leaders who liaised with the ${unit.name}.`}

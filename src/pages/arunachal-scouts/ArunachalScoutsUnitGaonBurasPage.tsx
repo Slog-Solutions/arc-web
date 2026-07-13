@@ -12,12 +12,12 @@ export default function ArunachalScoutsUnitGaonBurasPage() {
 
   const breadcrumbs = [
     { label: unit.shortName, path: `/arunachal-scouts/${unit.id}` },
-    { label: 'Gaon Buras' },
+    { label: 'Gaon Buras Commanding Officer' },
   ];
 
   return (
     <SubPageLayout
-      title="Gaon Buras (Commanders)"
+      title="Gaon Buras Commanding Officer (Commanders)"
       breadcrumbs={breadcrumbs}
       backPath={`/arunachal-scouts/${unit.id}`}
     >
