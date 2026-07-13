@@ -12,12 +12,12 @@ export default function RashtriyaRiflesUnitGaonBurasPage() {
 
   const breadcrumbs = [
     { label: unit.shortName, path: `/rashtriya-rifles/${unit.id}` },
-    { label: 'Gaon Buras Commanding Officer' },
+    { label: 'Gaon Buras' },
   ];
 
   return (
     <SubPageLayout
-      title="Gaon Buras Commanding Officer (Commanders)"
+      title="Gaon Buras (Commanders)"
       breadcrumbs={breadcrumbs}
       backPath={`/rashtriya-rifles/${unit.id}`}
     >

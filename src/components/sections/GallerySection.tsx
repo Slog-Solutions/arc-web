@@ -18,11 +18,11 @@ export default function GallerySection({ gallery }: Props) {
   return (
     <section id="gallery" className="relative museum-room-wall spotlight-glow" style={{ paddingTop: '60px', paddingBottom: '80px' }}>
       <div className="museum-container">
-        <SectionHeader
+        {/* <SectionHeader
           tag="Visual Archive"
           title="Photography Gallery"
           subtitle="Walk through the visual collection of historic moments, field trainings, and official parades. Click any portrait or action record to open its catalog entry."
-        />
+        /> */}
 
         {/* Category filters */}
         <div className="flex flex-wrap gap-4 justify-center" style={{ marginBottom: '40px' }}>

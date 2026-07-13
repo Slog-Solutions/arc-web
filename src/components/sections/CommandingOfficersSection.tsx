@@ -27,12 +27,12 @@ export default function CommandingOfficersSection({ officers, gaonBuras }: Props
     <section id="commanding-officers" className="relative" style={{ paddingTop: '40px', paddingBottom: '100px' }}>
       <div className="museum-container">
 
-        {/* Section Header */}
+        {/* Section Header
         <SectionHeader
           tag="Portrait Gallery"
           title="Commanding Officers"
           subtitle="Hover or tap a portrait frame to inspect the service records, military biography and key accomplishments."
-        />
+        /> */}
 
         {/* ── Large Portrait Grid (3D Flip Plaque Layout) ── */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-12 md:gap-16 lg:gap-20 mb-32">
@@ -130,7 +130,7 @@ export default function CommandingOfficersSection({ officers, gaonBuras }: Props
           })}
         </div>
 
-        {/* ── Gaon Buras Commanding Officer Heritage Section ────────────────── */}
+        {/* ── Gaon Buras Heritage Section ────────────────── */}
         {gaonBuras && gaonBuras.length > 0 && (
           <div className="pt-8">
             {/* <div className="room-divider">
@@ -146,7 +146,7 @@ export default function CommandingOfficersSection({ officers, gaonBuras }: Props
             <div className="mt-20">
               {/* <SectionHeader
                 tag="Cultural Pillars"
-                title="Gaon Buras Commanding Officer"
+                title="Gaon Buras"
                 subtitle="The village elders and community leaders who served as the vital bridge between the regiment and local tribes."
               /> */}
               <br />
